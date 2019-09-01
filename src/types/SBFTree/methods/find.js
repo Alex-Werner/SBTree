@@ -1,3 +1,3 @@
-module.exports = async function get(identifier){
-  await this.root.get(identifier);
+module.exports = async function find(key){
+  return this.root.find(key);
 }

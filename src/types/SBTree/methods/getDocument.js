@@ -1,7 +1,7 @@
-const query = require('../ops/query');
+const get = require('../ops/get');
 
-async function findDocuments(params){
-  return (query.call(this,params));
+async function getDocument(identifier){
+  return (await get.call(this,identifier));
 
 };
-module.exports = findDocuments;
+module.exports = getDocument;

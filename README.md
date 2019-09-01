@@ -1,7 +1,7 @@
 # SBTree
 
 [![NPM Version](https://img.shields.io/npm/v/sbtree.svg?&style=flat-square)](https://www.npmjs.org/package/sbtree)
-[![Build Status](https://img.shields.io/travis/com/sbtree.svg?branch=master&style=flat-square)](https://travis-ci.com/Alex-Werner/SBTree)
+[![Build Status](https://api.travis-ci.org/Alex-Werner/SBTree.svg?branch=master)](https://travis-ci.com/Alex-Werner/SBTree)
 
 > Fast document store using B+ Tree for fields. Adapters support for In-Memory and FileSystem 
 
@@ -17,7 +17,7 @@ Most of the databases uses B-Tree (MongoDB, CouchDB) or B+Tree (InnoDB, MariaDB,
  - [Installation](#installation)
  - [Usage](#usage)
  - [Documentation](#documentation)
-     - [Events](/doc/events.md)
+    - [Events](/doc/events.md)
     - [API](/doc/api.md)
  - [Adapters](#adapters)
  - [FAQ](#faq)

@@ -1,6 +1,3 @@
-const {SBFRoot,SBFNode, SBFLeaf} = require('../../index')
-const {MemoryAdapter} = require('../../adapters');
-
 const defaultOpts = {
   order: 16,
   verbose:false
@@ -20,9 +17,15 @@ class SBFTree {
     }
     this.field = (props.field) ? props.field : null;
     this.root = (props.root) ? props.root : null;
-    this.adapter = (props.adapter) ? props.adapter : new MemoryAdapter();
+    if(!props.adapter){
+      throw new Error(`SBFTree expect an adapter to be initialized`);
+    }
+    this.adapter = props.adapter;
   }
 };
-SBFTree.prototype.insert = require('../../methods/insert');
-SBFTree.prototype.createRoot = require('../../methods/createRoot');
+
+SBFTree.prototype.find = require('./methods/find');
+SBFTree.prototype.get = require('./methods/get');
+SBFTree.prototype.insert = require('./methods/insert');
+SBFTree.prototype.createRoot = require('./methods/createRoot');
 module.exports = SBFTree;

@@ -1,4 +1,4 @@
-const {SBFTree} = require('../src');
+const {SBFTree} = require('../index');
 
 const tree = new SBFTree({field:'users',order:3, verbose:true});
 const start = async function (){

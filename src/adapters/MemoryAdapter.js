@@ -10,15 +10,30 @@ class Data {
     this.keys=[]
   }
 }
+function getAllIndexes(arr, val) {
+  let indexes = [], i = -1;
+  while ((i = arr.indexOf(val, i+1)) != -1){
+    indexes.push(i);
+  }
+  return indexes;
+}
 class MemoryAdapter {
   constructor(){
     this.leafs = {};
+    this.documents = {}
   }
-  async addInLeaf(leafName, identifier, key){
+  async addInLeaf(leafName, field, identifier, key){
     if(!this.leafs[leafName]){
       await this.createLeaf(leafName);
     }
+
     const index = insertSorted(this.leafs[leafName].data.keys, key);
+
+    if(!this.documents[identifier]){
+      this.documents[identifier] = {_id: identifier}
+    }
+    this.documents[identifier][field] = key;
+
     this.leafs[leafName].meta.size +=1;
     this.leafs[leafName].meta.identifiers.splice(index, 0, identifier);
   }
@@ -27,6 +42,18 @@ class MemoryAdapter {
       throw new Error(`Leaf do not exist`);
     }
     return this.leafs[leafName];
+  }
+  async getDocument(identifier){
+    return this.documents[identifier];
+  }
+  async findInLeaf(leafName, key){
+    const indexes = getAllIndexes(this.leafs[leafName].data.keys, key);
+    if(!indexes.length){
+      return [];
+    }
+    const start = indexes[0];
+    const end = indexes[0]+indexes.length;
+    return this.leafs[leafName].meta.identifiers.slice(start, end);
   }
   async splitLeaf(sourceLeaf, siblingLeaf){
     if(!this.leafs[sourceLeaf.name]){

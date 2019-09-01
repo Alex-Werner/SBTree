@@ -1,15 +1,8 @@
-const comparatorString = function(a, b) {
-  if (typeof a !== 'string') a = String(a);
-  if (typeof b !== 'string') b = String(b);
-  return (a > b ? 1 : (a < b ? -1 : 0));
-};
-const comparatorNum = function (a,b) {
-  return (a > b ? 1 : (a < b ? -1 : 0));
-}
+const {comparatorString, comparatorNum} = require('./comparators')
 const array = {
   insertSorted:(arr, item)=>{
     if(!['number','string'].includes(typeof item )){
-      throw new Error('Unsupported type')
+      throw new Error(`Unsupported type typeof ${typeof item}`)
     }
     const comparator = (typeof item ==='string') ? comparatorString : comparatorNum;
     let min = 0;

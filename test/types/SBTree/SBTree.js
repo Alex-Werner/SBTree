@@ -1,78 +1,74 @@
 const {expect} = require('chai');
 const SBTree = require('../../../src/types/SBTree/SBTree');
+const fixtures = {
+  documents:[
+    {age:27,email:'alex@valjean.fr', _id:'16ced004da93e'},
+    {age:33, email:'alain@dourak.ru', _id:'16ced00ee7931'},
+    {age:33, email:'basil@valjean.fr', _id:'16ced00ce6a31'},
+    {age:42, email:'jean@valjean.fr'}
+  ]
+};
 
-// Vector for verifying with a visual tool : https://www.cs.csubak.edu/~msarr/visualizations/BPlusTree.html
 describe('SBTree', () => {
   let tree;
 
-  it('should failed without any field name ', function () {
-    expect(()=>{
-      tree = new SBFTree({order: 3})
-    }).to.throw('SBFTree expect a field to be initialized')
-  });
-  it('should default on mem adapter + size', function () {
-    const t = new SBFTree({field:'email'});
-    expect(t.options.order).to.equal(16)
-    expect(t.adapter.constructor.name).to.equal('MemoryAdapter')
-  });
   it('should instantiate', async function () {
-    tree = new SBFTree({field:'age',order: 3});
+    tree = new SBTree({order:3, verbose:true});
     expect(tree.options.order).to.equal(3)
-    expect(tree.field).to.equal('age')
+    expect(tree.fieldTrees).to.deep.equal({});
+    expect(tree.size).to.equal(0);
+  });
+  it('should correctly default', function () {
+    const t = new SBTree();
+    expect(t.options.order).to.equal(16)
+    expect(tree.fieldTrees).to.deep.equal({});
+    expect(tree.size).to.equal(0);
 
-    await tree.insert(40, '5d675592aa2c1a52a0eeaa46');
-    await tree.insert(60, '5d6755b71f9edbc997c8d156');
-    await tree.insert(70, '5d6755bba792f16bdb3eab7b');
-    await tree.insert(80, '5d67592851b41056838b7232');
-    await tree.insert(30, '5d67599b94f1fcc963071138');
-    await tree.insert(0, '5d6759cd1d493a7fdcb0c43a');
-    await tree.insert(90, '5d6761b785c340115a93e87f');
-    await tree.insert(50, '5d6761b785c340115a9dd87f');
-    await tree.insert(20, '5d6761b785c340115a9dd87f');
-    await tree.insert(10, '5d6761b785c340115a9dd87f');
+  });
+  it('should insert a document',async function () {
+    const inserted = await tree.insertDocuments(fixtures.documents[0]);
+    expect(tree.size).to.equal(1);
+    expect(Object.keys(tree.fieldTrees).length).to.equal(2);
+    expect(tree.fieldTrees['age'].field).to.equal('age')
+    expect(tree.fieldTrees['age'].options).to.deep.equal({
+      order:3,
+      verbose:true
+    });
 
-    expect(tree.root.keys).to.deep.equal([30,60]);
-    expect(Object.keys(tree.root.childrens).length).to.deep.equal(3);
+    expect(Object.keys(tree.fieldTrees['age'].root.keys)).to.deep.equal([]);
+    expect(Object.keys(tree.fieldTrees['age'].root.childrens).length).to.deep.equal(1);
+  })
+  it('should insert and split', async function () {
+      await tree.insertDocuments(fixtures.documents[1]);
+      await tree.insertDocuments(fixtures.documents[2]);
+  });
+  it('should find ', async function (){
+    const docs = await tree.findDocuments({email:'alex@valjean.fr'});
+    expect(docs).to.deep.equal([{"_id":"16ced004da93e","age":27,"email":"alex@valjean.fr"}])
 
-    expect(tree.root.childrens[0].keys).to.deep.equal([10]);
-    expect(Object.keys(tree.root.childrens[0].childrens).length).to.deep.equal(2);
+    const docs2 = await tree.findDocuments({age:45});
+    expect(docs2).to.deep.equal([])
 
-    const bucket1Name = tree.root.childrens[0].childrens[0].name;
-    expect(tree.adapter.leafs[bucket1Name].data.keys).to.deep.equal([0]);
+    const docs3 = await tree.findDocuments({age:27});
+    expect(docs3).to.deep.equal([{"_id":"16ced004da93e","age":27,"email":"alex@valjean.fr"}])
 
-    const bucket2Name = tree.root.childrens[0].childrens[1].name;
-    expect(tree.adapter.leafs[bucket2Name].data.keys).to.deep.equal([10,20]);
+    const docs4 = await tree.findDocuments({age:33});
+    expect(docs4).to.deep.equal([{"_id":"16ced00ee7931","age":33,"email":"alain@dourak.ru"},{"_id":"16ced00ce6a31","age":33,"email":"basil@valjean.fr"}])
+  })
 
-    expect(tree.root.childrens[1].keys).to.deep.equal([40]);
-    expect(Object.keys(tree.root.childrens[1].childrens).length).to.deep.equal(2);
+  it('should get a document from a id', async function () {
+    const doc = await tree.getDocument('16ced00ee7931');
+    expect(doc).to.deep.equal({"_id":"16ced00ee7931","age":33,"email":"alain@dourak.ru"})
+  });
+  it('should create a id on a document if not yet present', async function () {
+    const inserted = await tree.insertDocuments(fixtures.documents[3]);
+    const {_id} = inserted;
+    const doc = await tree.getDocument(_id);
+    const doc2 = await tree.findDocuments({_id});
+    const doc3 = await tree.findDocuments({email:fixtures.documents[3].email});
 
-    const bucket3Name = tree.root.childrens[1].childrens[0].name;
-    expect(tree.adapter.leafs[bucket3Name].data.keys).to.deep.equal([30]);
-
-    const bucket4Name = tree.root.childrens[1].childrens[1].name;
-    expect(tree.adapter.leafs[bucket4Name].data.keys).to.deep.equal([40,50]);
-
-    expect(tree.root.childrens[2].keys).to.deep.equal([70, 80]);
-    expect(Object.keys(tree.root.childrens[2].childrens).length).to.deep.equal(3);
-
-    const bucket5Name = tree.root.childrens[2].childrens[0].name;
-    expect(tree.adapter.leafs[bucket5Name].data.keys).to.deep.equal([60]);
-
-    const bucket6Name = tree.root.childrens[2].childrens[1].name;
-    expect(tree.adapter.leafs[bucket6Name].data.keys).to.deep.equal([70]);
-
-    const bucket7Name = tree.root.childrens[2].childrens[2].name;
-    expect(tree.adapter.leafs[bucket7Name].data.keys).to.deep.equal([80,90]);
-
-    await tree.insert(85, '507f191e810c19729de860ea');
-    expect(tree.root.keys).to.deep.equal([60]);
-
-    expect(tree.root.childrens[0].keys).to.deep.equal([30]);
-    expect(tree.root.childrens[0].childrens[0].keys).to.deep.equal([10]);
-    expect(tree.root.childrens[0].childrens[1].keys).to.deep.equal([40]);
-    expect(tree.root.childrens[1].keys).to.deep.equal([80]);
-
-    expect(tree.root.childrens[1].childrens[0].keys).to.deep.equal([70]);
-    expect(tree.root.childrens[1].childrens[1].keys).to.deep.equal([85]);
+    expect(doc).to.deep.equal(Object.assign({},{_id},fixtures.documents[3] ))
+    expect(doc3).to.deep.equal([Object.assign({},{_id},fixtures.documents[3] )])
+    expect(doc2).to.deep.equal(Object.assign({},{_id},fixtures.documents[3] ))
   });
 });
