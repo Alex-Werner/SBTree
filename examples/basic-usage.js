@@ -1,4 +1,4 @@
-const SBTree = require('../index');
+const {SBTree} = require('../index');
 
 const tree = new SBTree();
 const start = async function () {

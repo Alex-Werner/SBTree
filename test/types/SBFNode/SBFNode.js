@@ -1,7 +1,7 @@
 const {expect} = require('chai');
 const SBFNode = require('../../../src/types/SBFNode/SBFNode');
 const SBFLeaf = require('../../../src/types/SBFLeaf/SBFLeaf');
-const MemoryAdpter = require('../../../src/adapters/MemoryAdapter');
+const MemoryAdpter = require('../../../src/adapters/MemoryAdapter/MemoryAdapter');
 const adapter = new MemoryAdpter()
 
 const fakeTree = {

@@ -1,2 +1,3 @@
 const SBTree = require('./src/types/SBTree/SBTree');
-module.exports = SBTree;
+const adapters = require('./src/adapters/index');
+module.exports = {SBTree, adapters};

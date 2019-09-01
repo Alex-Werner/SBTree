@@ -41,7 +41,7 @@ And there just use that snipets to start playing ! :
 
 
 ```js
-const SBTree = require('SBTree');
+const {SBTree} = require('SBTree');
 const tree = new SBTree({order:100});
 const start = async function () {
   const doc = {_id:'507f1f77bcf86cd799439011',name:"Alex", age:28};

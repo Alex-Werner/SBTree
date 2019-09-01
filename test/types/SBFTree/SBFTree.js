@@ -1,6 +1,6 @@
 const {expect} = require('chai');
 const SBFTree = require('../../../src/types/SBFTree/SBFTree');
-const MemoryAdapter = require('../../../src/adapters/MemoryAdapter')
+const MemoryAdapter = require('../../../src/adapters/MemoryAdapter/MemoryAdapter')
 // Vector for verifying with a visual tool : https://www.cs.csubak.edu/~msarr/visualizations/BPlusTree.html
 describe('SBFTree', () => {
   let tree;
