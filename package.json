@@ -1,0 +1,19 @@
+{
+  "name": "sbtree",
+  "version": "1.0.0",
+  "description": "Optimised document store using B+ Tree for fields. Adapters support for In-Memory and FileSystem",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alex-Werner/SBTree.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Alex-Werner/SBTree/issues"
+  },
+  "homepage": "https://github.com/Alex-Werner/SBTree#readme"
+}
