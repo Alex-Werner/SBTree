@@ -1,23 +1,19 @@
-const {SBFTree} = require('../index');
+const SBTree = require('../index');
 
-const tree = new SBFTree({field:'users',order:3, verbose:true});
-const start = async function (){
-  await tree.insert(5, '5bf');
-  await tree.insert(3, '3ae');
-  await tree.insert(6, '2yc');
-  await tree.insert(7, '7zx');
-  await tree.insert(2, '2ti');
-  await tree.insert(1, '1fect');
-  await tree.insert(8, '8fect');
-  await tree.insert(9, '9vi');
-  await tree.insert(10, '10vi');
-  await tree.insert(4, '4das');
-  await tree.insert(11, '11ver');
-  await tree.insert(12, '12fin');
-  await tree.insert(13, '13conf');
-  await tree.insert(14, '14r');
-  await tree.insert(15, '15gbye');
+const tree = new SBTree();
+const start = async function () {
 
-  console.dir(tree.root);
+  await tree.insertDocuments({age: 27, email: 'alex@valjean.fr', _id: '16ced004da93e'});
+  await tree.insertDocuments([
+    {age: 33, email: 'alain@dourak.ru', _id: '16ced00ee7931'},
+    {age: 33, email: 'basil@valjean.fr', _id: '16ced00ce6a31'},
+  ])
+  // If you don't have any _id attach, it will create one for you
+  await tree.insertDocuments({age: 42, email: 'jean@valjean.fr'});
+
+  console.dir(tree);
 }
+
+
+
 start();

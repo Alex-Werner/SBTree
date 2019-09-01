@@ -42,16 +42,18 @@ And there just use that snipets to start playing ! :
 
 ```js
 const SBTree = require('SBTree');
+const tree = new SBTree({order:100});
+const start = async function () {
+  const doc = {_id:'507f1f77bcf86cd799439011',name:"Alex", age:28};
+  const doc2 = {name:"Jean", age:30}
+  await tree.insertDocuments(doc);
+  await tree.insertDocuments(doc2);
 
-const tree = new SBTree({order:3});
+  // [ { _id: '507f1f77bcf86cd799439011', name: 'Alex', age: 28 } ]
+  const search = await tree.findDocuments({age:28});
 
-async function start(){
- const doc = {id:'507f1f77bcf86cd799439011',data:{name:"Alex", age:28}};
- const doc2 = {id:'507f191e810c19729de860ea',data:{name:"Jean", age:30}};
- await tree.insert(doc.data, doc.id);
- await tree.insert(doc2.data, doc2.id);
- const search = tree.find({age:28});
- const get = tree.get(doc2.id);
+  // [ { _id: '507f1f77bcf86cd799439011', name: 'Alex', age: 28 } ]
+  const get = await tree.getDocument(doc._id);
 }
 start();
 ```

@@ -1,6 +1,7 @@
 const {map} = require('lodash');
 
 async function get(id) {
+  console.log(id)
   if (!id) throw new Error('Expected an objectid')
 
   let document = {
