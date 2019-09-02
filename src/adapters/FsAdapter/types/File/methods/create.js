@@ -21,22 +21,30 @@ function stringify(obj, options) {
 module.exports = async function create(p, data = '') {
   console.log('Should create file', p)
   const self = this;
+  console.log('a', p, data)
+
   return new Promise(async (res, rej) => {
+    console.log('b')
     await Directory.ensure(path.dirname(p));
+    console.log('c')
     const exist = await this.exists(p);
+    console.log('f', p, data)
     const write = (resolver, lock) => {
-      console.log(data, p)
-      jsonfile.writeFile(p, data, function (err) {
+      console.log('write data', p, data)
+      fs.writeFile(p, stringify(data), (err) => {
+        // if (lock) lock.release();
+        // else console.log('no lock?')
+        console.log('!!!!!!!!!!!!!!',err)
         if (err) return (err);
         resolver(true);
-      })
+      });
     };
 
     if (exist) {
       // const lock = await slocket(p);
       try {
         write(res, /*lock*/);
-      }catch (e) {
+      } catch (e) {
         console.error('CREATE', p, 'error');
         console.error(e);
       }

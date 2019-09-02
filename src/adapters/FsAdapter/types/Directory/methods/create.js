@@ -9,7 +9,7 @@ module.exports = async function create(p) {
         return resolve(true);
       } if (err.code === 'ENOENT') {
         // Create parent
-        return self.create(path.dirname(p));
+        return resolve(self.create(path.dirname(p)));
       }
       return reject(err);
     });

@@ -6,7 +6,6 @@ module.exports = async function createLeaf(leafName){
   };
 
   const data = new LeafData();
-
+  console.log('created', leafName)
   await this.saveLeafData(leafName, data)
-
 }
