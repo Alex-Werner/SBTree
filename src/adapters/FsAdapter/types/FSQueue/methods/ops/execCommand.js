@@ -2,7 +2,6 @@ const File = require('../../../File/File');
 const Directory = require('../../../Directory/Directory');
 
 module.exports = async function execCommand(command, path, params){
-  console.log('exec', command)
   switch (command) {
     case "Directory.create":
       return Directory.create(path);
