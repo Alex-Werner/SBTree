@@ -1,12 +1,11 @@
 module.exports = async function updateDocument(_doc){
-  try {
-    const doc = await this.openDocument(_doc._id)
-    return doc;
-  }catch (e) {
-    if(e.message.slice(0,22)==='CannotReadFileNotFound'){
-      await this.saveDocument(_doc);
-    }else{
-      throw e;
+    const job = await this.queue.add('File.appendJSON', `${this.options.path}/d/${_doc._id}.dat`, _doc);
+    await job.execution();
+    let data = {}
+    if (job.results.constructor.name !== Error.name) {
+        data = job.results;
     }
-  }
+    this.lastChange = Date.now();
+
+    return data
 }

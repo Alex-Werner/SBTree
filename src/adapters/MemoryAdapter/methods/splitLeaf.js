@@ -8,6 +8,10 @@ module.exports = async function splitLeaf(sourceLeaf, siblingLeaf){
   }
   const sibling = this.leafs[siblingLeaf.name];
   const midIndex = ~~(source.data.keys.length/2);
+
+  // console.log(this.leafs,sourceLeaf.name,{source:source.data.keys})
+  // console.dir(this, {depth:null});
+
   const rightKeys = source.data.keys.splice(midIndex);
   const rightIdentifiers = source.meta.identifiers.splice(midIndex);
   const midKey = rightKeys.slice(0,1)[0];

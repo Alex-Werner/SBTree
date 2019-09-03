@@ -5,6 +5,7 @@ async function isFull(){
   try {
     const leaf = await adapter.openLeaf(this.name);
     return leaf.meta.size>=order;
+
   }catch (e) {
     if(e.message === 'Leaf do not exist'){
       await adapter.createLeaf(this.name);

@@ -5,7 +5,6 @@ async function find(key){
     leafIndex++;
   });
 
-
   const leaf = this.childrens[leafIndex];
   let result = await leaf.find(key);
 
@@ -13,6 +12,7 @@ async function find(key){
     const left = this.childrens[leafIndex];
     result = result.concat(result, await left.find(key));
   }
+  // We also check the leaf nearby
   if(this.childrens.length>leafIndex+1){
     const right = this.childrens[leafIndex+1];
     result = result.concat(result, await right.find(key));

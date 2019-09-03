@@ -12,6 +12,7 @@ class SFBLeaf {
     }
     this.#parent = props.parent;
     this.name = (props.name) ? props.name : generateLeafName();
+    this.type = 'leaf';
   }
   getParent(){
     return this.#parent;

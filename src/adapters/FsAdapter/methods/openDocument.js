@@ -1,5 +1,9 @@
-const File = require('../types/File/File');
-module.exports = async function openLeafData(identifer){
-  const data = await File.read(`${this.options.path}/d/${identifer}.dat`);
+module.exports = async function openDocument(identifer) {
+  const job = await this.queue.add('File.read', `${this.options.path}/d/${identifer}.dat`);
+  await job.execution();
+  let data = {}
+  if (job.results.constructor.name !== Error.name) {
+    data = job.results;
+  }
   return data
 }
