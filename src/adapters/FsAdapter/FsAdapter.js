@@ -1,6 +1,5 @@
-// const {FSLock} = require('fslockjs');
+const {FSLock} = require('fslockjs');
 const EventEmitter = require('events');
-const {FSLock} = require('../../../../fslockjs/index');
 const defaultProps = {
   options: {
     path: '.db',

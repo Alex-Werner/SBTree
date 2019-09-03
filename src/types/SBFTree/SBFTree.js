@@ -1,13 +1,14 @@
-const defaultOpts = {
-  order: 16,
-  verbose:false
-}
+
 /**
  * SBFTree
  *
  */
 class SBFTree {
   constructor(props={}){
+    const defaultOpts = {
+      order: 16,
+      verbose:false
+    }
     Object.assign(SBFTree.prototype, {
       createRoot: require('./methods/createRoot')
     });

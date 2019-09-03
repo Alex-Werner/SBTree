@@ -1,15 +1,6 @@
 const EventEmitter = require('events');
 const {MemoryAdapter} = require('../../adapters');
 
-const defaultProps = {
-  options:{
-    order: 16,
-    verbose:false
-  },
-  fieldTrees:{},
-  size:0
-};
-
 /**
  * SBTree
  *
@@ -17,6 +8,15 @@ const defaultProps = {
 class SBTree extends EventEmitter {
   #emitter = new EventEmitter();
   constructor(props = {}) {
+    const defaultProps = {
+      options:{
+        order: 511,
+        verbose:false
+      },
+      fieldTrees:{},
+      size:0
+    };
+
     super();
     this.options = {
       order: (props.order) ? props.order : defaultProps.options.order,

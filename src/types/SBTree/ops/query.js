@@ -5,6 +5,7 @@ const get = require('./get');
 async function query(query) {
   const self = this;
   let listOfFieldLookup = [];
+
   if (query._id) {
     const {_id} = query;
     return [await get.call(this, _id)]

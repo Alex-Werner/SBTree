@@ -20,7 +20,7 @@ describe('SBTree', () => {
   });
   it('should correctly default', function () {
     const t = new SBTree();
-    expect(t.options.order).to.equal(16)
+    expect(t.options.order).to.equal(511)
     expect(tree.fieldTrees).to.deep.equal({});
     expect(tree.size).to.equal(0);
 
