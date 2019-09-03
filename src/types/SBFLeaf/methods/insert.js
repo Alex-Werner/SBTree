@@ -4,6 +4,7 @@ async function insert(key, identifier){
   await adapter.addInLeaf(this.name, field, identifier, key);
   const isFull = await this.isFull();
 
+
   if(isFull){
     await this.split();
   }

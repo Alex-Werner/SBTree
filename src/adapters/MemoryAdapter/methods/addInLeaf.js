@@ -4,6 +4,10 @@ async function addInLeaf(leafName, field, identifier, key){
   if(!this.leafs[leafName]){
     await this.createLeaf(leafName);
   }
+  if(this.leafs[leafName].meta.identifiers.includes(identifier)){
+    //TODO : except unique:false?
+    return false;
+  }
 
   const index = insertSorted(this.leafs[leafName].data.keys, key);
 

@@ -5,7 +5,9 @@ async function insert(key, identifier = null){
   if(!this.childrens.length){
     const leaf = new SBFLeaf({parent:this});
     this.childrens.push(leaf);
+
     await leaf.insert(key, identifier);
+
   }else{
     let leafIndex = 0;
     this.keys.forEach((_key)=>{
@@ -19,5 +21,6 @@ async function insert(key, identifier = null){
   if(this.isFull()){
     await this.split();
   }
+
 };
 module.exports = insert;

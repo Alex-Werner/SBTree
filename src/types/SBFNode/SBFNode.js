@@ -1,5 +1,5 @@
 const {insertSorted} = require('../../utils/array');
-
+const SBFLeaf = require('../SBFLeaf/SBFLeaf');
 /**
  * SBFTree
  *
@@ -12,7 +12,19 @@ class SBFNode {
     }
     this.#parent = props.parent;
     this.keys = (props.keys) ? props.keys : [];
-    this.childrens = (props.childrens) ? props.childrens : [];
+    this.childrens = [];
+    if(props.childrens){
+      props.childrens.forEach((child)=>{
+        if(child.type==='leaf'){
+          this.childrens.push(new SBFLeaf({parent:this.#parent,...child}))
+        }
+        if(child.type==='node'){
+          this.childrens.push(new SBFNode({parent:this.#parent,...child}))
+        }
+      })
+
+    }
+    this.type = 'node';
   }
   getParent(){
     return this.#parent;

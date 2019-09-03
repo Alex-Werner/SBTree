@@ -6,9 +6,14 @@ function getAllIndexes(arr, val) {
   return indexes;
 }
 module.exports = async function findInLeaf(leafName, key){
-  throw new Error('Not Implemented');
 
-  const indexes = getAllIndexes(this.leafs[leafName].data.keys, key);
+  let {keys} = await this.openLeafData(leafName);
+  if(!keys){
+    console.error(`Leafname ${leafName} was not present, had to recreate`)
+    await this.createLeaf(leafName);
+    return this.findInLeaf(leafName, key);
+  }
+  const indexes = getAllIndexes(keys, key);
   if(!indexes.length){
     return [];
   }

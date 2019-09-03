@@ -7,6 +7,7 @@ async function split(){
 
   const midKey = rightKeys.splice(0,1)[0];
 
+
   const rightChildrens = this.childrens.splice(midIndex+1);
   const leftChildrens = this.childrens.splice(0);
 

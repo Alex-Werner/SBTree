@@ -4,12 +4,11 @@ class MemoryAdapter {
     this.leafs = {};
     this.documents = {}
   }
-
 };
 MemoryAdapter.prototype.addInLeaf = require('./methods/addInLeaf')
 MemoryAdapter.prototype.createLeaf = require('./methods/createLeaf')
 MemoryAdapter.prototype.findInLeaf = require('./methods/findInLeaf')
 MemoryAdapter.prototype.getDocument = require('./methods/getDocument')
 MemoryAdapter.prototype.openLeaf = require('./methods/openLeaf')
-MemoryAdapter.prototype.splitLeaf = require('./methods/splitLeaf')
+MemoryAdapter.prototype.splitLeaf = require('./methods/splitLeaf');
 module.exports = MemoryAdapter;

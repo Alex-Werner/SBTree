@@ -1,7 +1,12 @@
-const File = require('../types/File/File');
 const LeafData = require('../types/LeafData/LeafData');
 module.exports = async function openLeafData(leafName){
-  console.log('s', leafName)
-  const data = await File.read(`${this.options.path}/l/${leafName}.dat`);
-  return new LeafData(data);
+  const job = await this.queue.add('File.read', `${this.options.path}/l/${leafName}.dat`);
+  await job.execution();
+  let data = {}
+  if (job.results.constructor.name !== Error.name) {
+    data = job.results;
+  }
+  this.lastChange = Date.now();
+
+  return data
 }

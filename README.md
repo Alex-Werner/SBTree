@@ -55,9 +55,8 @@ const start = async function () {
   // [ { _id: '507f1f77bcf86cd799439011', name: 'Alex', age: 28 } ]
   const get = await tree.getDocument(doc._id);
 }
-start();
+tree.on('ready', start);
 ```
-
 
 ## Documentation 
 
@@ -87,3 +86,9 @@ That basically allow us to deal with bigger dataset.
 
 For development purpose, I decided that being able to console view the object without all the nested parent thing was handy a clean.   
 That's the only reason. But Node V.12 is old enough already, no point sticking to the past.  
+
+
+### Caveat :
+
+Right now, due to FS adapter requiring reference from tree for autoload.   
+And adapter being called beforehand (for props passing). You need to listen for the event `.on('ready')` first.   
