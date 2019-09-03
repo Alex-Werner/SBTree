@@ -46,6 +46,7 @@ class SBTree extends EventEmitter {
 }
 
 
+SBTree.prototype.deleteDocuments = require('./methods/deleteDocuments')
 SBTree.prototype.findDocuments = require('./methods/findDocuments')
 SBTree.prototype.getDocument = require('./methods/getDocument')
 SBTree.prototype.getFieldTree = require('./methods/getFieldTree')

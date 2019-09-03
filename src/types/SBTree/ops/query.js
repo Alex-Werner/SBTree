@@ -7,7 +7,7 @@ async function query(query) {
   let listOfFieldLookup = [];
   if (query._id) {
     const {_id} = query;
-    return get.call(this, _id)
+    return [await get.call(this, _id)]
   }
 
   for(const queryFieldName in query){

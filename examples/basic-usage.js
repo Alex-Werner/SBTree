@@ -23,6 +23,8 @@ const start = async function () {
     {age:44, email:'phillipe@valjean.fr', _id:'5d6ded6fcb8d55944c7fc5e6'}
   ])
 
+  console.log(await tree.deleteDocuments({_id:'5d6dc93f6059937716f41eed'}))
+
   // // If you don't have any _id attach, it will create one for you
   const id = await tree.insertDocuments({age: 42, email: 'jean@valjean.fr'});
   //
