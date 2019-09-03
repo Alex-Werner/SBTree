@@ -27,9 +27,9 @@ describe('SBFTree', () => {
     await tree.insert(30, '5d67599b94f1fcc963071138');
     await tree.insert(0, '5d6759cd1d493a7fdcb0c43a');
     await tree.insert(90, '5d6761b785c340115a93e87f');
-    await tree.insert(50, '5d6761b785c340115a9dd87f');
-    await tree.insert(20, '5d6761b785c340115a9dd87f');
-    await tree.insert(10, '5d6761b785c340115a9dd87f');
+    await tree.insert(50, '5d6761b785c340115a9dd88f');
+    await tree.insert(20, '5d6761b785c340115a9dd89f');
+    await tree.insert(10, '5d6761b785c340115a9dd10f');
 
     expect(tree.root.keys).to.deep.equal([30,60]);
     expect(Object.keys(tree.root.childrens).length).to.deep.equal(3);

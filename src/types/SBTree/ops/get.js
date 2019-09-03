@@ -7,7 +7,6 @@ async function get(id) {
     _id: id
   };
   for(const field in this.fieldTrees){
-    if (this.options.verbose) console.log(`Seeking for ${id} in ${field}`);
     const data = await this.fieldTrees[field].get(id);
     document = Object.assign(document, data);
   }

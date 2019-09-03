@@ -69,6 +69,6 @@ describe('SBTree', () => {
 
     expect(doc).to.deep.equal(Object.assign({},{_id},fixtures.documents[3] ))
     expect(doc3).to.deep.equal([Object.assign({},{_id},fixtures.documents[3] )])
-    expect(doc2).to.deep.equal(Object.assign({},{_id},fixtures.documents[3] ))
+    expect(doc2).to.deep.equal([Object.assign({},{_id},fixtures.documents[3] )])
   });
 });

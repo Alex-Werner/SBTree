@@ -52,7 +52,7 @@ describe('SBFLeaf', () => {
     sharedNode.childrens = [leaf];
     expect(Object.keys(fakeTree.adapter.leafs).length).to.equal(1);
 
-    await sharedNode.insert('Jean', '507f191e810c19729de860ea');
+    await sharedNode.insert('Jean', '507f191e810c19729de860eb');
     expect(Object.keys(fakeTree.adapter.leafs).length).to.equal(2);
     expect(sharedNode.keys).to.deep.equal(['Jean']);
   });
