@@ -6,7 +6,7 @@ async function query(query) {
   const self = this;
   let listOfFieldLookup = [];
 
-  if (query._id) {
+  if (query._id && Object.keys(query).length === 1) {
     const {_id} = query;
     return [await get.call(this, _id)]
   }
@@ -21,9 +21,7 @@ async function query(query) {
     if (value) {
       listOfFieldLookup = listOfFieldLookup.concat(value)
     } else {
-
       throw new Error(`No value ${queryFieldName} found : ${value}, ${query}`)
-
     }
   }
 

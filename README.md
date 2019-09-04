@@ -20,6 +20,7 @@ Note : By default. Everything is indexed.
  - [Documentation](#documentation)
     - [Events](/doc/events.md)
     - [API](/doc/api.md)
+    - [Queries](/doc/queries.md)
  - [Adapters](#adapters)
  - [FAQ](#faq)
  

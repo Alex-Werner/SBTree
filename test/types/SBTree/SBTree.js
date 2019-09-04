@@ -71,4 +71,15 @@ describe('SBTree', () => {
     expect(doc3).to.deep.equal([Object.assign({},{_id},fixtures.documents[3] )])
     expect(doc2).to.deep.equal([Object.assign({},{_id},fixtures.documents[3] )])
   });
+  it('should deal with nested documents', async function () {
+    // FIXME
+    // const inserted = await tree.insertDocuments({"_id":"16ced00ee7932","age":55,"email":"patrick@dourak.ru", rapports:[{date:'2019-01-01', title:"Started reporting", diffusion:{releasePublicDate:'2050-01-01'} }]});
+  })
+  describe('Queries', ()=>{
+    it('should handle strict equality', async function () {
+      const doc = await tree.findDocuments({age:33});
+      const doc2 = await tree.findDocuments({$eq:{age:33}});
+      console.log(doc2)
+    });
+  })
 });

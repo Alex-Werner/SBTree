@@ -32,6 +32,8 @@ Allow to fetch a specific document by it's specific id.
 
 Allow to find all documents matching the query
 
+See more info on [queries](/docs/queries.md)
+
 
 ```js
     await tree.findDocuments({age:33});
@@ -40,6 +42,8 @@ Allow to find all documents matching the query
 #### async tree.deleteDocuments(query)
 
 Will delete all documents matching the query.
+
+See more info on [queries](/docs/queries.md)
 
 ```js
     await tree.deleteDocuments({age:33});
