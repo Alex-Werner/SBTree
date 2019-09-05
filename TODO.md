@@ -8,3 +8,4 @@
 - [ ] Allow to excludes certains indexes or switch from all indexed to a specify index only ?
 - [ ] Allow to set some indexes uniques.
 - [ ] Do we want to allow them to allow duplicate _id ?
+- [ ] Case sentitivity
