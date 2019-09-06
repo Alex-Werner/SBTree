@@ -39,7 +39,7 @@
     "mocha": "^6.2.0"
   },
   "dependencies": {
-    "fslockjs": "^1.2.0",
+    "fslockjs": "^1.3.0",
     "lodash": "^4.17.15",
     "mongo-objectid": "^1.1.0"
   }
