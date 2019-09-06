@@ -16,6 +16,7 @@ Note : By default. Everything is indexed.
 
 ### Table of Contents
  - [Installation](#installation)
+ - [Release Notes](#release-notes)
  - [Usage](#usage)
  - [Documentation](#documentation)
     - [Events](/doc/events.md)
@@ -28,6 +29,10 @@ Note : By default. Everything is indexed.
 ## Installation 
 
 `npm install sbtree`
+
+## Release Notes
+
+See the [release notes](RELEASE.md)
 
 ## Usage
 
@@ -52,7 +57,9 @@ const start = async function () {
   await tree.insertDocuments(doc2);
 
   // [ { _id: '507f1f77bcf86cd799439011', name: 'Alex', age: 28 } ]
-  const search = await tree.findDocuments({age:28});
+  const searchLte = await tree.findDocuments({age:{$lte:28}});
+  // [ { _id: '507f1f77bcf86cd799439011', name: 'Alex', age: 28 } ] -> equivalent {age:{$eq:28}}
+  const searchEq = await tree.findDocuments({age:28});
 
   // [ { _id: '507f1f77bcf86cd799439011', name: 'Alex', age: 28 } ]
   const get = await tree.getDocument(doc._id);
@@ -89,8 +96,11 @@ That basically allow us to deal with bigger dataset.
 For development purpose, I decided that being able to console view the object without all the nested parent thing was handy a clean.   
 That's the only reason. But Node V.12 is old enough already, no point sticking to the past.  
 
-
 ### Caveat :
 
 Right now, due to FS adapter requiring reference from tree for autoload.   
 And adapter being called beforehand (for props passing). You need to listen for the event `.on('ready')` first.   
+
+### Others links 
+
+- [TODO](TODO.md)

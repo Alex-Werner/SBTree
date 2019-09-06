@@ -56,7 +56,13 @@ describe('SBTree - Performance - Benchmark within test ', async function () {
         const rand = Math.floor(Math.random() * (findData.length - 1 + 1) + 0);
         const data = findData.splice(rand, 1)[0];
         return tree.findDocuments(data)
-      }]
+      }],
+      // ['negFindOp', async () => {
+        // const rand = Math.floor(Math.random() * (findData.length - 1 + 1) + 0);
+        // const data = findData.splice(rand, 1)[0];
+        // console.log(data)
+        // return tree.findDocuments(data)
+      // }]
     ];
 
     const processNext = async (jobFn, jobName) => {

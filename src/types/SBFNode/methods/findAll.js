@@ -6,8 +6,10 @@ module.exports = async function findAll(){
     p.push(child.findAll());
   });
 
-  await (Promise.all(p)).forEach((p)=>{
-    result = result.concat(p);
+  await Promise.all(p).then((res) => {
+    res.forEach((p) => {
+      result = result.concat(p);
+    })
   });
 
   return result;

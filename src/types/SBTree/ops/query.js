@@ -26,7 +26,7 @@ async function resolveDocuments(self, objectIds) {
 async function query(query) {
   const self = this;
   let listOfFieldLookup = [];
-
+  if(query===undefined) return [];
   if (query._id && Object.keys(query).length === 1) {
     const {_id} = query;
     return [await get.call(this, _id)]

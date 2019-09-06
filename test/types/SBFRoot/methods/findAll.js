@@ -57,7 +57,6 @@ const fakeSelf = {
     new SFBLeaf({ name: '16d07531858f6', type: 'leaf' , parent:fakeAgeTreeParent}),
   ],
 };
-fakeSelf.getAllIdentifiers = require('../../../../src/types/SBFRoot/methods/getAllIdentifiers').bind(fakeSelf);
 
 describe('SBFTree - methods - findAll', () => {
   it('should find all identifiers', async function () {

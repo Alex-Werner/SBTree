@@ -8,4 +8,5 @@
 - [ ] Allow to excludes certains indexes or switch from all indexed to a specify index only ?
 - [ ] Allow to set some indexes uniques.
 - [ ] Do we want to allow them to allow duplicate _id ?
-- [ ] Case sentitivity
+- [ ] Case sentitivity (the transform method need to be deterministic. It won't touch the value added in documents.);
+- [ ] LRU Caching on the most requested keys

@@ -64,8 +64,8 @@ describe('SBFTree - methods - find', () => {
   it('should find using strict operator', async function () {
     const res = await find.call(fakeSelf, 33);
     const resEqOp = await find.call(fakeSelf, 33, '$eq');
-
     expect(res).to.deep.equal(resEqOp);
+    expect(res).to.deep.equal(['5d6ebb7e21f1df6ff7482631']);
     expect(await find.call(fakeSelf, 32)).to.deep.equal([]);
     expect(await find.call(fakeSelf, 17)).to.deep.equal(['5d6ebb7e21f1df6ff7482621']);
     expect(await find.call(fakeSelf, 45)).to.deep.equal(['5d6ebb7e21f1df6ff7482641']);
@@ -74,15 +74,70 @@ describe('SBFTree - methods - find', () => {
     const res = await find.call(fakeSelf, 33, '$neq');
     expect(res).to.be.deep.equal([ '5d6ebb7e21f1df6ff7482621', '5d6ebb7e21f1df6ff7482641' ])
   });
-  // it('should detect strict operators', async function () {
-  //   const res = await query.call(fakeSelf, {age: 33});
-  //   expect(calledFn[0]).to.deep.equal(['age','find',33, '$eq']);
-  // });
-  // it('should detect other operators', async function () {
-  //   const res2 = await query.call(fakeSelf, {age: {$gte:33, $lte:50}});
-  //   expect(calledFn[1]).to.deep.equal(['age','find',33, '$gte']);
-  //   expect(calledFn[2]).to.deep.equal(['age','find',50, '$lte']);
-  // });
+  it('should find using lower than operators', async function () {
+    const res = await find.call(fakeSelf, 1, '$lt');
+    expect(res).to.be.deep.equal([ ])
+    const res2 = await find.call(fakeSelf, 100, '$lt');
+    expect(res2).to.be.deep.equal(['5d6ebb7e21f1df6ff7482621','5d6ebb7e21f1df6ff7482631','5d6ebb7e21f1df6ff7482641' ])
+    const res3 = await find.call(fakeSelf, 33, '$lt');
+    expect(res3).to.be.deep.equal([ '5d6ebb7e21f1df6ff7482621' ])
+    const res4 = await find.call(fakeSelf, 34, '$lt');
+    expect(res4).to.be.deep.equal([ '5d6ebb7e21f1df6ff7482621', '5d6ebb7e21f1df6ff7482631' ])
+  });
+  it('should find using lower than or equal operators', async function () {
+    const res = await find.call(fakeSelf, 1, '$lte');
+    expect(res).to.be.deep.equal([ ])
+    const res2 = await find.call(fakeSelf, 100, '$lte');
+    expect(res2).to.be.deep.equal(['5d6ebb7e21f1df6ff7482621','5d6ebb7e21f1df6ff7482631','5d6ebb7e21f1df6ff7482641' ])
+    const res3 = await find.call(fakeSelf, 17, '$lte');
+    expect(res3).to.be.deep.equal([ '5d6ebb7e21f1df6ff7482621'])
+    const res4 = await find.call(fakeSelf, 34, '$lte');
+    expect(res4).to.be.deep.equal([ '5d6ebb7e21f1df6ff7482621', '5d6ebb7e21f1df6ff7482631' ])
+
+    const res5 = await find.call(fakeSelf, 33, '$lte');
+    expect(res5).to.be.deep.equal([ '5d6ebb7e21f1df6ff7482621', '5d6ebb7e21f1df6ff7482631' ])
+  });
+  it('should find using greater than operators', async function (){
+    const res = await find.call(fakeSelf, 1, '$gt');
+    expect(res).to.be.deep.equal(['5d6ebb7e21f1df6ff7482621','5d6ebb7e21f1df6ff7482631','5d6ebb7e21f1df6ff7482641' ])
+    const res2 = await find.call(fakeSelf, 100, '$gt');
+    expect(res2).to.be.deep.equal([ ])
+    const res3 = await find.call(fakeSelf, 16, '$gt');
+    expect(res3).to.be.deep.equal(['5d6ebb7e21f1df6ff7482621','5d6ebb7e21f1df6ff7482631','5d6ebb7e21f1df6ff7482641' ])
+    const res4 = await find.call(fakeSelf, 17, '$gt');
+    expect(res4).to.be.deep.equal(['5d6ebb7e21f1df6ff7482631','5d6ebb7e21f1df6ff7482641' ])
+    const res5 = await find.call(fakeSelf, 32, '$gt');
+    expect(res5).to.be.deep.equal(['5d6ebb7e21f1df6ff7482631', '5d6ebb7e21f1df6ff7482641' ])
+    const res6 = await find.call(fakeSelf, 33, '$gt');
+    expect(res6).to.be.deep.equal([  '5d6ebb7e21f1df6ff7482641' ])
+    const res7 = await find.call(fakeSelf, 44, '$gt');
+    expect(res7).to.be.deep.equal([  '5d6ebb7e21f1df6ff7482641' ])
+    const res8 = await find.call(fakeSelf, 45, '$gt');
+    expect(res8).to.be.deep.equal([   ])
+  });
+  it('should find using greater than or equal operators', async function (){
+    const res = await find.call(fakeSelf, 1, '$gte');
+    expect(res).to.be.deep.equal(['5d6ebb7e21f1df6ff7482621','5d6ebb7e21f1df6ff7482631','5d6ebb7e21f1df6ff7482641' ])
+    const res2 = await find.call(fakeSelf, 100, '$gte');
+    expect(res2).to.be.deep.equal([ ])
+    const res3 = await find.call(fakeSelf, 16, '$gte');
+    expect(res3).to.be.deep.equal(['5d6ebb7e21f1df6ff7482621','5d6ebb7e21f1df6ff7482631','5d6ebb7e21f1df6ff7482641' ])
+    const res4 = await find.call(fakeSelf, 17, '$gte');
+    expect(res4).to.be.deep.equal(['5d6ebb7e21f1df6ff7482621','5d6ebb7e21f1df6ff7482631','5d6ebb7e21f1df6ff7482641' ])
+    const res5 = await find.call(fakeSelf, 32, '$gte');
+    expect(res5).to.be.deep.equal(['5d6ebb7e21f1df6ff7482631', '5d6ebb7e21f1df6ff7482641' ])
+    const res6 = await find.call(fakeSelf, 33, '$gte');
+    expect(res6).to.be.deep.equal([ '5d6ebb7e21f1df6ff7482631', '5d6ebb7e21f1df6ff7482641' ])
+    const res7 = await find.call(fakeSelf, 44, '$gte');
+    expect(res7).to.be.deep.equal([  '5d6ebb7e21f1df6ff7482641' ])
+    const res8 = await find.call(fakeSelf, 45, '$gte');
+    expect(res8).to.be.deep.equal([ '5d6ebb7e21f1df6ff7482641'  ])
+    const res9 = await find.call(fakeSelf, 46, '$gte');
+    expect(res9).to.be.deep.equal([   ])
+
+  });
+
+
   // it('should detect nested object', async function () {
   //   //TODO
   //   // const res3 = await query.call(fakeSelf, {address: {country:{$in:['France', 'Russia']}}});

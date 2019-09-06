@@ -24,6 +24,8 @@ class SFBLeaf {
 SFBLeaf.prototype.insert = require('./methods/insert');
 SFBLeaf.prototype.find = require('./methods/find');
 SFBLeaf.prototype.findAll = require('./methods/findAll');
+SFBLeaf.prototype.findLowerThan = require('./methods/findLowerThan');
+SFBLeaf.prototype.findGreaterThan = require('./methods/findGreaterThan');
 SFBLeaf.prototype.isFull = require('./methods/isFull');
 SFBLeaf.prototype.split = require('./methods/split');
 module.exports = SFBLeaf;

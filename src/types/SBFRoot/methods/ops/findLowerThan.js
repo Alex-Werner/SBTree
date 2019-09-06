@@ -19,7 +19,6 @@ async function findLowerThan(key, includeKey=false){
     });
 
     await Promise.all(p).then((res)=>{
-      console.log({res})
       res.forEach((p)=>{
         result = result.concat(p);
 
