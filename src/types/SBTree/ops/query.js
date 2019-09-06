@@ -61,7 +61,7 @@ async function query(query) {
 
         // TODO : Move to Promise.all. Expect changes, no point to not parallel the calls. We use this for now.
         for(let operator of operators){
-          const value = await fieldTree.find(queryFieldValue, operator);
+          const value = await fieldTree.find(queryFieldValue[operator], operator);
           if (value) {
             listOfFieldLookup = listOfFieldLookup.concat(value)
           } else {
