@@ -15,7 +15,6 @@ module.exports = async function loadDatabase(){
             this.leafs[leafName] = {name:leafName, meta:new LeafMeta(leaf.meta)};
         })
         await this.parent.loadState(tree);
-
     }
 
     // console.dir(this.parent, {depth:null});

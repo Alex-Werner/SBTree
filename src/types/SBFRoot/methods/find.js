@@ -1,22 +1,25 @@
-async function find(key){
-  let leafIndex = 0;
-  this.keys.forEach((_key)=>{
-    if(key<=_key) return;
-    leafIndex++;
-  });
+const findEquals = require('./ops/findEquals');
+const findLowerThan = require('./ops/findLowerThan');
+const findGreaterThan = require('./ops/findGreaterThan');
 
-  const leaf = this.childrens[leafIndex];
-  let result = await leaf.find(key);
-
-  if(leafIndex>0){
-    const left = this.childrens[leafIndex];
-    result = result.concat(result, await left.find(key));
+async function find(key, operator = '$eq'){
+  switch (operator) {
+    case '$eq':
+      return findEquals.call(this,key);
+    case '$neq':
+      const findAllIdentifier = await this.findAll();
+      const excludedIdentifiers = await findEquals.call(this, key);
+      return findAllIdentifier.filter(id => !excludedIdentifiers.includes(id));
+    case '$lte':
+      return findLowerThan.call(this, key, true);
+    case '$lt':
+      return findLowerThan.call(this, key, false);
+    case '$gt':
+      return findGreaterThan.call(this, key, false);
+    case '$gte':
+      return findGreaterThan.call(this, key, true);
+    default:
+      throw new Error(`Not handled operator ${operator}`)
   }
-  // We also check the leaf nearby
-  if(this.childrens.length>leafIndex+1){
-    const right = this.childrens[leafIndex+1];
-    result = result.concat(result, await right.find(key));
-  }
-  return result;
 }
 module.exports = find;

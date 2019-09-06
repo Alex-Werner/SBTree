@@ -40,6 +40,7 @@ FsAdapter.prototype.attachParent = require('./methods/attachParent');
 FsAdapter.prototype.addInLeaf = require('./methods/addInLeaf')
 FsAdapter.prototype.createLeaf = require('./methods/createLeaf')
 FsAdapter.prototype.findInLeaf = require('./methods/findInLeaf')
+FsAdapter.prototype.findAllInLeaf = require('./methods/findAllInLeaf')
 FsAdapter.prototype.getDocument = require('./methods/getDocument')
 FsAdapter.prototype.insertSortedInLeaf = require('./methods/insertSortedInLeaf')
 FsAdapter.prototype.loadDatabase = require('./methods/loadDatabase')
