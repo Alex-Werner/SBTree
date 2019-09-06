@@ -71,7 +71,7 @@ describe('SBFTree - methods - find', () => {
     expect(await find.call(fakeSelf, 45)).to.deep.equal(['5d6ebb7e21f1df6ff7482641']);
   });
   it('should find using negated equality operation', async function () {
-    const res = await find.call(fakeSelf, 33, '$neq');
+    const res = await find.call(fakeSelf, 33, '$ne');
     expect(res).to.be.deep.equal([ '5d6ebb7e21f1df6ff7482621', '5d6ebb7e21f1df6ff7482641' ])
   });
   it('should find using lower than operators', async function () {

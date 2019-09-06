@@ -6,7 +6,7 @@ async function find(key, operator = '$eq'){
   switch (operator) {
     case '$eq':
       return findEquals.call(this,key);
-    case '$neq':
+    case '$ne':
       const findAllIdentifier = await this.findAll();
       const excludedIdentifiers = await findEquals.call(this, key);
       return findAllIdentifier.filter(id => !excludedIdentifiers.includes(id));
