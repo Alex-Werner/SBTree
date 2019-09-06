@@ -1,6 +1,9 @@
 ## 1.1.0 
 
-TODO
+- [#9c7b008](https://github.com/Alex-Werner/SBTree/commit/9c7b008eb17c7cf68e460eba0c92759daf1931eb) - PR #2 - Added $lt, $lte, $gte, $gt
+- [#59b264f](https://github.com/Alex-Werner/SBTree/commit/59b264fd6201b17f3ce0ef8da99f0b886f2eab55) - Added $ne operator
+- [#c25dd91](https://github.com/Alex-Werner/SBTree/commit/c25dd91601019afeceac6fc7dd09906b190ebd67) - Added operators logic ($eq)
+- [#1e8ea78](https://github.com/Alex-Werner/SBTree/commit/1e8ea78776eaddc94f6c7e9972b2315896c8056c) - Wrote next step specifications
 
 ## 1.0.0 
 
