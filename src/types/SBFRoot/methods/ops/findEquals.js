@@ -9,7 +9,9 @@ module.exports = async function findEquals(key){
 
 
   const left = this.childrens[leafIndex];
+  if(left){
   result = result.concat(await left.find(key));
+  }
 
   // We also check the leaf nearby
   if(this.childrens.length>leafIndex+1){

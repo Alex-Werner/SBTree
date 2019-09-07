@@ -8,6 +8,7 @@ const tree = new SBTree([props]);
   - `adapter` Adapter - (def: MemoryAdapter) : Allow to specific another adapter to use
   - `order` Number - (def: 511) : Primordial for the performance, the closest to L1 the better. Chose below 2^n. 
   - `verbose` Bool - (def: false)
+  - `uniques` Array - (def: []) - Allow to set some field unique by adding them to this array
 
 #### async tree.insertDocuments(documents)
 
