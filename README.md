@@ -32,7 +32,7 @@ Note : By default. Everything is indexed.
 
 ## Release Notes
 
-See the [release notes](RELEASE.md)
+See the [release notes](RELEASE_NOTES.md)
 
 ## Usage
 
