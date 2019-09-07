@@ -12,7 +12,8 @@ It uses a field-specific indexing system relaying on B+Tree structure.
 This allow to handle a lot of data, and have them indexed without the need to keep the whole dataset in-memory. 
 Most of the databases uses B-Tree (MongoDB, CouchDB) or B+Tree (InnoDB, MariaDB, MySQL).
 
-Note : By default. Everything is indexed. 
+Note : By default. Everything except specifically excluded field are indexed    
+Optional support for uniques key provided.    
 
 ### Table of Contents
  - [Installation](#installation)
@@ -69,7 +70,9 @@ tree.on('ready', start);
 
 ## Documentation 
 
+- [Events](/doc/events.md)
 - [API](/doc/api.md)
+- [Queries](/doc/queries.md)
 
 
 ## Adapters 

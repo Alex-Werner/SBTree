@@ -6,7 +6,10 @@ function setFieldTree(field, root = null){
   }
   const {adapter} = this;
 
-  const fieldTree = new SBFTree({field, adapter, order:this.options.order, verbose:this.options.verbose, root});
+  const isUnique = this.uniques.includes(field);
+  const isExcluded = this.exclude.includes(field);
+  if(isExcluded) return;
+  const fieldTree = new SBFTree({field, adapter, order:this.options.order, verbose:this.options.verbose, root, isUnique});
   this.fieldTrees[field] = fieldTree;
 };
 module.exports = setFieldTree;

@@ -1,15 +1,15 @@
-const {map} = require('lodash');
-
 async function get(id) {
   if (!id) throw new Error('Expected an objectid')
 
   let document = {
     _id: id
   };
-  for(const field in this.fieldTrees){
-    const data = await this.fieldTrees[field].get(id);
-    document = Object.assign(document, data);
-  }
+  return await this.adapter.getDocument(id)
+
+  // for(const field in this.fieldTrees){
+  //   const data = await this.fieldTrees[field].get(id);
+  //   document = Object.assign(document, data);
+  // }
   // await Promise.all(map(this.fieldTrees, async (fieldTree) => {
   //       const {field} = fieldTree;
   //       if (this.options.verbose) console.log(`Seeking for ${id} in ${field}`);
@@ -17,6 +17,6 @@ async function get(id) {
   //       document = Object.assign(document, data);
   //     }
   // ));
-  return document;
+  // return document;
 };
 module.exports = get;

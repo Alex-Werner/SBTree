@@ -10,13 +10,13 @@ async function findGreaterThan(key, includeKey=false){
   });
 
 
+  let p = [];
 
   // first, we lookup for all greater than matches in the actual leaf where we had our el.
-  result = result.concat(await this.childrens[leafIndex].findGreaterThan(key, includeKey));
+  p.push(this.childrens[leafIndex].findGreaterThan(key, includeKey));
   // If our key is in the keys, then right item will contains our key and it's superior elements
   // We need this extra step first
   let start = leafIndex+1;
-  let p = [];
   if(this.keys.includes(key)){
 
     p.push(this.childrens[start].findGreaterThan(key, includeKey));

@@ -14,7 +14,9 @@ class SBTree extends EventEmitter {
         verbose:false
       },
       fieldTrees:{},
-      size:0
+      size:0,
+      exclude:[],
+      uniques:[],
     };
 
     super();
@@ -24,6 +26,8 @@ class SBTree extends EventEmitter {
     };
 
     this.fieldTrees = (props.fieldTrees!==undefined) ? props.fieldTrees : defaultProps.fieldTrees;
+    this.uniques = (props.uniques) ? props.uniques : defaultProps.uniques;
+    this.exclude = (props.exclude) ? props.exclude : defaultProps.exclude;
     this.size = (props.size!==undefined) ? props.size : defaultProps.size;
     this.adapter = (props.adapter) ? props.adapter : new MemoryAdapter();
     if(this.adapter.attachParent){

@@ -78,8 +78,46 @@ describe('SBTree', () => {
   describe('Queries', ()=>{
     it('should handle strict equality', async function () {
       const doc = await tree.findDocuments({age:33});
+      expect(doc).to.be.deep.equal([ { age: 33, email: 'alain@dourak.ru', _id: '16ced00ee7931' } ]);
+
       const doc2 = await tree.findDocuments({$eq:{age:33}});
-      console.log(doc2)
+      expect(doc2).to.be.deep.equal([]);
+    });
+  })
+  describe('Unique field', ()=>{
+    it('should work',async function () {
+      const uniqueTree = new SBTree({order:3, verbose:true, uniques:['email']});
+      expect(uniqueTree.uniques).to.be.deep.equal(['email']);
+
+      const realJean = {email:'jean@valjean.fr', pseudo:'realJean'};
+      const inserted = await uniqueTree.insertDocuments(realJean);
+      const insertedDuplicateKey = await uniqueTree.insertDocuments({email:'jean@valjean.fr', pseudo:'fakeJean'});
+      expect(Object.assign({}, {email:inserted.email, pseudo:inserted.pseudo})).to.deep.equal(realJean);
+      // expect(Object.assign({}, {email:insertedDuplicateKey.email, pseudo:insertedDuplicateKey.pseudo})).to.deep.equal(realJean);
+      const findingRes = (await uniqueTree.findDocuments({email:'jean@valjean.fr'}))
+      expect(findingRes.length).to.deep.equal(1);
+      expect(findingRes[0].email).to.deep.equal(realJean.email);
+      expect(findingRes[0].name).to.deep.equal(realJean.name);
+    });
+  })
+  describe('Excluded fields', ()=>{
+    it('should work',async function () {
+      const excludeTree = new SBTree({order:3, verbose:true, exclude:['nestedField']});
+      expect(excludeTree.exclude).to.be.deep.equal(['nestedField']);
+
+      const user1 = {email:'jean@valjean.fr', pseudo:'realJean', nestedField:{address:{country:'France'}}};
+      const inserted = await excludeTree.insertDocuments(user1);
+
+      const findingRes = (await excludeTree.findDocuments({email:'jean@valjean.fr'}))
+      expect(findingRes.length).to.deep.equal(1);
+      expect(findingRes[0].email).to.deep.equal(user1.email);
+      expect(findingRes[0].name).to.deep.equal(user1.name);
+      expect(findingRes[0].nestedField).to.deep.equal(user1.nestedField);
+
+      expect(Object.keys(excludeTree.fieldTrees)).to.be.deep.equal(['email','pseudo']);
+
+      const tryingToFingInExclude = (await excludeTree.findDocuments({nestedField:user1.nestedField}));
+      expect(tryingToFingInExclude).to.be.deep.equal([]);
     });
   })
 });

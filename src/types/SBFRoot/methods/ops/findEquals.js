@@ -6,15 +6,25 @@ module.exports = async function findEquals(key){
   });
 
   let result = [];
+  let p = []
 
-
-  const left = this.childrens[leafIndex];
-  result = result.concat(await left.find(key));
+  const {childrens} = this;
+  const left = childrens[leafIndex];
+  if(left){
+    p.push(left.find(key));
+  }
 
   // We also check the leaf nearby
-  if(this.childrens.length>leafIndex+1){
-    const right = this.childrens[leafIndex+1];
-    result = result.concat(await right.find(key));
+  if(childrens.length>leafIndex+1){
+    const right = childrens[leafIndex+1];
+    p.push(right.find(key));
   }
+
+  await Promise.all(p).then((res)=>{
+    res.forEach((_pRes)=>{
+
+      result = result.concat(_pRes);
+    })
+  });
   return result;
 };

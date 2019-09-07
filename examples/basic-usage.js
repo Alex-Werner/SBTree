@@ -28,7 +28,7 @@ const start = async function () {
   ])
 
   // // If you don't have any _id attach, it will create one for you
-  const id = await tree.insertDocuments({age: 42, email: 'jean.paul@valjean.fr'});
+  const inserted = await tree.insertDocuments({age: 42, email: 'jean.paul@valjean.fr'});
 
 
   // Feature in todo
@@ -38,9 +38,9 @@ const start = async function () {
   console.log(await tree.getDocument('5d6dc94e3c7734812f051d7b'))
   console.log(await tree.findDocuments({age:33}))
   console.log(await tree.findDocuments({email:'goptnik@dourak.ru'}))
-  console.log(await tree.findDocuments({_id:id}))
-
-  console.log(await tree.findDocuments({age:{$gte:45}}))
+  console.log(await tree.findDocuments({_id:inserted._id}))
+  //
+  console.log(await tree.findDocuments({age:{$gte:44}}))
   console.log(await tree.findDocuments({country:{$nin:['France',"Belgium", "Russia"]}}))
   console.log(await tree.findDocuments({country:{$in:['Belgium']}}));
 

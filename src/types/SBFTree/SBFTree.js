@@ -6,8 +6,9 @@
 class SBFTree {
   constructor(props={}){
     const defaultOpts = {
-      order: 16,
-      verbose:false
+      order: 511,
+      verbose:false,
+      isUnique:false
     }
     Object.assign(SBFTree.prototype, {
       createRoot: require('./methods/createRoot')
@@ -21,6 +22,7 @@ class SBFTree {
       throw new Error(`SBFTree expect a field to be initialized`);
     }
     this.field = (props.field) ? props.field : null;
+    this.isUnique = (props.isUnique!==undefined) ? props.isUnique : defaultOpts.isUnique;
     if(props.root){
       this.createRoot(props.root)
     }else{

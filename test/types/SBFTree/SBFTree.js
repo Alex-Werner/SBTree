@@ -12,7 +12,7 @@ describe('SBFTree', () => {
   });
   it('should default on mem adapter + size', function () {
     const t = new SBFTree({adapter,field:'email'});
-    expect(t.options.order).to.equal(16)
+    expect(t.options.order).to.equal(511)
     expect(t.adapter.constructor.name).to.equal('MemoryAdapter')
   });
   it('should instantiate', async function () {

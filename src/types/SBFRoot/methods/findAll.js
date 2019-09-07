@@ -1,17 +1,21 @@
-async function findAll(){
+async function findAll() {
   let result = [];
 
   let p = [];
-  this.childrens.forEach((child)=>{
+  this.childrens.forEach((child) => {
     p.push(child.findAll());
   });
 
-  await Promise.all(p).then((res)=>{
-    res.forEach((resolvedP)=>{
-      result = result.concat(resolvedP);
-    });
-  });
-
-  return result;
+  return new Promise((resolve) => {
+    Promise
+        .all(p)
+        .then((res) => {
+          res.forEach((resolvedP) => {
+            result = result.concat(resolvedP);
+          });
+          resolve(result);
+        });
+  })
 }
+
 module.exports = findAll;
