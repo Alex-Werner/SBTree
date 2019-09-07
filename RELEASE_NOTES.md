@@ -1,3 +1,7 @@
+## 1.2.1 (2019-09-07)
+
+- [#e0777b9](https://github.com/Alex-Werner/SBTree/commit/e0777b925e8512f6d34748095acfedf842852090) - fix(query): correctly implicit $and on multi-field query
+
 ## 1.2.0 (2019-09-07)
 
 - [#d2cc62f](https://github.com/Alex-Werner/SBTree/commit/d2cc62f8a65faf4cac46aa9ab3d00d800a091d4e) - improvement: refactorate + fix SBFNode issues on $gt, $lte
