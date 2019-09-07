@@ -38,8 +38,8 @@ async function find(key, operator = '$eq'){
       const includingIdentifiers = await this.find(key, '$in');
       const allIdentifiers = await this.findAll();
       // We exclude the $in result from our getAllIdentifiers
-      return allIdentifiers.filter(id => !includingIdentifiers.includes(id));
-
+      const res =  allIdentifiers.filter(id => !includingIdentifiers.includes(id));
+      return res;
     default:
       throw new Error(`Not handled operator ${operator}`)
   }

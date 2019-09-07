@@ -3,14 +3,28 @@ async function findLowerThan(key,includeKey=false) {
 
   let leafIndex = 0;
   let p = [];
+  // It might be a bug that we have no keys, but in this case, we take first child
   if(this.keys.length===0 && this.childrens.length===1){
     p.push(this.childrens[0].findLowerThan(key, includeKey));
   }else{
+    // Let's find our first match leaf
     this.keys.forEach((_key) => {
       if (key <= _key) return;
       leafIndex++;
-      p.push(this.childrens[leafIndex].findLowerThan(key, includeKey));
     });
+
+    // We first look up all smaller value
+    this.childrens.slice(0,leafIndex).forEach((child) => {
+      p.push(child.findAll())
+    });
+
+    // And then we lookup in our children
+    p.push(this.childrens[leafIndex].findLowerThan(key, includeKey));
+
+    // And the next one if it exist (in case we got duplicate same value
+    if(this.childrens[leafIndex+1]){
+      p.push(this.childrens[leafIndex+1].findLowerThan(key, includeKey));
+    }
   }
   await Promise.all(p).then((res) => {
     res.forEach((p) => {

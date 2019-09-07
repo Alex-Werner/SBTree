@@ -1,18 +1,6 @@
-const {map, each, intersection} = require('lodash');
+const {intersection} = require('lodash');
 
 const get = require('./get');
-
-const comparators = {
-  numeric: (keys) => {
-    let leafIndex = 0;
-    keys.forEach((_key) => {
-      if (key <= _key) return;
-      leafIndex++;
-    });
-    return leafIndex;
-  }
-}
-
 
 async function resolveDocuments(self, objectIds) {
   const documents = [];
@@ -46,7 +34,7 @@ async function query(query) {
 
 
     // We try to look up the easy cases, strict equality
-    if(['string', 'number'].includes(typeof queryFieldValue)){
+    if (['string', 'number'].includes(typeof queryFieldValue)) {
       let operator = '$eq';
       const value = await fieldTree.find(queryFieldValue, operator);
       if (value) {
@@ -54,13 +42,13 @@ async function query(query) {
       } else {
         throw new Error(`No value ${queryFieldName} found : ${value}, query(${JSON.stringify(query)})`)
       }
-    }else{
-      if(Array.isArray(queryFieldValue)) throw new Error(`Not supported array input. Please open a Github issue to specify your need.`);
-      if(typeof queryFieldValue === "object" && !Array.isArray(queryFieldValue)){
-        const operators = Object.keys(queryFieldValue).filter((el)=>  el[0]==='$');
+    } else {
+      if (Array.isArray(queryFieldValue)) throw new Error(`Not supported array input. Please open a Github issue to specify your need.`);
+      if (typeof queryFieldValue === "object" && !Array.isArray(queryFieldValue)) {
+        const operators = Object.keys(queryFieldValue).filter((el) => el[0] === '$');
 
         // TODO : Move to Promise.all. Expect changes, no point to not parallel the calls. We use this for now.
-        for(let operator of operators){
+        for (let operator of operators) {
           const value = await fieldTree.find(queryFieldValue[operator], operator);
           if (value) {
             listOfFieldLookup = listOfFieldLookup.concat(value)
