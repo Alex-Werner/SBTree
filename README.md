@@ -14,6 +14,8 @@ Most of the databases uses B-Tree (MongoDB, CouchDB) or B+Tree (InnoDB, MariaDB,
 
 Note : By default. Everything is indexed. 
 
+Supports excluded and/or uniques.   
+
 ### Table of Contents
  - [Installation](#installation)
  - [Release Notes](#release-notes)
@@ -69,7 +71,9 @@ tree.on('ready', start);
 
 ## Documentation 
 
+- [Events](/doc/events.md)
 - [API](/doc/api.md)
+- [Queries](/doc/queries.md)
 
 
 ## Adapters 

@@ -12,11 +12,11 @@ async function addInLeaf(leafName, field, identifier, key) {
   this.leafs[leafName].meta.size += 1;
   this.leafs[leafName].meta.identifiers.splice(index, 0, identifier);
 
-  const doc = {
-    _id: identifier,
-  };
-  doc[field] = key;
-  await this.updateDocument(doc)
+  // const doc = {
+  //   _id: identifier,
+  // };
+  // doc[field] = key;
+  // await this.updateDocument(doc)
 }
 
 module.exports = addInLeaf;

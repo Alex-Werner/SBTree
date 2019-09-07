@@ -14,11 +14,12 @@ async function insert(document) {
         this.setFieldTree(_fieldName);
       }
       const fieldNode = this.getFieldTree(_fieldName);
-
-      await fieldNode.insert(_field, id);
-
+      if(fieldNode){
+        await fieldNode.insert(_field, id);
+      }
     }
   }
+  await this.adapter.saveDocument(document);
 
 };
 module.exports = insert;
