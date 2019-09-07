@@ -21,24 +21,20 @@ async function query(query) {
   }
 
   for (const queryFieldName in query) {
+    let fieldLookup = []
     const queryFieldValue = query[queryFieldName];
     const fieldTree = this.getFieldTree(queryFieldName);
     if (!fieldTree) {
       continue;
     }
 
-    // At this point, query can still be either strict or diverse. Let's sort this out
-    const queryFieldValueType = typeof queryFieldValue;
-
-    const keys = [];
-
-
     // We try to look up the easy cases, strict equality
     if (['string', 'number'].includes(typeof queryFieldValue)) {
+
       let operator = '$eq';
       const value = await fieldTree.find(queryFieldValue, operator);
       if (value) {
-        listOfFieldLookup = listOfFieldLookup.concat(value)
+        fieldLookup = fieldLookup.concat(value)
       } else {
         throw new Error(`No value ${queryFieldName} found : ${value}, query(${JSON.stringify(query)})`)
       }
@@ -51,16 +47,17 @@ async function query(query) {
         for (let operator of operators) {
           const value = await fieldTree.find(queryFieldValue[operator], operator);
           if (value) {
-            listOfFieldLookup = listOfFieldLookup.concat(value)
+            fieldLookup = fieldLookup.concat(value)
           } else {
             throw new Error(`No value ${queryFieldName} found : ${value}, query(${JSON.stringify(query)})`)
           }
         }
       }
     }
+    listOfFieldLookup.push(fieldLookup);
   }
 
-  const matchingObjectIds = intersection(listOfFieldLookup);
+  const matchingObjectIds = intersection(...listOfFieldLookup);
   const documents = await resolveDocuments(self, matchingObjectIds);
   return documents;
 };
