@@ -1,5 +1,6 @@
 ## TODO 
 
+- [ ] Nested object (Priority task. We should be able to push `{nested:{nested1:{value:true}}}`)
 - [ ] Remove a key.
 - [ ] Query comparators (See all the fun planned in queries)
 - [ ] Count - Should be faster than get as we do not need to even fetch the data itselves.

@@ -3,6 +3,10 @@ const findLowerThan = require('./ops/findLowerThan');
 const findGreaterThan = require('./ops/findGreaterThan');
 
 async function find(key, operator = '$eq'){
+  const self = this;
+  const p = [];
+  const results = [];
+
   switch (operator) {
     case '$eq':
       return findEquals.call(this,key);
@@ -18,6 +22,24 @@ async function find(key, operator = '$eq'){
       return findGreaterThan.call(this, key, false);
     case '$gte':
       return findGreaterThan.call(this, key, true);
+    case '$in':
+      if(!Array.isArray(key)) throw new Error(`$in operator expect key to be an array`);
+      for(let el of key){
+        p.push(self.find(el))
+      }
+      await Promise.all(p).then((resolvedP) => {
+        resolvedP.forEach((p) => {
+          results.push(...p);
+        })
+      });
+      return results;
+    case '$nin':
+      if(!Array.isArray(key)) throw new Error(`$nin operator expect key to be an array`);
+      const includingIdentifiers = await this.find(key, '$in');
+      const allIdentifiers = await this.findAll();
+      // We exclude the $in result from our getAllIdentifiers
+      return allIdentifiers.filter(id => !includingIdentifiers.includes(id));
+
     default:
       throw new Error(`Not handled operator ${operator}`)
   }
