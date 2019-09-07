@@ -5,29 +5,28 @@ const {Timer} = require('../../src/utils/time');
 const {version} = require('../../package.json');
 const {each} = require('lodash');
 
-
 let tree;
-let benchmark = {
+let standard = {
   writeOp: {
-    maxOp: 2600,
+    maxOp: fakeData.length,
     executedOp: 0,
     duration: 0,
     ops: 0
   },
   getOp: {
-    maxOp: 2600,
+    maxOp: fakeData.length,
     executedOp: 0,
     duration: 0,
     ops: 0
   },
   findOp: {
-    maxOp: 2600,
+    maxOp: fakeData.length,
     executedOp: 0,
     duration: 0,
     ops: 0
   }
 }
-describe('SBTree - Performance - Benchmark within test ', async function () {
+describe('SBTree - Performance - Multi-Trees (index/field) benchmark within test ', async function () {
   this.timeout(10000)
   before((done) => {
     console.log(`Will process ${fakeData.length} elements`);
@@ -54,21 +53,29 @@ describe('SBTree - Performance - Benchmark within test ', async function () {
       }],
       ['findOp', async () => {
         const rand = Math.floor(Math.random() * (findData.length - 1 + 1) + 0);
-        const data = findData.splice(rand, 1)[0];
-        return tree.findDocuments(data)
+        const el = findData.splice(rand, 1)[0];
+        const query = {}
+        query.age = el.age;
+        if(rand % 2 === 0){
+          query.country = el.country;
+        }
+        if(rand % 3 === 0){
+          query.gender = el.gender;
+        }
+        if(rand % 4 === 0){
+          query.firstname = el.firstname;
+        }
+        if(rand % 5 === 0){
+          query.email = el.email;
+        }
+        return await tree.findDocuments(query);
       }],
-      // ['negFindOp', async () => {
-        // const rand = Math.floor(Math.random() * (findData.length - 1 + 1) + 0);
-        // const data = findData.splice(rand, 1)[0];
-        // console.log(data)
-        // return tree.findDocuments(data)
-      // }]
     ];
 
     const processNext = async (jobFn, jobName) => {
       await jobFn();
-      benchmark[jobName].executedOp += 1;
-      if (benchmark[jobName].executedOp < benchmark[jobName].maxOp) {
+      standard[jobName].executedOp += 1;
+      if (standard[jobName].executedOp < standard[jobName].maxOp) {
         await processNext(jobFn, jobName)
       }
     };
@@ -81,20 +88,20 @@ describe('SBTree - Performance - Benchmark within test ', async function () {
 
       await processNext(jobFn, jobName);
       timer.stop();
-      benchmark[jobName].duration = timer.duration.ms / 1000;
-      benchmark[jobName].ops = benchmark[jobName].executedOp / (timer.duration.ms / 1000);
+      standard[jobName].duration = timer.duration.ms / 1000;
+      standard[jobName].ops = standard[jobName].executedOp / (timer.duration.ms / 1000);
 
-      console.log(`Finished ${jobName} in ${timer.duration.ms} ms [${benchmark[jobName].ops}] ops`)
+      console.log(`Finished ${jobName} in ${timer.duration.ms} ms [${standard[jobName].ops}] ops`)
     }
   });
   it('should display result', function (done) {
-    const totalDuration = benchmark.writeOp.duration + benchmark.getOp.duration + benchmark.findOp.duration;
-    const totalOps = benchmark.writeOp.executedOp + benchmark.getOp.executedOp + benchmark.findOp.executedOp;
-    const avgOps = (benchmark.writeOp.ops + benchmark.getOp.ops + benchmark.findOp.ops) / 3;
-    console.log(`======== SBTree ${version} - Benchmark from mocha`)
-    console.log(`= Write : ${benchmark.writeOp.ops} op/s [${benchmark.writeOp.executedOp}]`)
-    console.log(`= Get : ${benchmark.getOp.ops} op/s [${benchmark.getOp.executedOp}]`)
-    console.log(`= Find : ${benchmark.findOp.ops} op/s [${benchmark.findOp.executedOp}]`)
+    const totalDuration = standard.writeOp.duration + standard.getOp.duration + standard.findOp.duration;
+    const totalOps = standard.writeOp.executedOp + standard.getOp.executedOp + standard.findOp.executedOp;
+    const avgOps = (standard.writeOp.ops + standard.getOp.ops + standard.findOp.ops) / 3;
+    console.log(`======== SBTree ${version} - Multi-tree Benchmark from mocha`)
+    console.log(`= Write : ${standard.writeOp.ops} op/s [${standard.writeOp.executedOp}]`)
+    console.log(`= Get : ${standard.getOp.ops} op/s [${standard.getOp.executedOp}]`)
+    console.log(`= Find : ${standard.findOp.ops} op/s [${standard.findOp.executedOp}]`)
     console.log(`= Total : ${totalOps} operations`)
     console.log(`= Duration : ${totalDuration} s`)
     console.log(`= Avg : ${avgOps} op/s`)
