@@ -1,7 +1,7 @@
 const findEquals = require('./ops/findEquals');
 const findLowerThan = require('./ops/findLowerThan');
 const findGreaterThan = require('./ops/findGreaterThan');
-
+const {xor, difference, pullAll} = require('lodash');
 async function find(key, operator = '$eq'){
   const self = this;
   const p = [];
@@ -13,7 +13,14 @@ async function find(key, operator = '$eq'){
     case '$ne':
       const findAllIdentifier = await this.findAll();
       const excludedIdentifiers = await findEquals.call(this, key);
-      return findAllIdentifier.filter(id => !excludedIdentifiers.includes(id));
+
+      excludedIdentifiers.forEach((id)=>{
+        const idOf = findAllIdentifier.indexOf(id);
+        if(idOf>-1){
+          findAllIdentifier.splice(idOf,1);
+        }
+      });
+      return findAllIdentifier;
     case '$lte':
       return findLowerThan.call(this, key, true);
     case '$lt':
@@ -35,11 +42,16 @@ async function find(key, operator = '$eq'){
       return results;
     case '$nin':
       if(!Array.isArray(key)) throw new Error(`$nin operator expect key to be an array`);
+
+      const findAllIdentifiers = await this.findAll();
       const includingIdentifiers = await this.find(key, '$in');
-      const allIdentifiers = await this.findAll();
-      // We exclude the $in result from our getAllIdentifiers
-      const res =  allIdentifiers.filter(id => !includingIdentifiers.includes(id));
-      return res;
+      includingIdentifiers.forEach((id)=>{
+        const idOf = findAllIdentifiers.indexOf(id);
+        if(idOf>-1){
+          findAllIdentifiers.splice(idOf,1);
+        }
+      })
+      return findAllIdentifiers;
     default:
       throw new Error(`Not handled operator ${operator}`)
   }

@@ -60,7 +60,7 @@ const fakeSelf = {
 };
 fakeSelf.findAll = require('../../../../src/types/SBFRoot/methods/findAll').bind(fakeSelf);
 
-describe('SBFTree - methods - find', () => {
+describe('SBFRoot - methods - find', () => {
   //FIXME : It is too strict for string. jean should be found when we request Jean.
   it('should find using strict operator', async function () {
     const res = await find.call(fakeSelf, 33);

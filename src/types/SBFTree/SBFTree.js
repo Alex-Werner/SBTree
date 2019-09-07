@@ -6,7 +6,7 @@
 class SBFTree {
   constructor(props={}){
     const defaultOpts = {
-      order: 16,
+      order: 511,
       verbose:false,
       isUnique:false
     }

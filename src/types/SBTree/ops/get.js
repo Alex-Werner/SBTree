@@ -4,7 +4,6 @@ async function get(id) {
   let document = {
     _id: id
   };
-
   return await this.adapter.getDocument(id)
 
   // for(const field in this.fieldTrees){
@@ -18,6 +17,6 @@ async function get(id) {
   //       document = Object.assign(document, data);
   //     }
   // ));
-  return document;
+  // return document;
 };
 module.exports = get;
