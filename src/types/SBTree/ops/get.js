@@ -4,7 +4,9 @@ async function get(id) {
   let document = {
     _id: id
   };
-  return await this.adapter.getDocument(id)
+  const res = await this.adapter.getDocument(id);
+
+  return res || false;
 
   // for(const field in this.fieldTrees){
   //   const data = await this.fieldTrees[field].get(id);
