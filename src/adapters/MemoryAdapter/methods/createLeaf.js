@@ -9,9 +9,15 @@ class Data {
     this.keys=[]
   }
 }
-module.exports = async function createLeaf(leafName){
+
+async function createLeaf(leafName){
+  if(this.leafs[leafName]) {
+    throw new Error(`Leaf ${leafName} already exist.`)
+  }
   this.leafs[leafName] = {
     meta: new Meta(),
     data: new Data()
   };
-}
+};
+
+module.exports = createLeaf;

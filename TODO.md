@@ -11,3 +11,4 @@
 - [ ] Do we want to allow them to allow duplicate _id ?
 - [ ] Case sentitivity (the transform method need to be deterministic. It won't touch the value added in documents.);
 - [ ] LRU Caching on the most requested keys
+- [ ] Optimised Indexes search/queries. When we perform a composed-query, we should first pre-select using any early query before searching the rest (may be by transversing the tree ?)

@@ -34,6 +34,9 @@ const fakeSelf = {
 };
 
 describe('SBTree - ops - remove', () => {
+  before(()=>{
+
+  });
   it('should remove an inserted object by it\'s id', async function () {
       // const removedDoc = remove.call();
   });
