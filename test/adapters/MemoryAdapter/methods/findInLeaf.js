@@ -30,16 +30,5 @@ describe('Adapters - MemoryAdapter - findInLeaf', function suite() {
   it('should $gt find in a leaf', async function () {
     expect(await adapter.findInLeaf(leafName, 42, '$gt')).to.deep.equal(["1234abc6"])
   });
-  it('should fail on unknown op', function (done) {
-    try {
-
-      expect(async function () {
-        await adapter.findInLeaf(leafName, 42, '$gta')
-      }).to.throw('stuff')
-      done()
-    } catch (e) {
-      done(true)
-    }
-  });
 
 })
