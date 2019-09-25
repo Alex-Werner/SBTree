@@ -1,6 +1,6 @@
 const {insertSorted} = require('../../../utils/array');
 
-async function addInLeaf(leafName, field, identifier, key) {
+async function addInLeaf(leafName, identifier, key) {
   if (!this.leafs[leafName]) {
     await this.createLeaf(leafName);
   }

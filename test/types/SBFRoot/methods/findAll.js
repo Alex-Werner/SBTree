@@ -39,9 +39,9 @@ adapter.documents = {
   '5d6ebb7e21f1df6ff7482631': {_id: '5d6ebb7e21f1df6ff7482631', age: 33},
   '5d6ebb7e21f1df6ff7482641': {_id: '5d6ebb7e21f1df6ff7482641', age: 45}
 };
-adapter.addInLeaf('16d075318572b', 'age', '5d6ebb7e21f1df6ff7482621', 17)
-adapter.addInLeaf('16d07531858f6', 'age', '5d6ebb7e21f1df6ff7482631', 33)
-adapter.addInLeaf('16d07531858f6', 'age', '5d6ebb7e21f1df6ff7482641', 45)
+adapter.addInLeaf( 'age', '5d6ebb7e21f1df6ff7482621', 17)
+adapter.addInLeaf( 'age', '5d6ebb7e21f1df6ff7482631', 33)
+adapter.addInLeaf( 'age', '5d6ebb7e21f1df6ff7482641', 45)
 const fakeAgeTreeParent = {
   field:'age',
   getAdapter:()=> adapter,
