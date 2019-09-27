@@ -6,13 +6,9 @@ module.exports = async function findInLeaf(leafId, value, op = '$eq'){
     throw new Error(`Trying to search in non-existing leafId ${leafId}`);
   }
 
-  console.log(leafId, value, op)
-  console.dir(this.leafs, {depth:null})
   const strictMatchingKeys = getStrictMatchingKeys(this.leafs[leafId].data.keys, value);
   switch (op) {
     case "$eq":
-      console.log(this.leafs[leafId])
-      console.log(strictMatchingKeys)
       if(!strictMatchingKeys.length){
         return [];
       }

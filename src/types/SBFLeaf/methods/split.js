@@ -3,7 +3,7 @@ async function split(){
   const adapter = parent.getAdapter();
 
   const newLeaf = new this.constructor({parent});
-  await adapter.createLeaf(newLeaf.name);
+  await adapter.createLeaf(newLeaf.id);
   const midKey = await adapter.splitLeaf(this, newLeaf);
 
   const index = await parent.insertReferenceKey(midKey);

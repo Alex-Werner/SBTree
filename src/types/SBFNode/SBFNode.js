@@ -11,7 +11,10 @@ class SBFNode {
       throw new Error(`SBFNode initialized without parent reference`)
     }
     this.#parent = props.parent;
+    this.fieldName = (props.parent.fieldName) ? props.parent.fieldName : null;
+
     this.keys = (props.keys) ? props.keys : [];
+
     this.childrens = [];
     if(props.childrens){
       props.childrens.forEach((child)=>{
