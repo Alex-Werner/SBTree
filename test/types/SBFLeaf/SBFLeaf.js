@@ -72,6 +72,10 @@ describe('SBFLeaf', () => {
       }
     });
     await sharedLeaf.insert('507c7f79bcf86cd7994f6c0e','Xavier');
+
+    console.log('\n\n\n')
+    console.log(sharedLeaf)
+
     expect(fakeTree.refKey).to.equal('Jean');
     expect(Object.keys(fakeTree.adapter.leafs).length).to.equal(2);
     expect(fakeTree.adapter.leafs[Object.keys(fakeTree.adapter.leafs)[0]]).to.deep.equal({
