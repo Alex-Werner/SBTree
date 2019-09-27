@@ -1,5 +1,5 @@
-module.exports = async function find(key){
+module.exports = async function find(value){
   const adapter = this.getParent().getAdapter();
-  const res = await adapter.findInLeaf(this.name,key);
+  const res = await adapter.findInLeaf(this.name,value);
   return res
 }

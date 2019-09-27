@@ -1,13 +1,13 @@
-module.exports = async function find(key){
+module.exports = async function find(value){
   let leafIndex = 0;
   this.keys.forEach((_key)=>{
-    if(key<=_key) return;
+    if(value<=_key) return;
     leafIndex++;
   });
   const leaf = this.childrens[leafIndex];
 
   // const leaf = this.childrens[leafIndex];
-  let result = await leaf.find(key);
+  let result = await leaf.find(value);
   //
   // if(leafIndex>0){
   //   console.log('oui', leafIndex)
@@ -17,10 +17,10 @@ module.exports = async function find(key){
   // We also check the leaf nearby
   if(this.childrens.length>leafIndex+1){
     const right = this.childrens[leafIndex+1];
-    result = result.concat(await right.find(key));
+    result = result.concat(await right.find(value));
   }
 
   return result;
   //
-  return leaf.find(key);
+  return leaf.find(value);
 }

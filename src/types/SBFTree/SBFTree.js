@@ -18,10 +18,10 @@ class SBFTree {
       order: (props.order) ? props.order : defaultOpts.order,
       verbose: (props.verbose) ? props.verbose : defaultOpts.verbose
     };
-    if(!props.field){
-      throw new Error(`SBFTree expect a field to be initialized`);
+    if(!props.fieldName){
+      throw new Error(`SBFTree expect a fieldName to be initialized`);
     }
-    this.field = (props.field) ? props.field : null;
+    this.fieldName = (props.fieldName) ? props.fieldName : null;
     this.isUnique = (props.isUnique!==undefined) ? props.isUnique : defaultOpts.isUnique;
     if(props.root){
       this.createRoot(props.root)

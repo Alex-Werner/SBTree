@@ -1,3 +1,3 @@
-module.exports = async function find(key, operator){
-  return this.root.find(key, operator);
+module.exports = async function find(value, operator){
+  return this.root.find(value, operator);
 }

@@ -28,6 +28,6 @@ const crypto = {
   insecureRandomBytes,
   randomBytes: (isWindowContext) ? browserRandomBytes : getRandomBytes(),
 }
-crypto.generateLeafName = () => (Date.now().toString(16) + crypto.randomBytes(1).toString('hex'));
+crypto.generateLeafId = () => (Date.now().toString(16) + crypto.randomBytes(1).toString('hex'));
 
 module.exports = crypto;

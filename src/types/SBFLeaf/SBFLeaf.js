@@ -1,4 +1,4 @@
-const {generateLeafName} = require('../../utils/crypto');
+const {generateLeafId} = require('../../utils/crypto');
 
 /**
  * SFBLeaf
@@ -11,7 +11,8 @@ class SFBLeaf {
       throw new Error(`SFBLeaf initialized without parent reference`)
     }
     this.#parent = props.parent;
-    this.name = (props.name) ? props.name : generateLeafName();
+    this.id = (props.id) ? props.id : generateLeafId();
+    this.fieldName = (props.parent.fieldName) ? props.parent.fieldName : null;
     this.type = 'leaf';
   }
   getParent(){
@@ -27,5 +28,6 @@ SFBLeaf.prototype.findAll = require('./methods/findAll');
 SFBLeaf.prototype.findLowerThan = require('./methods/findLowerThan');
 SFBLeaf.prototype.findGreaterThan = require('./methods/findGreaterThan');
 SFBLeaf.prototype.isFull = require('./methods/isFull');
+SFBLeaf.prototype.remove = require('./methods/remove');
 SFBLeaf.prototype.split = require('./methods/split');
 module.exports = SFBLeaf;

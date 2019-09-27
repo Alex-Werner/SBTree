@@ -31,7 +31,7 @@ describe('SBFLeaf', () => {
   let sharedLeaf;
   it('should initialize', function () {
     sharedLeaf = new SBFLeaf({parent: fakeParent})
-    expect(sharedLeaf.name.length).to.equal(13)
+    expect(sharedLeaf.id.length).to.equal(13)
   });
   it('should get parent', function () {
     const leaf = new SBFLeaf({parent: fakeParent2})
@@ -43,7 +43,7 @@ describe('SBFLeaf', () => {
     expect(leaf.getParent()).to.equal(fakeParent3)
   });
   it('should insert', async function () {
-    await sharedLeaf.insert('Jean', '507f191e810c19729de860ea');
+    await sharedLeaf.insert('507f191e810c19729de860ea','Jean' );
 
     expect(Object.keys(fakeTree.adapter.leafs).length).to.equal(1);
     expect(fakeTree.adapter.leafs[Object.keys(fakeTree.adapter.leafs)]).to.deep.equal({
@@ -58,8 +58,7 @@ describe('SBFLeaf', () => {
       }
     });
 
-    await sharedLeaf.insert('Alex', '507f1f77bcf86cd799439011');
-
+    await sharedLeaf.insert('507f1f77bcf86cd799439011','Alex');
     expect(fakeTree.adapter.leafs[Object.keys(fakeTree.adapter.leafs)]).to.deep.equal({
       data: {
         keys: [
@@ -72,7 +71,7 @@ describe('SBFLeaf', () => {
         size: 2
       }
     });
-    await sharedLeaf.insert('Xavier', '507c7f79bcf86cd7994f6c0e');
+    await sharedLeaf.insert('507c7f79bcf86cd7994f6c0e','Xavier');
     expect(fakeTree.refKey).to.equal('Jean');
     expect(Object.keys(fakeTree.adapter.leafs).length).to.equal(2);
     expect(fakeTree.adapter.leafs[Object.keys(fakeTree.adapter.leafs)[0]]).to.deep.equal({
@@ -98,4 +97,30 @@ describe('SBFLeaf', () => {
       }
     });
   });
+  it('should find', async function () {
+    await sharedLeaf.insert('507c7f79bcf86cd7994f6p4t','Patricia');
+    console.log('/inserted patricia')
+    await sharedLeaf.insert('507c7f79bcf86cd7994f6l0l','Lola');
+    const find = await sharedLeaf.find('Patricia');
+    console.log(sharedLeaf.getParent().getTree().adapter.leafs[sharedLeaf.name])
+    console.log({sharedLeaf})
+    console.log(find)
+    // const find2 = await sharedLeaf.find('Lola');
+    expect(find).to.deep.equal(['507c7f79bcf86cd7994f6p4t']);
+    // expect(find2).to.deep.equal(['507c7f79bcf86cd7994f6l0l']);
+  });
+  // it('should remove', async function () {
+  //   const find = await sharedLeaf.find('Patricia');
+  //   expect(find).to.deep.equal(['507c7f79bcf86cd7994f6p4t'])
+  //
+  //   await sharedLeaf.remove('507c7f79bcf86cd7994f6p4t');
+  //
+  //   const find2 = await sharedLeaf.find('Patricia');
+  //   console.log(find2)
+  //   expect(find2).to.deep.equal(['507c7f79bcf86cd7994f6p4t'])
+  //
+  // });
+  // it('should find and remove', async function () {
+  //   // await
+  // });
 });

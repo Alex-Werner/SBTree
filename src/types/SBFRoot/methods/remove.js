@@ -1,8 +1,8 @@
 
-async function remove(key){
+async function remove(value){
   let leafIndex = 0;
   this.keys.forEach((_key)=>{
-    if(key<=_key) return;
+    if(value<=_key) return;
     leafIndex++;
   });
 
@@ -10,6 +10,6 @@ async function remove(key){
 
   // Attention,
   throw new Error('Not implemented')
-  await leaf.remove(key);
+  await leaf.remove(value);
 };
 module.exports = remove;

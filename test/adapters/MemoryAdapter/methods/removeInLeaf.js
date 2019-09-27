@@ -7,12 +7,12 @@ describe('Adapters - MemoryAdapter - removeInLeaf', function suite() {
   before(async () => {
     adapter = new MemoryAdapter();
     await adapter.createLeaf(leafName);
-    await adapter.addInLeaf(leafName, leafName, '1234abc', 42);
-    await adapter.addInLeaf(leafName, leafName, '1234abc2', 42);
-    await adapter.addInLeaf(leafName, leafName, '1234abc3', -5);
-    await adapter.addInLeaf(leafName, leafName, '1234abc4', 41);
-    await adapter.addInLeaf(leafName, leafName, '1234abc5', 0);
-    await adapter.addInLeaf(leafName, leafName, '1234abc6', 43)
+    await adapter.addInLeaf( leafName, '1234abc', 42);
+    await adapter.addInLeaf(leafName, '1234abc2', 42);
+    await adapter.addInLeaf(leafName, '1234abc3', -5);
+    await adapter.addInLeaf( leafName, '1234abc4', 41);
+    await adapter.addInLeaf( leafName, '1234abc5', 0);
+    await adapter.addInLeaf( leafName, '1234abc6', 43)
   })
   it('should remove a document', async function () {
     expect(await adapter.findInLeaf(leafName, 42, '$eq')).to.deep.equal(['1234abc', '1234abc2']);

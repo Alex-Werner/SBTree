@@ -35,15 +35,20 @@ describe('Adapters - MemoryAdapter - findInLeaf', function suite() {
 });
 describe('Adapters - MemoryAdapter - findInLeaf - special cases', async function () {
 
-  it('should work', async function () {
+  it('should always work', async function () {
     const adapter = new MemoryAdapter();
     const leafName2 = 'name';
     await adapter.createLeaf(leafName2);
-    await adapter.addInLeaf(leafName2, 'Jean', '507f191e810c19729de860ea');
-    await adapter.addInLeaf(leafName2,'Alex', '507f1f77bcf86cd799439011');
-    await adapter.addInLeaf(leafName2,'Xavier', '507c7f79bcf86cd7994f6c0e');
-    await adapter.addInLeaf(leafName2,'Patricia', '507c7f79bcf86cd7994f6p4t');
-    await adapter.addInLeaf(leafName2,'Lola', '507c7f79bcf86cd7994f6l0l');
+    await adapter.addInLeaf(leafName2, '507f191e810c19729de860ea', 'Jean', );
+    await adapter.addInLeaf(leafName2,'507c7f79bcf86cd7994f6p4t', 'Patricia', );
+    expect(await adapter.findInLeaf(leafName2,'Patricia')).to.deep.equal(['507c7f79bcf86cd7994f6p4t'])
+    await adapter.addInLeaf(leafName2, '507f1f77bcf86cd799439011','Alex');
 
+    await adapter.addInLeaf(leafName2,'507c7f79bcf86cd7994f6c0e','Xavier');
+    await adapter.addInLeaf(leafName2,'507c7f79bcf86cd7994f6l0l','Lola');
+    expect(await adapter.findInLeaf(leafName2,'Patricia')).to.deep.equal(['507c7f79bcf86cd7994f6p4t'])
+    await adapter.addInLeaf(leafName2,'507c7f79bcf86cd7994f6p1l','Phillipe');
+    await adapter.addInLeaf(leafName2,'507c7f79bcf86cd7994f6D1d','Didier');
+    expect(await adapter.findInLeaf(leafName2,'Patricia')).to.deep.equal(['507c7f79bcf86cd7994f6p4t'])
   });
 })

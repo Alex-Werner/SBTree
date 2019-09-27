@@ -1,7 +1,7 @@
-function getFieldTree(field){
-  const isExcluded = this.exclude.includes(field);
+function getFieldTree(fieldName){
+  const isExcluded = this.exclude.includes(fieldName);
   if(isExcluded) return;
 
-  return this.fieldTrees[field];
+  return this.fieldTrees[fieldName];
 };
 module.exports = getFieldTree;

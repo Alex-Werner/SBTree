@@ -1,21 +1,21 @@
 const SBFLeaf = require('../../SBFLeaf/SBFLeaf');
 
-async function insert(key, identifier = null){
+async function insert(identifier, value = null){
 
   if(!this.childrens.length){
     const leaf = new SBFLeaf({parent:this});
     this.childrens.push(leaf);
 
-    await leaf.insert(key, identifier);
+    await leaf.insert(identifier, value);
 
   }else{
     let leafIndex = 0;
     this.keys.forEach((_key)=>{
-      if(key<=_key) return;
+      if(value<=_key) return;
       leafIndex++;
     });
     const leaf = this.childrens[leafIndex];
-    await leaf.insert(key, identifier);
+    await leaf.insert(identifier, value);
   }
 
   if(this.isFull()){

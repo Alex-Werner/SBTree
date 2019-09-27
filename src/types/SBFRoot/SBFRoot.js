@@ -14,6 +14,8 @@ class SBFRoot {
       throw new Error(`SBFRoot is initialized without any tree referenced`);
     }
     this.#tree = props.tree;
+    this.fieldName = (props.tree.fieldName) ? props.tree.fieldName : null;
+
     this.keys = (props.keys) ? props.keys : [];
     this.childrens = (props.childrens) ? props.childrens : [];
   }
