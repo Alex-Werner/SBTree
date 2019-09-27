@@ -1,9 +1,9 @@
-async function findAll() {
+async function getAll() {
   let result = [];
 
   let p = [];
   this.childrens.forEach((child) => {
-    p.push(child.findAll());
+    p.push(child.getAll());
   });
 
   return new Promise((resolve) => {
@@ -18,4 +18,4 @@ async function findAll() {
   })
 }
 
-module.exports = findAll;
+module.exports = getAll;

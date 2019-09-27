@@ -1,7 +1,7 @@
 const {expect} = require('chai');
 const SFBLeaf = require('../../../../src/types/SBFLeaf/SBFLeaf');
 const MemoryAdapter = require('../../../../src/adapters/MemoryAdapter/MemoryAdapter');
-const findAll = require('../../../../src/types/SBFRoot/methods/findAll');
+const getAll = require('../../../../src/types/SBFRoot/methods/getAll');
 const fixtures = {
   documents: {
     // '5d6ebb7e21f1df6ff7482631': {
@@ -58,9 +58,9 @@ const fakeSelf = {
   ],
 };
 
-describe('SBFTree - methods - findAll', () => {
-  it('should find all identifiers', async function () {
-    const res = await findAll.call(fakeSelf);
+describe('SBFTree - methods - getAll', () => {
+  it('should get all identifiers', async function () {
+    const res = await getAll.call(fakeSelf);
     expect(res).to.deep.equal(Object.keys(adapter.documents));
   });
 });

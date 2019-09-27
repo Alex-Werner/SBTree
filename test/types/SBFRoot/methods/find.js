@@ -58,7 +58,7 @@ const fakeSelf = {
   ],
   find
 };
-fakeSelf.findAll = require('../../../../src/types/SBFRoot/methods/findAll').bind(fakeSelf);
+fakeSelf.getAll = require('../../../../src/types/SBFRoot/methods/getAll').bind(fakeSelf);
 
 describe('SBFRoot - methods - find', () => {
   //FIXME : It is too strict for string. jean should be found when we request Jean.

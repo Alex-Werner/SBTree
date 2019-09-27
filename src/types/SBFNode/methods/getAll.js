@@ -1,9 +1,9 @@
-module.exports = async function findAll(){
+module.exports = async function getAll(){
   let result = [];
 
   let p = [];
   this.childrens.forEach((child)=>{
-    p.push(child.findAll());
+    p.push(child.getAll());
   });
 
   await Promise.all(p).then((res) => {

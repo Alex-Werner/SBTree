@@ -26,7 +26,7 @@ class SBFRoot {
 };
 SBFRoot.prototype.attachLeaf = require('./methods/attachLeaf')
 SBFRoot.prototype.find = require('./methods/find')
-SBFRoot.prototype.findAll = require('./methods/findAll')
+SBFRoot.prototype.getAll = require('./methods/getAll')
 SBFRoot.prototype.get = require('./methods/get')
 SBFRoot.prototype.getAdapter = require('./methods/getAdapter')
 SBFRoot.prototype.getTreeOptions = require('./methods/getTreeOptions')

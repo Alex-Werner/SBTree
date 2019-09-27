@@ -46,10 +46,10 @@ class SBFNode {
 };
 SBFNode.prototype.attachLeaf = require('./methods/attachLeaf')
 SBFNode.prototype.find = require('./methods/find')
-SBFNode.prototype.findAll = require('./methods/findAll')
 SBFNode.prototype.findLowerThan = require('./methods/findLowerThan')
 SBFNode.prototype.findGreaterThan = require('./methods/findGreaterThan')
 SBFNode.prototype.getAdapter = require('./methods/getAdapter')
+SBFNode.prototype.getAll = require('./methods/getAll')
 SBFNode.prototype.getTreeOptions = require('./methods/getTreeOptions')
 SBFNode.prototype.insert = require('./methods/insert')
 SBFNode.prototype.insertReferenceKey = require('./methods/insertReferenceKey')

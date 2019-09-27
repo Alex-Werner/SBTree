@@ -7,7 +7,7 @@ class MemoryAdapter {
 };
 MemoryAdapter.prototype.addInLeaf = require('./methods/addInLeaf')
 MemoryAdapter.prototype.createLeaf = require('./methods/createLeaf')
-MemoryAdapter.prototype.findAllInLeaf = require('./methods/findAllInLeaf')
+MemoryAdapter.prototype.getAllInLeaf = require('./methods/getAllInLeaf')
 MemoryAdapter.prototype.findInLeaf = require('./methods/findInLeaf')
 MemoryAdapter.prototype.getDocument = require('./methods/getDocument')
 MemoryAdapter.prototype.openLeaf = require('./methods/openLeaf')
