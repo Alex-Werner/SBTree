@@ -1,5 +1,7 @@
 const {insertSorted} = require('../../utils/array');
 const SBFLeaf = require('../SBFLeaf/SBFLeaf');
+const {generateNodeId} = require('../../utils/crypto');
+
 /**
  * SBFTree
  *
@@ -11,6 +13,8 @@ class SBFNode {
       throw new Error(`SBFNode initialized without parent reference`)
     }
     this.#parent = props.parent;
+    this.id = (props.id) ? props.id : generateNodeId();
+
     this.fieldName = (props.parent.fieldName) ? props.parent.fieldName : null;
 
     this.keys = (props.keys) ? props.keys : [];

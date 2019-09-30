@@ -1,3 +1,4 @@
+const {generateFieldTreeId} = require('../../utils/crypto');
 
 /**
  * SBFTree
@@ -10,6 +11,8 @@ class SBFTree {
       verbose:false,
       isUnique:false
     }
+    this.id = (props.id) ? props.id : generateFieldTreeId();
+
     Object.assign(SBFTree.prototype, {
       createRoot: require('./methods/createRoot')
     });

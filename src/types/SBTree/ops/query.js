@@ -33,6 +33,7 @@ async function query(query) {
 
       let operator = '$eq';
       const value = await fieldTree.find(queryFieldValue, operator);
+
       if (value) {
         fieldLookup = fieldLookup.concat([value])
       } else {
@@ -58,6 +59,7 @@ async function query(query) {
         });
       }
     }
+
     listOfFieldLookup = listOfFieldLookup.concat(fieldLookup);
   }
 

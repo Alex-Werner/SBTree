@@ -1,5 +1,6 @@
 const {insertSorted} = require('../../utils/array');
 const {comparatorString, comparatorNum} = require('../../utils/comparators')
+const {generateRootId} = require('../../utils/crypto');
 
 
 /**
@@ -14,6 +15,8 @@ class SBFRoot {
       throw new Error(`SBFRoot is initialized without any tree referenced`);
     }
     this.#tree = props.tree;
+    this.id = (props.id) ? props.id : generateRootId();
+
     this.fieldName = (props.tree.fieldName) ? props.tree.fieldName : null;
 
     this.keys = (props.keys) ? props.keys : [];

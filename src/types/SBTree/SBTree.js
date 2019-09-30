@@ -1,5 +1,6 @@
 const EventEmitter = require('events');
 const {MemoryAdapter} = require('../../adapters');
+const {generateTreeId} = require('../../utils/crypto');
 
 /**
  * SBTree
@@ -27,6 +28,8 @@ class SBTree extends EventEmitter {
       fillFactor: (props.fillFactor) ? props.fillFactor : defaultProps.options.fillFactor,
       verbose: (props.verbose) ? props.verbose : defaultProps.options.verbose
     };
+
+    this.id = (props.id) ? props.id : generateTreeId();
 
     this.fieldTrees = (props.fieldTrees!==undefined) ? props.fieldTrees : defaultProps.fieldTrees;
     this.uniques = (props.uniques) ? props.uniques : defaultProps.uniques;
