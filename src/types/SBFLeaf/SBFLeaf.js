@@ -27,6 +27,7 @@ SFBLeaf.prototype.find = require('./methods/find');
 SFBLeaf.prototype.getAll = require('./methods/getAll');
 SFBLeaf.prototype.findLowerThan = require('./methods/findLowerThan');
 SFBLeaf.prototype.findGreaterThan = require('./methods/findGreaterThan');
+SFBLeaf.prototype.isAtLeastHalfFull = require('./methods/isAtLeastHalfFull');
 SFBLeaf.prototype.isFull = require('./methods/isFull');
 SFBLeaf.prototype.remove = require('./methods/remove');
 SFBLeaf.prototype.split = require('./methods/split');
