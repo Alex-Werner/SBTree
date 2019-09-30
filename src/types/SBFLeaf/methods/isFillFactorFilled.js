@@ -1,18 +1,17 @@
-async function isAtLeastHalfFull(){
+async function isFillFactorFilled(){
   const parent = this.getParent();
   const adapter = parent.getAdapter();
-  const order = parent.getTreeOptions().order;
+  const {fillFactor,order} = parent.getTreeOptions().order;
   try {
     const leaf = await adapter.openLeaf(this.id);
-    const half = ~~order/2;
-    return leaf.meta.size>=half;
+    return leaf.meta.size>=(order*fillFactor);
 
   }catch (e) {
     if(e.message === 'Leaf do not exist'){
       await adapter.createLeaf(this.id);
-      return this.isAtLeastHalfFull()
+      return this.isFillFactorFilled()
     }
     else throw e
   };
 };
-module.exports = isAtLeastHalfFull;
+module.exports = isFillFactorFilled;

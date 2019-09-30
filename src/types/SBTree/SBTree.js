@@ -11,6 +11,8 @@ class SBTree extends EventEmitter {
     const defaultProps = {
       options:{
         order: 511,
+        // FillFactor should not be less than half.
+        fillFactor: 0.5,
         verbose:false
       },
       fieldTrees:{},
@@ -22,6 +24,7 @@ class SBTree extends EventEmitter {
     super();
     this.options = {
       order: (props.order) ? props.order : defaultProps.options.order,
+      fillFactor: (props.fillFactor) ? props.fillFactor : defaultProps.options.fillFactor,
       verbose: (props.verbose) ? props.verbose : defaultProps.options.verbose
     };
 

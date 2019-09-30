@@ -37,7 +37,7 @@ describe('SBFLeaf - methods - remove', () => {
   });
   it('should try to redistribute when less than half full', async function () {
     expect(_isSplitCalled).to.equal(false);
-    await insert.call(self, alex.identifier, alex.name);
+    await remove().call(self, alex.identifier, alex.name);
     expect(_isSplitCalled).to.equal(true);
   });
 });
