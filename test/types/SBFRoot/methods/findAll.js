@@ -43,7 +43,7 @@ adapter.addInLeaf( 'age', '5d6ebb7e21f1df6ff7482621', 17)
 adapter.addInLeaf( 'age', '5d6ebb7e21f1df6ff7482631', 33)
 adapter.addInLeaf( 'age', '5d6ebb7e21f1df6ff7482641', 45)
 const fakeAgeTreeParent = {
-  field:'age',
+  fieldName:'age',
   getAdapter:()=> adapter,
   find:(key)=>{
     console.log('findkey',key)
@@ -51,6 +51,8 @@ const fakeAgeTreeParent = {
 
 };
 const fakeSelf = {
+  id: '16d72f309846d',
+  fieldName:'age',
   keys:[33],
   childrens:[
     new SFBLeaf({ name: '16d075318572b', type: 'leaf' , parent:fakeAgeTreeParent}),
