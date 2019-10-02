@@ -25,6 +25,7 @@ class SFBLeaf {
 SFBLeaf.prototype.insert = require('./methods/insert');
 SFBLeaf.prototype.find = require('./methods/find');
 SFBLeaf.prototype.getAll = require('./methods/getAll');
+SFBLeaf.prototype.getFillStatus = require('./methods/getFillStatus');
 SFBLeaf.prototype.getLeft = require('./methods/getLeft');
 SFBLeaf.prototype.getRight = require('./methods/getRight');
 SFBLeaf.prototype.findLowerThan = require('./methods/findLowerThan');
