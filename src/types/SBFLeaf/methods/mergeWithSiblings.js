@@ -13,14 +13,30 @@ async function mergeWithSiblings(){
 
 
   if(siblings.left) siblings.leftStatus = await siblings.left.getFillStatus();
-  if(siblings.right) siblings.rightStatus = await siblings.left.getFillStatus();
+  if(siblings.right) siblings.rightStatus = await siblings.right.getFillStatus();
 
   if(selfPos===0 && siblings.right){
     const rightSib = siblings.right;
 
-    throw new Error('Implementation required.');
+    const rightSibPos = selfPos+1;
+    const {identifiers, keys} = await rightSib.getAll();
 
-    // Repair for parent.
+    const p = [];
+    identifiers.forEach((identifier,i)=>{
+      const key = keys[i];
+      p.push(this.insert(identifier, key));
+    });
+    await Promise.all(p);
+
+    // Kill parent's children
+    delete parent.childrens[rightSibPos];
+
+    // Remove the undefined corpse from the array
+    parent.childrens.splice(rightSibPos,1);
+
+
+    // Repair parent keys TODO FIXME
+    hasMerged=true;
 
   }else if(siblings.left){
     const leftSib = siblings.left;
@@ -40,7 +56,7 @@ async function mergeWithSiblings(){
     // Remove the undefined corpse from the array
     parent.childrens.splice(leftSibPos,1);
 
-    // Repair parent keys
+    // Repair parent keys TODO FIXME
     hasMerged=true;
   }
 

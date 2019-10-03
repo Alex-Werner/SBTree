@@ -14,6 +14,7 @@ MemoryAdapter.prototype.findInLeaf = require('./methods/findInLeaf')
 MemoryAdapter.prototype.getDocument = require('./methods/getDocument')
 MemoryAdapter.prototype.openLeaf = require('./methods/openLeaf')
 MemoryAdapter.prototype.removeInLeaf = require('./methods/removeInLeaf')
+MemoryAdapter.prototype.removeDocument = require('./methods/removeDocument')
 MemoryAdapter.prototype.saveDocument = require('./methods/saveDocument')
 MemoryAdapter.prototype.splitLeaf = require('./methods/splitLeaf');
 module.exports = MemoryAdapter;

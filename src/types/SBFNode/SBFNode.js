@@ -58,5 +58,6 @@ SBFNode.prototype.getTreeOptions = require('./methods/getTreeOptions')
 SBFNode.prototype.insert = require('./methods/insert')
 SBFNode.prototype.insertReferenceKey = require('./methods/insertReferenceKey')
 SBFNode.prototype.isFull = require('./methods/isFull')
+SBFNode.prototype.remove = require('./methods/remove')
 SBFNode.prototype.split = require('./methods/split')
 module.exports = SBFNode;

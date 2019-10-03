@@ -40,6 +40,7 @@ class SBFTree {
 
 SBFTree.prototype.find = require('./methods/find');
 SBFTree.prototype.get = require('./methods/get');
+SBFTree.prototype.getAdapter = require('./methods/getAdapter');
 SBFTree.prototype.insert = require('./methods/insert');
 SBFTree.prototype.remove = require('./methods/remove');
 module.exports = SBFTree;
