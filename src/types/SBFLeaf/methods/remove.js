@@ -7,9 +7,9 @@ async function remove(identifier){
     return true;
   }else{
     try{
-      this.redistribute();
+      await this.redistribute();
     }catch (e) {
-      this.mergeWithSiblings();
+      await this.mergeWithSiblings();
     }
   }
 };

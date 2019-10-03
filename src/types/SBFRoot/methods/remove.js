@@ -7,9 +7,6 @@ async function remove(value){
   });
 
   const leaf = this.childrens[leafIndex];
-
-  // Attention,
-  throw new Error('Not implemented')
   await leaf.remove(value);
 };
 module.exports = remove;
