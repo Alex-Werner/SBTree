@@ -3,26 +3,28 @@ const {forEach} = require('./array');
 /*
  Cheap drawing implementation. Would need deep rework to make it really working.
  */
-const draw = async (fieldNode) => {
+const draw = async (fieldNode, preventConsole = false) => {
   if (fieldNode.id[0] === 't') {
-    console.log(`======== SBTree Tree ========`);
-    console.log(`=== Id : ${fieldNode.id}`)
-    console.log(`=== Order :  ${fieldNode.options.order}`)
+    !preventConsole && console.log(`======== SBTree Tree ========`);
+    !preventConsole && console.log(`=== Id : ${fieldNode.id}`)
+    !preventConsole && console.log(`=== Order :  ${fieldNode.options.order}`)
     if (Object.keys(fieldNode.fieldTrees).length === 0) {
-      console.log(`=== Empty.`)
+      !preventConsole && console.log(`=== Empty.`)
+      return [];
     } else {
+      const res = [];
       await forEach(Object.keys(fieldNode.fieldTrees), async (fieldKey) => {
         const fieldTree = fieldNode.fieldTrees[fieldKey]
-        await draw(fieldTree);
+        res.push(await draw(fieldTree, preventConsole));
       })
+      return res;
     }
-    return;
   }
 
-  console.log(`======== SBTree Node ========`);
-  console.log(`=== Id : ${fieldNode.id}`)
-  console.log(`=== Order :  ${fieldNode.options.order}`)
-  console.log(`=== Field :  ${fieldNode.fieldName}`)
+  !preventConsole && console.log(`======== SBTree Node ========`);
+  !preventConsole && console.log(`=== Id : ${fieldNode.id}`)
+  !preventConsole && console.log(`=== Order :  ${fieldNode.options.order}`)
+  !preventConsole && console.log(`=== Field :  ${fieldNode.fieldName}`)
 
   const {root} = fieldNode;
   const rows = [];
@@ -74,7 +76,7 @@ const draw = async (fieldNode) => {
     // const next = rows[i+1] || [];
     const calc = biggestRepeatTimes - (i * spanVal * 2)
     const repeatTimes = (calc > 0) ? calc : 0;
-    console.log(`${' '.repeat(repeatTimes)}${JSON.stringify(row)}`);
+    !preventConsole && console.log(`${' '.repeat(repeatTimes)}${JSON.stringify(row)}`);
   })
   return rows;
 };
