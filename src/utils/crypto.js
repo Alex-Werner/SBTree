@@ -28,7 +28,7 @@ const crypto = {
   insecureRandomBytes,
   randomBytes: (isWindowContext) ? browserRandomBytes : getRandomBytes(),
 }
-crypto.generateRandId = (prefix='') => prefix+(Date.now().toString(16) + crypto.randomBytes(1).toString('hex'));
+crypto.generateRandId = (prefix='') => prefix+(Date.now().toString(16) + crypto.randomBytes(4).toString('hex'));
 
 crypto.generateLeafId = () => crypto.generateRandId('l');
 crypto.generateFieldTreeId = () => crypto.generateRandId('f');
