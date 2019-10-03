@@ -1,3 +1,3 @@
-module.exports = async function remove(identifier){
-    await this.root.remove(identifier);
+module.exports = async function remove(remCmd){
+    await this.root.remove(remCmd);
 }

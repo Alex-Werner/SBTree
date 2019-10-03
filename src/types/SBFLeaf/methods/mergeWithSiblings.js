@@ -15,7 +15,8 @@ async function mergeWithSiblings(){
   if(siblings.left) siblings.leftStatus = await siblings.left.getFillStatus();
   if(siblings.right) siblings.rightStatus = await siblings.right.getFillStatus();
 
-  if(selfPos===0 && siblings.right){
+
+  if(siblings.right && (selfPos===0 || !siblings.left )){
     const rightSib = siblings.right;
 
     const rightSibPos = selfPos+1;
@@ -36,9 +37,20 @@ async function mergeWithSiblings(){
 
 
     // Repair parent keys TODO FIXME
+    const parentKeys = parent.keys;
+
+    // We remove the children reference in keys
+    parent.keys.splice(parseInt(selfPos/2),1);
+    if(parent.keys.length===0){
+    //   We have no keys, let's merge up.
+      await parent.mergeUp();
+    }
+    console.log('merge')
+
     hasMerged=true;
 
-  }else if(siblings.left){
+  }
+  else if(siblings.left){
     const leftSib = siblings.left;
     const leftSibPos = selfPos-1;
     const {identifiers, keys} = await leftSib.getAll();
@@ -57,6 +69,18 @@ async function mergeWithSiblings(){
     parent.childrens.splice(leftSibPos,1);
 
     // Repair parent keys TODO FIXME
+    const parentKeys = parent.keys;
+
+    // We remove the children reference in keys
+    parent.keys.splice(parseInt(selfPos/2),1);
+    if(parent.keys.length===0){
+
+        // throw new Error('Not implemented. Looking for case.')
+        // We have no keys, let's merge up.
+        await parent.mergeUp();
+      // }
+
+    }
     hasMerged=true;
   }
 

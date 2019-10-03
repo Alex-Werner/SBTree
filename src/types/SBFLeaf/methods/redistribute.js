@@ -21,11 +21,10 @@ async function redistribute(){
 
   const borrowFromRight = async ()=>{
     const rightStatus = await siblings.right.getFillStatus();
-
     if(rightStatus.fillFactorFilled && (rightStatus.leafSize>Number.parseInt(rightStatus.order/2))){
       redistributed+=1;
       throw new Error('Missing implementation of actually redistribute');
-    }
+    }else return false;
   }
   const borrowFromLeft = async ()=>{
     const leftStatus = await siblings.left.getFillStatus();
@@ -33,6 +32,8 @@ async function redistribute(){
     if(leftStatus.fillFactorFilled && (leftStatus.leafSize>Number.parseInt(leftStatus.order/2))){
       redistributed+=1;
       throw new Error('Missing implementation of actually redistribute');
+    }else {
+      return false;
     }
   }
 

@@ -20,7 +20,12 @@ class SBFRoot {
     this.fieldName = (props.tree.fieldName) ? props.tree.fieldName : null;
 
     this.keys = (props.keys) ? props.keys : [];
+    // Used when SBFRoot holds value (when size = 0)
+    this.identifiers = (props.identifiers) ? props.identifiers : [];
+
     this.childrens = (props.childrens) ? props.childrens : [];
+
+    this.type = 'root';
   }
 
   getTree() {
@@ -32,6 +37,7 @@ SBFRoot.prototype.find = require('./methods/find')
 SBFRoot.prototype.getAll = require('./methods/getAll')
 SBFRoot.prototype.get = require('./methods/get')
 SBFRoot.prototype.getAdapter = require('./methods/getAdapter')
+SBFRoot.prototype.getFillStatus = require('./methods/getFillStatus')
 SBFRoot.prototype.getTreeOptions = require('./methods/getTreeOptions')
 SBFRoot.prototype.remove = require('./methods/remove')
 SBFRoot.prototype.insert = require('./methods/insert')

@@ -1,5 +1,4 @@
 module.exports = async function insert(identifier, value){
-
   if(!this.root){
     this.createRoot();
   }
@@ -9,6 +8,5 @@ module.exports = async function insert(identifier, value){
       return false
     }
   }
-  console.log(identifier, value)
-    await this.root.insert(identifier, value);
+  await this.root.insert(identifier, value);
 }

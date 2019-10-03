@@ -12,10 +12,10 @@ const draw = async (fieldNode, preventConsole = false) => {
       !preventConsole && console.log(`=== Empty.`)
       return [];
     } else {
-      const res = [];
+      let res = [];
       await forEach(Object.keys(fieldNode.fieldTrees), async (fieldKey) => {
         const fieldTree = fieldNode.fieldTrees[fieldKey]
-        res.push(await draw(fieldTree, preventConsole));
+        res = res.concat(await draw(fieldTree, preventConsole));
       })
       return res;
     }
@@ -37,12 +37,14 @@ const draw = async (fieldNode, preventConsole = false) => {
       if (child.type === 'leaf') {
         childrens.push((await child.getAll()).keys);
       } else if (child.type === 'node') {
+
         childrens.push(child.keys);
         childToProcess = childToProcess.concat(child.childrens);
       } else {
         throw new Error(`Received invalid type ${child.type}`);
       }
     });
+
     rows.push(childrens);
     return childToProcess;
   }
@@ -58,10 +60,12 @@ const draw = async (fieldNode, preventConsole = false) => {
   }
   const processFromRoot = async (_root) => {
     rows.push(_root.keys);
-    const childrensToProcess = await processRootChildrens(_root.childrens)
+    if(_root.childrens.length>0){
+      const childrensToProcess = await processRootChildrens(_root.childrens)
 
-    if (childrensToProcess.length) {
-      await processLeafs(childrensToProcess);
+      if (childrensToProcess.length) {
+        await processLeafs(childrensToProcess);
+      }
     }
   }
 

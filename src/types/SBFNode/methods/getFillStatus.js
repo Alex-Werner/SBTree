@@ -1,4 +1,4 @@
-async function isFillFactorFilled(){
+const getFillStatus = async function(){
   const parent = this.getParent();
   const adapter = parent.getAdapter();
   const {fillFactor,order} = parent.getTreeOptions();
@@ -8,14 +8,13 @@ async function isFillFactorFilled(){
   try {
     const leaf = await adapter.openLeaf(this.id);
 
-    return leaf.meta.size>=(order*fillFactor);
-
+    return {fillFactor, order, leafSize:leaf.meta.size, fillFactorFilled: leaf.meta.size>=(order*fillFactor)};
   }catch (e) {
     if(e.message === 'Leaf do not exist'){
       await adapter.createLeaf(this.id);
-      return this.isFillFactorFilled()
+      return this.getFillStatus()
     }
     else throw e
   };
 };
-module.exports = isFillFactorFilled;
+module.exports = getFillStatus;

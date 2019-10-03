@@ -22,14 +22,6 @@ const array = {
     arr.splice(index, 0, item);
     return index;
   },
-  /*!
-  * Sync/Async forEach
-  * https://github.com/cowboy/javascript-sync-async-foreach
-  *
-  * Copyright (c) 2012 "Cowboy" Ben Alman
-  * Licensed under the MIT license.
-  * http://benalman.com/about/license/
-  */
   forEach: async function(array, eachFn) {
       for (let index = 0; index < array.length; index++) {
         await eachFn(array[index], index, array)
