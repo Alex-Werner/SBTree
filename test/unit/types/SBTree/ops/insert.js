@@ -1,6 +1,6 @@
 const {expect} = require('chai');
 const insert = require('../../../../../src/types/SBTree/ops/insert');
-
+const {expectThrowsAsync} = require('../../../../test.utils');
 const fixtures = {
   documents: {
     '5d6ebb7e21f1df6ff7482631': {
@@ -22,7 +22,8 @@ const fakeSelf = {
     getDocument: (docId) => fixtures.documents[docId],
     saveDocument: (doc) => calledFn.push(['savedDocument', doc._id])
   },
-  setFieldTree: (fieldName) => {
+  setFieldTree: (fieldOps) => {
+    const {fieldName} = fieldOps
     calledFn.push(['setFieldTree', fieldName]);
   },
   getFieldTree: (fieldName) => {
@@ -37,7 +38,6 @@ describe('SBTree - ops - insert', () => {
   it('should insert an object', async function () {
     const doc = fixtures.documents[Object.keys(fixtures.documents)[0]];
     const insertedDocument = await insert.call(fakeSelf, doc);
-    console.log(calledFn)
     expect(calledFn).to.deep.equal([
       ['getFieldTree', 'age'],
       ['setFieldTree', 'age'],
@@ -60,9 +60,9 @@ describe('SBTree - ops - insert', () => {
   });
   it('should not insert with no _id', async function () {
     const doc = {
-      name:'Nothing'
+      name: 'Nothing'
     };
     const exceptedException = 'Expecting all document to have an _id';
-    expect(() => insert.call(fakeSelf, doc)).to.throw(exceptedException);
+    await expectThrowsAsync(async () => await insert.call(fakeSelf, doc), exceptedException)
   });
 });

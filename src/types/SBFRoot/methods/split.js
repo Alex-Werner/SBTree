@@ -2,8 +2,6 @@ const SBFNode = require('../../SBFNode/SBFNode');
 const SBFLeaf = require('../../SBFLeaf/SBFLeaf');
 const {forEach} = require('../../../utils/array');
 async function split() {
-  console.log('Root Split')
-
   const midIndex = ~~(this.keys.length / 2);
   const rightKeys = this.keys.splice(midIndex);
   const leftKeys = this.keys.splice(0);

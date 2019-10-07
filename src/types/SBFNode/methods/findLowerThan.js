@@ -1,5 +1,5 @@
 async function findLowerThan(value,includeKey=false) {
-  let result = [];
+  let result = {identifiers:[], keys:[]};
 
   let leafIndex = 0;
   let p = [];
@@ -28,7 +28,9 @@ async function findLowerThan(value,includeKey=false) {
   }
   await Promise.all(p).then((res) => {
     res.forEach((p) => {
-      result = result.concat(p);
+
+      result.identifiers.push(...p.identifiers);
+      result.keys.push(...p.keys);
     })
   });
   return result;

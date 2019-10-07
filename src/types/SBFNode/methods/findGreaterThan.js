@@ -25,7 +25,9 @@ async function findGreaterThan(value,includeKey=false) {
   }
   await Promise.all(p).then((res) => {
     res.forEach((_el) => {
-      result = result.concat(_el);
+      result.identifiers.push(...p.identifiers);
+      result.keys.push(...p.keys);
+      // result = result.concat(_el);
     })
   });
   return result;

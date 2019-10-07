@@ -23,7 +23,7 @@ const fakeSelf = {
     return {
       find: (key, operator) => {
         calledFn.push([fieldName, 'find', key, operator]);
-        return ['5d6ebb7e21f1df6ff7482631']
+        return {identifiers:['5d6ebb7e21f1df6ff7482631'],keys:[33]}
       }
     }
   }

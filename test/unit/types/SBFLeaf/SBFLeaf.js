@@ -6,9 +6,17 @@ const adapter = new MemoryAdpter()
 const fakeTree = {
   options: {order: 3},
   adapter,
-  refKey: null
+  root:{
+    keys:[],
+    identifiers:[],
+    childrens:[]
+  }
 }
-const fakeParent = {};
+const fakeParent = {
+  fieldName: 'name',
+  childrens:[],
+  keys:[]
+};
 fakeParent.getAdapter = () => {
   return fakeParent.getTree().adapter;
 };
@@ -19,9 +27,10 @@ fakeParent.getTreeOptions = () => {
   return fakeParent.getTree().options
 }
 fakeParent.insertReferenceKey = (key) => {
-  fakeTree.refKey = key
+  fakeTree.root.keys.push(key)
 }
-fakeParent.attachLeaf = () => {
+fakeParent.attachLeaf = (index, leaf) => {
+  fakeTree.root.childrens.splice(index,0,leaf);
 }
 
 
@@ -31,7 +40,7 @@ describe('SBFLeaf', () => {
   let sharedLeaf;
   it('should initialize', function () {
     sharedLeaf = new SBFLeaf({parent: fakeParent})
-    expect(sharedLeaf.id.length).to.equal(13)
+    expect(sharedLeaf.id.length).to.equal(20)
   });
   it('should get parent', function () {
     const leaf = new SBFLeaf({parent: fakeParent2})
@@ -73,11 +82,8 @@ describe('SBFLeaf', () => {
     });
     await sharedLeaf.insert('507c7f79bcf86cd7994f6c0e','Xavier');
 
-    console.log('\n\n\n')
-    console.log(sharedLeaf)
-
-    expect(fakeTree.refKey).to.equal('Jean');
-    expect(Object.keys(fakeTree.adapter.leafs).length).to.equal(2);
+    expect(fakeTree.root.keys).to.deep.equal(['Jean']);
+    // expect(Object.keys(fakeTree.root.keys).length).to.equal(2);
     expect(fakeTree.adapter.leafs[Object.keys(fakeTree.adapter.leafs)[0]]).to.deep.equal({
       data: {
         keys: [
@@ -103,28 +109,39 @@ describe('SBFLeaf', () => {
   });
   it('should find', async function () {
     await sharedLeaf.insert('507c7f79bcf86cd7994f6p4t','Patricia');
-    console.log('/inserted patricia')
-    await sharedLeaf.insert('507c7f79bcf86cd7994f6l0l','Lola');
+
     const find = await sharedLeaf.find('Patricia');
-    console.log(sharedLeaf.getParent().getTree().adapter.leafs[sharedLeaf.name])
-    console.log({sharedLeaf})
-    console.log(find)
-    // const find2 = await sharedLeaf.find('Lola');
-    expect(find).to.deep.equal(['507c7f79bcf86cd7994f6p4t']);
-    // expect(find2).to.deep.equal(['507c7f79bcf86cd7994f6l0l']);
+    expect(find).to.deep.equal({identifiers:['507c7f79bcf86cd7994f6p4t'], keys:['Patricia']});
+
+    await sharedLeaf.insert('507c7f79bcf86cd7994f6l0l','Lola');
+    // A split happened here
+    const anotherLeaf = sharedLeaf.getParent().getTree().root.childrens[0];
+
+    const find0fail = await sharedLeaf.find('Patricia');
+    expect(find0fail).to.deep.equal({identifiers:[], keys:[]});
+
+    const find0 = await anotherLeaf.find('Patricia');
+    expect(find0).to.deep.equal({identifiers:['507c7f79bcf86cd7994f6p4t'], keys:['Patricia']});
+
+    const find1 = await sharedLeaf.find('Alex');
+    expect(find1).to.deep.equal({identifiers:['507f1f77bcf86cd799439011'], keys:['Alex']});
+
+    const find2fail = await sharedLeaf.find('Lola');
+    expect(find2fail).to.deep.equal({identifiers:[], keys:[]});
+
+    const find2 = await anotherLeaf.find('Lola');
+    expect(find2).to.deep.equal({identifiers:['507c7f79bcf86cd7994f6l0l'], keys:['Lola']});
   });
-  // it('should remove', async function () {
-  //   const find = await sharedLeaf.find('Patricia');
-  //   expect(find).to.deep.equal(['507c7f79bcf86cd7994f6p4t'])
-  //
-  //   await sharedLeaf.remove('507c7f79bcf86cd7994f6p4t');
-  //
-  //   const find2 = await sharedLeaf.find('Patricia');
-  //   console.log(find2)
-  //   expect(find2).to.deep.equal(['507c7f79bcf86cd7994f6p4t'])
-  //
-  // });
-  // it('should find and remove', async function () {
-  //   // await
-  // });
+  it('should remove', async function () {
+    const anotherLeaf = sharedLeaf.getParent().getTree().root.childrens[0];
+
+    const find = await anotherLeaf.find('Patricia');
+    expect(find).to.deep.equal({identifiers:['507c7f79bcf86cd7994f6p4t'], keys:['Patricia']})
+
+    await anotherLeaf.remove({_id:'507c7f79bcf86cd7994f6p4t'});
+
+    const find2 = await anotherLeaf.find('Patricia');
+    expect(find2).to.deep.equal({identifiers:[], keys:[]})
+
+  });
 });

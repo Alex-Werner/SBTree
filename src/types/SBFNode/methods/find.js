@@ -1,4 +1,6 @@
 module.exports = async function find(value){
+  const results = {identifiers:[], keys:[]};
+
   let leafIndex = 0;
   this.keys.forEach((_key)=>{
     if(value<=_key) return;
@@ -7,7 +9,10 @@ module.exports = async function find(value){
   const leaf = this.childrens[leafIndex];
 
   // const leaf = this.childrens[leafIndex];
-  let result = await leaf.find(value);
+  let leftRes = await leaf.find(value);
+
+  results.identifiers.push(...leftRes.identifiers)
+  results.keys.push(...leftRes.keys)
   //
   // if(leafIndex>0){
   //   console.log('oui', leafIndex)
@@ -17,10 +22,13 @@ module.exports = async function find(value){
   // We also check the leaf nearby
   if(this.childrens.length>leafIndex+1){
     const right = this.childrens[leafIndex+1];
-    result = result.concat(await right.find(value));
+    const rightRes = await right.find(value);
+    results.identifiers.push(...rightRes.identifiers)
+    results.keys.push(...rightRes.keys)
+    // result = result.concat(await right.find(value));
   }
 
-  return result;
+  return results;
   //
   return leaf.find(value);
 }

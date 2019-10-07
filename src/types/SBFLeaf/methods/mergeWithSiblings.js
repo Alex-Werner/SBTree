@@ -45,7 +45,6 @@ async function mergeWithSiblings(){
     //   We have no keys, let's merge up.
       await parent.mergeUp();
     }
-    console.log('merge')
 
     hasMerged=true;
 
@@ -75,8 +74,8 @@ async function mergeWithSiblings(){
     parent.keys.splice(parseInt(selfPos/2),1);
     if(parent.keys.length===0){
 
-      console.log('====')
-      console.log(parent)
+      // console.log('====')
+      // console.log(parent)
         // throw new Error('Not implemented. Looking for case.')
         // We have no keys, let's merge up.
         await parent.mergeUp();

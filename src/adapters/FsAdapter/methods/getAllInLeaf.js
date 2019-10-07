@@ -6,5 +6,5 @@ module.exports = async function getAllInLeaf(leafName){
     await this.createLeaf(leafName);
     return this.getAllInLeaf(leafName);
   }
-  return this.leafs[leafName].meta.identifiers;
+  return JSON.parse(JSON.stringify(this.leafs[leafName].meta.identifiers));
 }

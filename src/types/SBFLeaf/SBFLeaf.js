@@ -10,6 +10,7 @@ class SFBLeaf {
     if(!props.parent){
       throw new Error(`SFBLeaf initialized without parent reference`)
     }
+
     this.#parent = props.parent;
     this.id = (props.id) ? props.id : generateLeafId();
     this.fieldName = (props.parent.fieldName) ? props.parent.fieldName : null;

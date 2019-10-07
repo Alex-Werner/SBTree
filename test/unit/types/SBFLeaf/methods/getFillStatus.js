@@ -43,7 +43,7 @@ describe('SBFLeaf - methods - getFillStatus', () => {
     const res2 = await getFillStatus.call(self)
     expect(res2).to.deep.equal({
       fillFactor: 0.5,
-      fillFactorFilled: false,
+      fillFactorFilled: true,
       leafSize: 1,
       order: 3,
     })

@@ -9,5 +9,10 @@ async function remove(remCmd){
 
   const leaf = this.childrens[leafIndex];
   await leaf.remove(remCmd);
+
+  // This has been added for the case where previous also contains the same value
+  if(this.childrens[leafIndex-1]){
+    await this.childrens[leafIndex-1].remove(remCmd);
+  }
 };
 module.exports = remove;

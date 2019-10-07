@@ -1,5 +1,5 @@
 async function getAll() {
-  let result = [];
+  let result = {identifiers:[], keys:[]};
 
   let p = [];
   this.childrens.forEach((child) => {
@@ -11,7 +11,8 @@ async function getAll() {
         .all(p)
         .then((res) => {
           res.forEach((resolvedP) => {
-            result = result.concat(resolvedP);
+            result.identifiers.push(...resolvedP.identifiers);
+            result.keys.push(...resolvedP.keys);
           });
           resolve(result);
         });

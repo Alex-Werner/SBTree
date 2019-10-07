@@ -1,5 +1,5 @@
 module.exports = async function split(){
-  console.log('Node - split')
+  // console.log('Node - split')
 
   const midIndex = ~~(this.keys.length/2);
 

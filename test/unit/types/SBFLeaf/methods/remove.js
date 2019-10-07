@@ -15,6 +15,9 @@ const self = {
 
       getParent: function () {
         return {
+          childrens:[
+            {}
+          ],
           getAdapter: () => {
             return {
               addInLeaf: () => {
@@ -22,6 +25,7 @@ const self = {
               },
               removeInLeaf: () => {
                 removed += 1;
+                return [jean]
               }
             }
           }

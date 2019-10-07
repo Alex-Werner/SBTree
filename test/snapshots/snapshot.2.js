@@ -6,7 +6,7 @@ describe('Snapshots', function suite() {
     const incTree = new SBTree({
       order: 3
     });
-    const preventConsole = false;
+    const preventConsole = true;
     it('should match the snapshot on inserting', async function () {
 
       await incTree.insertDocuments({age: 1})
@@ -47,13 +47,18 @@ describe('Snapshots', function suite() {
 
       await incTree.deleteDocuments({age:17});
       const snapshot = await draw(incTree, preventConsole);
-      const expectedSnapshot = [[9], [[5], [13]], [[3], [7], [11], [15]], [[2], [4], [6], [8], [10], [12], [14], [16]], [[1], [2], [3], [4], [5], [6], [7], [8], [9], [10], [11], [12], [13], [14], [15,16]]]
+      const expectedSnapshot = [[9], [[5], [13]], [[3], [7], [11], [15]], [[2], [4], [6], [8], [10], [12], [14], [16]], [[1], [2], [3], [4], [5], [6], [7], [8], [9], [10], [11], [12], [13], [14], [15],[16]]]
       expect(snapshot).to.deep.equal(expectedSnapshot);
 
       await incTree.deleteDocuments({age:17});
       const snapshot2 = await draw(incTree, preventConsole);
-      const expectedSnapshot2 = [[9], [[5], [13]], [[3], [7], [11], [15]], [[2], [4], [6], [8], [10], [12], [14], [16]], [[1], [2], [3], [4], [5], [6], [7], [8], [9], [10], [11], [12], [13], [14], [15,16]]]
-      expect(snapshot2).to.deep.equal(expectedSnapshot2);
+      expect(snapshot2).to.deep.equal(expectedSnapshot);
+
+      //FIXME : this case do not work...
+      // await incTree.deleteDocuments({age:9});
+      // const snapshot3 = await draw(incTree, false);
+      // const expectedSnapshot3 = [[9], [[5], [13]], [[3], [7], [11], [15]], [[2], [4], [6], [8], [10], [12], [14], [16]], [[1], [2], [3], [4], [5], [6], [7], [8], [9], [10], [11], [12], [13], [14], [15],[16]]]
+      // expect(snapshot3).to.deep.equal(expectedSnapshot3);
     });
   });
 })

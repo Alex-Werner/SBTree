@@ -1,16 +1,20 @@
 module.exports = async function findEquals(value){
+  let result = {identifiers:[], keys:[]};
+
   let leafIndex = 0;
   this.keys.forEach((_key)=>{
     if(value<=_key) return;
     leafIndex++;
   });
 
-  let result = [];
   let p = []
 
   const {childrens} = this;
   if(childrens.length===0){
-    result.push(this.identifiers[leafIndex])
+    if(this.identifiers[leafIndex]){
+      result.identifiers.push(this.identifiers[leafIndex])
+      result.keys.push(this.keys[leafIndex])
+    }
   }else{
     const left = childrens[leafIndex];
     if(left){
@@ -21,12 +25,13 @@ module.exports = async function findEquals(value){
       const right = childrens[leafIndex+1];
       p.push(right.find(value));
     }
-
     await Promise.all(p).then((res)=>{
-
-      res.forEach((_pRes)=>{
-        result = result.concat(_pRes);
-      })
+      if(res.length>0){
+        res.forEach((_pRes)=>{
+          result.identifiers.push(..._pRes.identifiers);
+          result.keys.push(..._pRes.keys);
+        })
+      }
     });
   }
   return result;

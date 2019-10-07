@@ -5,7 +5,7 @@ const {xor, difference, pullAll} = require('lodash');
 async function find(value, operator = '$eq'){
   const self = this;
   const p = [];
-  const results = [];
+  const results = {identifiers:[], keys:[]};
 
   switch (operator) {
     case '$eq':
@@ -14,10 +14,11 @@ async function find(value, operator = '$eq'){
       const getAllIdentifier = await this.getAll();
       const excludedIdentifiers = await findEquals.call(this, value);
 
-      excludedIdentifiers.forEach((id)=>{
-        const idOf = getAllIdentifier.indexOf(id);
+      excludedIdentifiers.identifiers.forEach((id)=>{
+        const idOf = getAllIdentifier.identifiers.indexOf(id);
         if(idOf>-1){
-          getAllIdentifier.splice(idOf,1);
+          getAllIdentifier.identifiers.splice(idOf,1);
+          getAllIdentifier.keys.splice(idOf,1);
         }
       });
       return getAllIdentifier;
@@ -36,22 +37,25 @@ async function find(value, operator = '$eq'){
       }
       await Promise.all(p).then((resolvedP) => {
         resolvedP.forEach((p) => {
-          results.push(...p);
+          results.identifiers.push(...p.identifiers)
+          results.keys.push(...p.keys)
         })
       });
       return results;
     case '$nin':
       if(!Array.isArray(value)) throw new Error(`$nin operator expect key to be an array`);
 
-      const findAllIdentifiers = await this.findAll();
+      const getAllIdentifiers = await this.getAll();
       const includingIdentifiers = await this.find(value, '$in');
-      includingIdentifiers.forEach((id)=>{
-        const idOf = findAllIdentifiers.indexOf(id);
+
+      includingIdentifiers.identifiers.forEach((id)=>{
+        const idOf = getAllIdentifiers.identifiers.indexOf(id);
         if(idOf>-1){
-          findAllIdentifiers.splice(idOf,1);
+          getAllIdentifiers.identifiers.splice(idOf,1);
+          getAllIdentifiers.keys.splice(idOf,1);
         }
       })
-      return findAllIdentifiers;
+      return getAllIdentifiers;
     default:
       throw new Error(`Not handled operator ${operator}`)
   }

@@ -1,5 +1,4 @@
 async function insert(identifier, value){
-  console.log('SBFLeaf - insert - ', value)
   const parent = this.getParent();
 
   const adapter = parent.getAdapter();

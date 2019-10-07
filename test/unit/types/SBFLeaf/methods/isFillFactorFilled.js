@@ -10,7 +10,7 @@ const self = {
       getParent: function () {
         return {
           getTreeOptions:()=>{
-            return {order:3, fillFactor:0.5}
+            return {order:5, fillFactor:0.5}
           },
           getAdapter: () => {
             return {

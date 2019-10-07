@@ -6,7 +6,7 @@
  * @returns {Promise<void>}
  */
 const mergeUp = async function(){
-  console.log('Node - Merge up')
+  // console.log('Node - Merge up')
   const parent = this.getParent();
   const {childrens, keys, id}= this;
   // const

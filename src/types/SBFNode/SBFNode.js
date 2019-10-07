@@ -20,6 +20,7 @@ class SBFNode {
     this.keys = (props.keys) ? props.keys : [];
 
     this.childrens = [];
+
     if(props.childrens){
       props.childrens.forEach((child)=>{
         if(child.type==='leaf'){
@@ -38,10 +39,6 @@ class SBFNode {
   setParent(parent){
     this.#parent = parent
   }
-  getTree(){
-    return (this.#parent.getTree());
-  }
-
   getTree(){
     return this.#parent.getTree() || this.#parent.getParent().getTree();
   }

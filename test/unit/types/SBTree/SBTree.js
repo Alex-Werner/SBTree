@@ -1,26 +1,25 @@
 const {expect} = require('chai');
 const SBTree = require('../../../../src/types/SBTree/SBTree');
 const fixtures = {
-  documents:[
-    {age:27,email:'alex@valjean.fr', _id:'16ced004da93e'},
-    {age:33, email:'alain@dourak.ru', _id:'16ced00ee7931'},
-    {age:33, email:'basil@valjean.fr', _id:'16ced00ce6a31'},
-    {age:42, email:'jean@valjean.fr'}
+  documents: [
+    {age: 27, email: 'alex@valjean.fr', _id: '16ced004da93e'},
+    {age: 33, email: 'alain@dourak.ru', _id: '16ced00ee7931'},
+    {age: 33, email: 'basil@valjean.fr', _id: '16ced00ce6a31'},
+    {age: 42, email: 'jean@valjean.fr'}
   ]
 };
 
 describe('SBTree', () => {
   let tree;
-
   it('should instantiate', async function () {
     tree = new SBTree({order:3, verbose:true});
-    expect(tree.options.order).to.equal(3)
+    expect(tree.order).to.equal(3)
     expect(tree.fieldTrees).to.deep.equal({});
     expect(tree.size).to.equal(0);
   });
   it('should correctly default', function () {
     const t = new SBTree();
-    expect(t.options.order).to.equal(511)
+    expect(t.order).to.equal(511)
     expect(tree.fieldTrees).to.deep.equal({});
     expect(tree.size).to.equal(0);
 
@@ -29,14 +28,13 @@ describe('SBTree', () => {
     const inserted = await tree.insertDocuments(fixtures.documents[0]);
     expect(tree.size).to.equal(1);
     expect(Object.keys(tree.fieldTrees).length).to.equal(2);
-    expect(tree.fieldTrees['age'].field).to.equal('age')
-    expect(tree.fieldTrees['age'].options).to.deep.equal({
-      order:3,
-      verbose:true
-    });
+    expect(tree.fieldTrees['age'].fieldName).to.equal('age')
+    expect(tree.fieldTrees['age'].order).to.equal(3);
+    expect(tree.fieldTrees['age'].verbose).to.equal(true);
 
-    expect(Object.keys(tree.fieldTrees['age'].root.keys)).to.deep.equal([]);
-    expect(Object.keys(tree.fieldTrees['age'].root.childrens).length).to.deep.equal(1);
+    expect(tree.fieldTrees['age'].root.keys).to.deep.equal([27]);
+    expect(Object.keys(tree.fieldTrees['age'].root.identifiers)).to.deep.equal(['0']);
+    expect(Object.keys(tree.fieldTrees['age'].root.childrens).length).to.deep.equal(0);
   })
   it('should insert and split', async function () {
       await tree.insertDocuments(fixtures.documents[1]);
@@ -84,39 +82,43 @@ describe('SBTree', () => {
       expect(doc2).to.be.deep.equal([]);
     });
   })
-  describe('Unique field', ()=>{
-    it('should work',async function () {
-      const uniqueTree = new SBTree({order:3, verbose:true, uniques:['email']});
+
+  describe('Unique field', () => {
+    it('should work', async function () {
+      const uniqueTree = new SBTree({order: 3, verbose: true, uniques: ['email']});
       expect(uniqueTree.uniques).to.be.deep.equal(['email']);
 
-      const realJean = {email:'jean@valjean.fr', pseudo:'realJean'};
+      const realJean = {email: 'jean@valjean.fr', pseudo: 'realJean'};
       const inserted = await uniqueTree.insertDocuments(realJean);
-      const insertedDuplicateKey = await uniqueTree.insertDocuments({email:'jean@valjean.fr', pseudo:'fakeJean'});
-      expect(Object.assign({}, {email:inserted.email, pseudo:inserted.pseudo})).to.deep.equal(realJean);
-      // expect(Object.assign({}, {email:insertedDuplicateKey.email, pseudo:insertedDuplicateKey.pseudo})).to.deep.equal(realJean);
-      const findingRes = (await uniqueTree.findDocuments({email:'jean@valjean.fr'}))
+      const insertedDuplicateKey = await uniqueTree.insertDocuments({email: 'jean@valjean.fr', pseudo: 'fakeJean'});
+      expect(Object.assign({}, {email: inserted.email, pseudo: inserted.pseudo})).to.deep.equal(realJean);
+      // expect(Object.assign({}, {
+      //   email: insertedDuplicateKey.email,
+      //   pseudo: insertedDuplicateKey.pseudo
+      // })).to.deep.equal(realJean);
+      const findingRes = (await uniqueTree.findDocuments({email: 'jean@valjean.fr'}))
       expect(findingRes.length).to.deep.equal(1);
       expect(findingRes[0].email).to.deep.equal(realJean.email);
       expect(findingRes[0].name).to.deep.equal(realJean.name);
     });
   })
-  describe('Excluded fields', ()=>{
-    it('should work',async function () {
-      const excludeTree = new SBTree({order:3, verbose:true, exclude:['nestedField']});
+  describe('Excluded fields', () => {
+    it('should work', async function () {
+      const excludeTree = new SBTree({order: 3, verbose: true, exclude: ['nestedField']});
       expect(excludeTree.exclude).to.be.deep.equal(['nestedField']);
 
-      const user1 = {email:'jean@valjean.fr', pseudo:'realJean', nestedField:{address:{country:'France'}}};
+      const user1 = {email: 'jean@valjean.fr', pseudo: 'realJean', nestedField: {address: {country: 'France'}}};
       const inserted = await excludeTree.insertDocuments(user1);
 
-      const findingRes = (await excludeTree.findDocuments({email:'jean@valjean.fr'}))
+      const findingRes = (await excludeTree.findDocuments({email: 'jean@valjean.fr'}))
       expect(findingRes.length).to.deep.equal(1);
       expect(findingRes[0].email).to.deep.equal(user1.email);
       expect(findingRes[0].name).to.deep.equal(user1.name);
       expect(findingRes[0].nestedField).to.deep.equal(user1.nestedField);
 
-      expect(Object.keys(excludeTree.fieldTrees)).to.be.deep.equal(['email','pseudo']);
+      expect(Object.keys(excludeTree.fieldTrees)).to.be.deep.equal(['email', 'pseudo']);
 
-      const tryingToFingInExclude = (await excludeTree.findDocuments({nestedField:user1.nestedField}));
+      const tryingToFingInExclude = (await excludeTree.findDocuments({nestedField: user1.nestedField}));
       expect(tryingToFingInExclude).to.be.deep.equal([]);
     });
   })

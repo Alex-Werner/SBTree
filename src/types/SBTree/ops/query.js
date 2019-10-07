@@ -10,6 +10,14 @@ async function resolveDocuments(self, objectIds) {
   }
   return documents;
 }
+const findIntersectingIdentifiers = (listOfFind)=>{
+  const identifiers = [];
+
+  listOfFind.forEach((fieldRes)=>{
+    identifiers.push(...fieldRes.identifiers)
+  })
+  return intersection(identifiers);
+}
 
 async function query(query) {
   const self = this;
@@ -19,7 +27,6 @@ async function query(query) {
     const {_id} = query;
     return [await get.call(this, _id)]
   }
-
   for (const queryFieldName in query) {
     let fieldLookup = []
     const queryFieldValue = query[queryFieldName];
@@ -35,7 +42,8 @@ async function query(query) {
       const value = await fieldTree.find(queryFieldValue, operator);
 
       if (value) {
-        fieldLookup = fieldLookup.concat([value])
+        value.fieldName = queryFieldName;
+        fieldLookup = fieldLookup.concat(value)
       } else {
         throw new Error(`No value ${queryFieldName} found : ${value}, query(${JSON.stringify(query)})`)
       }
@@ -52,6 +60,7 @@ async function query(query) {
 
         await Promise.all(p).then((value)=>{
           if (value) {
+            value.fieldName = queryFieldName;
             fieldLookup = fieldLookup.concat(value)
           } else {
             throw new Error(`No value ${queryFieldName} found : ${value}, query(${JSON.stringify(query)})`)
@@ -62,9 +71,7 @@ async function query(query) {
 
     listOfFieldLookup = listOfFieldLookup.concat(fieldLookup);
   }
-
-
-  const matchingObjectIds = intersection(...listOfFieldLookup);
+  const matchingObjectIds = findIntersectingIdentifiers(listOfFieldLookup);
   const documents = await resolveDocuments(self, matchingObjectIds);
   return documents;
 };

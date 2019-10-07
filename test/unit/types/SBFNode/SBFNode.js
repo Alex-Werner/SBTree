@@ -5,20 +5,23 @@ const MemoryAdpter = require('../../../../src/adapters/MemoryAdapter/MemoryAdapt
 const adapter = new MemoryAdpter()
 
 const fakeTree = {
-  options: {order: 3},
+  order: 3,
+  fillFactor:0.5,
   adapter,
-  refKey: null
+  getOptions: () =>{
+    return {order:fakeTree.order, fillFactor:fakeTree.fillFactor}
+  }
 }
-const fakeParent = {};
+const fakeParent = {
+  fieldName: 'firstname',
+};
 fakeParent.getAdapter = () => {
   return fakeParent.getTree().adapter;
 };
 fakeParent.getTree = () => {
   return fakeTree
 }
-fakeParent.getTreeOptions = () => {
-  return fakeParent.getTree().options
-}
+
 fakeParent.insertReferenceKey = (key) => {
   fakeTree.refKey = key
 }
@@ -45,15 +48,20 @@ describe('SBFLeaf', () => {
     expect(leaf.getParent()).to.equal(fakeParent3)
   });
   it('should insert', async function () {
-    const leaf = new SBFLeaf({parent:sharedNode})
+    // const node = new SBFNode({parent:sharedNode})
     // Hack because of Error: SBFNode cannot insert with no childrens
-    await leaf.insert('Jean','507f191e810c19729de860ea')
-    await leaf.insert('Alex','507f1f77bcf86cd799439011')
-    sharedNode.childrens = [leaf];
+    await sharedNode.insert('507f191e810c19729de860ea','Jean')
+    await sharedNode.insert('507f1f77bcf86cd799439011','Alex')
+    // sharedNode.childrens = [leaf];
     expect(Object.keys(fakeTree.adapter.leafs).length).to.equal(1);
 
-    await sharedNode.insert('Jean', '507f191e810c19729de860eb');
+    //FIXME : here, we have a split, so further tests should be done to ensure it.
+    await sharedNode.insert('507f191e810c19729de860eb','Jean');
     expect(Object.keys(fakeTree.adapter.leafs).length).to.equal(2);
-    expect(sharedNode.keys).to.deep.equal(['Jean']);
+    // expect(sharedNode.keys).to.deep.equal(['Jean']);
+  });
+  it('should find', async function () {
+    const find = await sharedNode.find('Alex');
+    expect(find).to.deep.equal(['507f1f77bcf86cd799439011'])
   });
 });

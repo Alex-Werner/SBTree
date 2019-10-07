@@ -1,3 +1,3 @@
 module.exports = async function getDocument(identifier){
-  return this.documents[identifier];
+  return JSON.parse(JSON.stringify(this.documents[identifier]));
 }

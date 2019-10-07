@@ -11,5 +11,5 @@ module.exports = async function getLeftInLeaf(leafName){
   const identifier = leaf.meta.identifiers[0];
   const key = leaf.data.keys[0];
 
-  return {identifier, key }
+  return JSON.parse(JSON.stringify({identifier, key }))
 }

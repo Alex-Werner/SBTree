@@ -16,12 +16,12 @@ describe('Snapshots', function suite() {
 
 
       await incTree.insertDocuments({age: 2})
-      const snapshot0 = await draw(incTree, false);
-      const expectedSnapshot0 = [[1,2]];
+      const snapshot0 = await draw(incTree, preventConsole);
+      const expectedSnapshot0 = [[1, 2]];
       expect(snapshot0).to.deep.equal(expectedSnapshot0);
 
       await incTree.insertDocuments({age: 3})
-      const snapshot1 = await draw(incTree, false);
+      const snapshot1 = await draw(incTree, preventConsole);
       const expectedSnapshot1 = [[2], [[1], [2, 3]]];
       expect(snapshot1).to.deep.equal(expectedSnapshot1);
 
@@ -36,33 +36,27 @@ describe('Snapshots', function suite() {
       expect(snapshot3).to.deep.equal(expectedSnapshot3);
     });
     it('should match the snapshot on removing', async function () {
-      await incTree.deleteDocuments({age:5});
-      // const snapshot = await draw(incTree, false);
-      // const expectedSnapshot = [[2,3], [[1], [2], [3,4]]];
-      // expect(snapshot).to.deep.equal(expectedSnapshot);
+      await incTree.deleteDocuments({age: 5});
+      const snapshot = await draw(incTree, preventConsole);
+      const expectedSnapshot = [[3], [[2], [4]], [[1], [2], [3], [4]]];
+      expect(snapshot).to.deep.equal(expectedSnapshot);
 
-      // const expectedSnapshot2 = [[2,3], [[1], [2], [3]]];
+      const expectedSnapshot2 = [[3], [[2], [4]], [[1], [2], [3], [4, 5]]];
       await incTree.insertDocuments({age: 5})
-      const snapshot2 = await draw(incTree, false);
-      // console.log(snapshot2)
-      // expect(snapshot2).to.deep.equal(expectedSnapshot2);
-
-      // const snapshot4 = await draw(incTree, false);
-      // await incTree.deleteDocuments({age:5});
-
+      const snapshot2 = await draw(incTree, preventConsole);
+      expect(snapshot2).to.deep.equal(expectedSnapshot2);
     });
     it('should deal with removing when its index', async function () {
-      // await incTree.deleteDocuments({age:4});
-      // const leaf = incTree.fieldTrees['age'].root.childrens[1].childrens[1]
-      // console.log(leaf, await leaf.getAll())
-      // const snapshot = await draw(incTree,false);
-      // const expectedSnapshot = [[3], [[2], [5]], [[1], [2], [3], [5]]];
-      // expect(snapshot).to.deep.equal(expectedSnapshot);
+      await incTree.deleteDocuments({age:4});
 
-      // await incTree.deleteDocuments({age:5});
-      // const snapshot2 = await draw(incTree,false);
-      // const expectedSnapshot2 = [[2,3],[[1],[2],[3]]];
-      // expect(snapshot2).to.deep.equal(expectedSnapshot2);
+      const snapshot = await draw(incTree,preventConsole);
+      const expectedSnapshot = [[3], [[2], [5]], [[1], [2], [3], [5]]];
+      expect(snapshot).to.deep.equal(expectedSnapshot);
+
+      await incTree.deleteDocuments({age:5});
+      const snapshot2 = await draw(incTree,preventConsole);
+      const expectedSnapshot2 = [[2,3],[[1],[2],[3]]];
+      expect(snapshot2).to.deep.equal(expectedSnapshot2);
     });
   });
 })

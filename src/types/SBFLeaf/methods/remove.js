@@ -6,7 +6,11 @@ async function remove(remCmd){
   const identifier = remCmd._id;
   const selfPos = parent.childrens.findIndex((el)=> el.id === this.id);
 
+
   const removed = await adapter.removeInLeaf(this.id, identifier);
+  if(removed.length===0){
+    return false;
+  }
   if(removed.length>1) throw new Error(`Unexpected amount of removed entities in same leaf`);
 
   if(removed[0].index===0){

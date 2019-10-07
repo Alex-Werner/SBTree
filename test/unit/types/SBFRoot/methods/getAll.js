@@ -34,14 +34,7 @@ const fixtures = {
 const calledFn = [];
 
 const adapter = new MemoryAdapter();
-adapter.documents = {
-  '5d6ebb7e21f1df6ff7482621': {_id: '5d6ebb7e21f1df6ff7482621', age: 17},
-  '5d6ebb7e21f1df6ff7482631': {_id: '5d6ebb7e21f1df6ff7482631', age: 33},
-  '5d6ebb7e21f1df6ff7482641': {_id: '5d6ebb7e21f1df6ff7482641', age: 45}
-};
-adapter.addInLeaf( 'age', '5d6ebb7e21f1df6ff7482621', 17)
-adapter.addInLeaf( 'age', '5d6ebb7e21f1df6ff7482631', 33)
-adapter.addInLeaf( 'age', '5d6ebb7e21f1df6ff7482641', 45)
+
 const fakeAgeTreeParent = {
   fieldName:'age',
   getAdapter:()=> adapter,
@@ -55,14 +48,29 @@ const fakeSelf = {
   fieldName:'age',
   keys:[33],
   childrens:[
-    new SFBLeaf({ name: '16d075318572b', type: 'leaf' , parent:fakeAgeTreeParent}),
-    new SFBLeaf({ name: '16d07531858f6', type: 'leaf' , parent:fakeAgeTreeParent}),
+    new SFBLeaf({ id: 'l16da4db23936c37368a', type: 'leaf' , parent:fakeAgeTreeParent}),
+    new SFBLeaf({ id: 'l16da4db23930ae17477', type: 'leaf' , parent:fakeAgeTreeParent}),
   ],
 };
 
 describe('SBFTree - methods - getAll', () => {
+  before(async ()=>{
+    await adapter.addInLeaf('l16da4db23936c37368a', '5d6ebb7e21f1df6ff7482621', 17)
+    await adapter.saveDocument({_id: '5d6ebb7e21f1df6ff7482621', age: 17})
+
+    await adapter.addInLeaf('l16da4db23930ae17477', '5d6ebb7e21f1df6ff7482631', 33)
+    await adapter.saveDocument({_id: '5d6ebb7e21f1df6ff7482631', age: 33})
+
+    await adapter.addInLeaf('l16da4db23930ae17477', '5d6ebb7e21f1df6ff7482641', 45)
+    await adapter.saveDocument({_id: '5d6ebb7e21f1df6ff7482641', age: 45})
+  })
   it('should get all identifiers', async function () {
     const res = await getAll.call(fakeSelf);
-    expect(res).to.deep.equal(Object.keys(adapter.documents));
+    const expectedRes = {
+      identifiers:Object.keys(adapter.documents),
+      keys:[17,33,45]
+    }
+
+    expect(res).to.deep.equal(expectedRes);
   });
 });
