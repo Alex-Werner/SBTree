@@ -1,8 +1,21 @@
-
+const {each} = require('lodash')
+const Data = require('./types/Data')
+const Meta = require('./types/Meta')
+const parseLeafs = (_leafs)=>{
+  const leafs = {}
+  each(_leafs, (_leaf, _leafId)=>{
+    leafs[_leafId]={
+      meta:new Meta(_leaf.meta),
+      data:new Data(_leaf.data)
+    };
+  })
+  return leafs;
+};
 class MemoryAdapter {
-  constructor(){
-    this.leafs = {};
-    this.documents = {}
+  constructor(props){
+    this.name = "MemoryAdapter";
+    this.leafs = (props.leafs) ? parseLeafs(props.leafs) : {};
+    this.documents = (props.documents) ? props.documents : {};
   }
 };
 MemoryAdapter.prototype.addInLeaf = require('./methods/addInLeaf')

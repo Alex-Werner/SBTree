@@ -6,6 +6,7 @@
  * @returns {Promise<void>}
  */
 const mergeUp = async function(){
+  console.log('Node - Merge up')
   const parent = this.getParent();
   const {childrens, keys, id}= this;
   // const
@@ -13,11 +14,13 @@ const mergeUp = async function(){
   if(childrens.length!==1){
     throw new Error('We did not tought about resolving this case. ');//todo
   }
+
   if(parent.childrens.length===2 && !await parent.getFillStatus().fillFactorFilled){
-    // We actually bring both leaf
     let siblingPos = (selfPos===1) ? 0 : 1;
+    // Our sibling is the other parent child.
     const sibling = parent.childrens[siblingPos];
 
+    // We bump up keys of our siblings.
     parent.keys.splice(siblingPos, 0, ...sibling.keys);
     parent.childrens = [...sibling.childrens, ...childrens]
   }else{

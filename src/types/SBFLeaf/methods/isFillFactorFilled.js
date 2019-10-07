@@ -8,6 +8,8 @@ async function isFillFactorFilled(){
   try {
     const leaf = await adapter.openLeaf(this.id);
 
+    console.log(order, fillFactor, parent)
+    console.log(leaf.meta.size, order*fillFactor)
     return leaf.meta.size>=(order*fillFactor);
 
   }catch (e) {

@@ -14,6 +14,8 @@ const defaultProps = {
 class FsAdapter extends EventEmitter {
   constructor(props = {}) {
     super();
+    this.name = "FsAdapter";
+
     if(props.parent){
       this.parent = props.parent
     }

@@ -7,6 +7,9 @@ module.exports = function createRoot(root = null){
   }
   const {fieldName} = this;
   let keys = (root && root.keys) ? root.keys : null;
+  console.log(root)
+  console.log(root)
+  console.log(root)
   this.root = new SBFRoot({tree:this, keys,fieldName});
 
   if(root){

@@ -11,7 +11,7 @@ async function insert(document) {
     const _fieldValue = document[_fieldName]
     if (_fieldName !== '_id') {
       if (!this.getFieldTree(_fieldName)) {
-        this.setFieldTree(_fieldName);
+        this.setFieldTree({fieldName:_fieldName});
       }
       const fieldTree = this.getFieldTree(_fieldName);
       if(fieldTree){

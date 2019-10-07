@@ -1,5 +1,8 @@
 module.exports = async function split(){
+  console.log('Node - split')
+
   const midIndex = ~~(this.keys.length/2);
+
   const rightKeys = this.keys.splice(midIndex);
   const leftKeys = this.keys.splice(0);
 

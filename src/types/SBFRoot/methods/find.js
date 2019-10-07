@@ -11,16 +11,16 @@ async function find(value, operator = '$eq'){
     case '$eq':
       return findEquals.call(this,value);
     case '$ne':
-      const findAllIdentifier = await this.findAll();
+      const getAllIdentifier = await this.getAll();
       const excludedIdentifiers = await findEquals.call(this, value);
 
       excludedIdentifiers.forEach((id)=>{
-        const idOf = findAllIdentifier.indexOf(id);
+        const idOf = getAllIdentifier.indexOf(id);
         if(idOf>-1){
-          findAllIdentifier.splice(idOf,1);
+          getAllIdentifier.splice(idOf,1);
         }
       });
-      return findAllIdentifier;
+      return getAllIdentifier;
     case '$lte':
       return findLowerThan.call(this, value, true);
     case '$lt':

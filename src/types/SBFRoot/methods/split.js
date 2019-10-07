@@ -2,6 +2,8 @@ const SBFNode = require('../../SBFNode/SBFNode');
 const SBFLeaf = require('../../SBFLeaf/SBFLeaf');
 const {forEach} = require('../../../utils/array');
 async function split() {
+  console.log('Root Split')
+
   const midIndex = ~~(this.keys.length / 2);
   const rightKeys = this.keys.splice(midIndex);
   const leftKeys = this.keys.splice(0);
@@ -16,7 +18,7 @@ async function split() {
     const leftChildrens = this.childrens.splice(0);
 
 
-    const right = new SBFNode({parent: this});
+    const right = new SBFNode({fieldName: this.fieldName, parent: this});
     right.keys = rightKeys;
     right.childrens = rightChildrens;
     rightChildrens.forEach((child) => {
@@ -24,7 +26,8 @@ async function split() {
     })
 
 
-    const left = new SBFNode({parent: this});
+
+    const left = new SBFNode({fieldName: this.fieldName, parent: this});
     left.keys = leftKeys;
     left.childrens = leftChildrens;
     leftChildrens.forEach((child) => {

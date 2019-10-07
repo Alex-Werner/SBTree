@@ -1,7 +1,7 @@
 const SBFLeaf = require('../../SBFLeaf/SBFLeaf');
 
 async function insert(identifier, value = null){
-
+  console.log('SBFROOT insert', value)
   if(this.childrens.length===0){
     // if(this.keys.length===0){
       const idx = await this.insertReferenceKey(value)

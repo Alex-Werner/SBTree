@@ -1,0 +1,231 @@
+{
+  "order": 3,
+  "fillFactor": 0.5,
+  "verbose": false,
+  "id": "t16da442732ccdb32e43",
+  "fieldTrees": {
+    "age": {
+      "id": "f16da442733b09fcf753",
+      "order": 3,
+      "verbose": false,
+      "fillFactor": 0.5,
+      "fieldName": "age",
+      "isUnique": false,
+      "root": {
+        "id": "r16da442735595375666",
+        "fieldName": "age",
+        "keys": [
+          3
+        ],
+        "identifiers": [],
+        "childrens": [
+          {
+            "id": "n16da442735afb3656f3",
+            "fieldName": "age",
+            "keys": [
+              2
+            ],
+            "childrens": [
+              {
+                "id": "l16da44273580f5aae0c",
+                "fieldName": "age",
+                "type": "leaf"
+              },
+              {
+                "id": "l16da4427357d30a879b",
+                "fieldName": "age",
+                "type": "leaf"
+              }
+            ],
+            "type": "node"
+          },
+          {
+            "id": "n16da442735a0dbeb62c",
+            "fieldName": "age",
+            "keys": [
+              4
+            ],
+            "childrens": [
+              {
+                "id": "l16da4427359f3ffde8b",
+                "fieldName": "age",
+                "type": "leaf"
+              },
+              {
+                "id": "l16da442735acfc10d72",
+                "fieldName": "age",
+                "type": "leaf"
+              }
+            ],
+            "type": "node"
+          }
+        ],
+        "type": "root"
+      },
+      "adapter": {
+        "name": "MemoryAdapter",
+        "leafs": {
+          "l16da4427357d30a879b": {
+            "meta": {
+              "size": 1,
+              "identifiers": [
+                "5d9ab0c1dc0369556c8b69b3"
+              ]
+            },
+            "data": {
+              "keys": [
+                2
+              ]
+            }
+          },
+          "l16da44273580f5aae0c": {
+            "meta": {
+              "size": 1,
+              "identifiers": [
+                "5d9ab0c1dc0369556c380499"
+              ]
+            },
+            "data": {
+              "keys": [
+                1
+              ]
+            }
+          },
+          "l16da4427359f3ffde8b": {
+            "meta": {
+              "size": 1,
+              "identifiers": [
+                "5d9ab0c1dc0369556c3dab15"
+              ]
+            },
+            "data": {
+              "keys": [
+                3
+              ]
+            }
+          },
+          "l16da442735acfc10d72": {
+            "meta": {
+              "size": 2,
+              "identifiers": [
+                "5d9ab0c1dc0369556cc0cb64",
+                "5d9ab0c1dc0369556c9a038f"
+              ]
+            },
+            "data": {
+              "keys": [
+                4,
+                5
+              ]
+            }
+          }
+        },
+        "documents": {
+          "5d9ab0c1dc0369556c380499": {
+            "age": 1,
+            "_id": "5d9ab0c1dc0369556c380499"
+          },
+          "5d9ab0c1dc0369556c8b69b3": {
+            "age": 2,
+            "_id": "5d9ab0c1dc0369556c8b69b3"
+          },
+          "5d9ab0c1dc0369556c3dab15": {
+            "age": 3,
+            "_id": "5d9ab0c1dc0369556c3dab15"
+          },
+          "5d9ab0c1dc0369556cc0cb64": {
+            "age": 4,
+            "_id": "5d9ab0c1dc0369556cc0cb64"
+          },
+          "5d9ab0c1dc0369556c9a038f": {
+            "age": 5,
+            "_id": "5d9ab0c1dc0369556c9a038f"
+          }
+        }
+      }
+    }
+  },
+  "uniques": [],
+  "size": 5,
+  "adapter": {
+    "name": "MemoryAdapter",
+    "leafs": {
+      "l16da4427357d30a879b": {
+        "meta": {
+          "size": 1,
+          "identifiers": [
+            "5d9ab0c1dc0369556c8b69b3"
+          ]
+        },
+        "data": {
+          "keys": [
+            2
+          ]
+        }
+      },
+      "l16da44273580f5aae0c": {
+        "meta": {
+          "size": 1,
+          "identifiers": [
+            "5d9ab0c1dc0369556c380499"
+          ]
+        },
+        "data": {
+          "keys": [
+            1
+          ]
+        }
+      },
+      "l16da4427359f3ffde8b": {
+        "meta": {
+          "size": 1,
+          "identifiers": [
+            "5d9ab0c1dc0369556c3dab15"
+          ]
+        },
+        "data": {
+          "keys": [
+            3
+          ]
+        }
+      },
+      "l16da442735acfc10d72": {
+        "meta": {
+          "size": 2,
+          "identifiers": [
+            "5d9ab0c1dc0369556cc0cb64",
+            "5d9ab0c1dc0369556c9a038f"
+          ]
+        },
+        "data": {
+          "keys": [
+            4,
+            5
+          ]
+        }
+      }
+    },
+    "documents": {
+      "5d9ab0c1dc0369556c380499": {
+        "age": 1,
+        "_id": "5d9ab0c1dc0369556c380499"
+      },
+      "5d9ab0c1dc0369556c8b69b3": {
+        "age": 2,
+        "_id": "5d9ab0c1dc0369556c8b69b3"
+      },
+      "5d9ab0c1dc0369556c3dab15": {
+        "age": 3,
+        "_id": "5d9ab0c1dc0369556c3dab15"
+      },
+      "5d9ab0c1dc0369556cc0cb64": {
+        "age": 4,
+        "_id": "5d9ab0c1dc0369556cc0cb64"
+      },
+      "5d9ab0c1dc0369556c9a038f": {
+        "age": 5,
+        "_id": "5d9ab0c1dc0369556c9a038f"
+      }
+    }
+  }
+}

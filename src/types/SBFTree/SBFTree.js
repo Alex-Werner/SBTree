@@ -8,6 +8,7 @@ class SBFTree {
   constructor(props={}){
     const defaultOpts = {
       order: 511,
+      fillFactor: 0.5,
       verbose:false,
       isUnique:false
     }
@@ -17,10 +18,10 @@ class SBFTree {
       createRoot: require('./methods/createRoot')
     });
 
-    this.options = {
-      order: (props.order) ? props.order : defaultOpts.order,
-      verbose: (props.verbose) ? props.verbose : defaultOpts.verbose
-    };
+    this.order= (props.order) ? props.order : defaultOpts.order;
+    this.verbose= (props.verbose) ? props.verbose : defaultOpts.verbose;
+    this.fillFactor= (props.fillFactor) ? props.fillFactor : defaultOpts.fillFactor;
+
     if(!props.fieldName){
       throw new Error(`SBFTree expect a fieldName to be initialized`);
     }
@@ -35,6 +36,12 @@ class SBFTree {
       throw new Error(`SBFTree expect an adapter to be initialized`);
     }
     this.adapter = props.adapter;
+  }
+  getOptions(){
+    const {order, fillFactor, verbose}= this;
+    return {
+      order, fillFactor, verbose
+    }
   }
 };
 

@@ -10,6 +10,7 @@ class SBFNode {
   #parent
   constructor(props){
     if(!props.parent){
+      console.log(props)
       throw new Error(`SBFNode initialized without parent reference`)
     }
     this.#parent = props.parent;
@@ -23,13 +24,12 @@ class SBFNode {
     if(props.childrens){
       props.childrens.forEach((child)=>{
         if(child.type==='leaf'){
-          this.childrens.push(new SBFLeaf({parent:this.#parent,...child}))
+          this.childrens.push(new SBFLeaf({parent:this,...child}))
         }
         if(child.type==='node'){
-          this.childrens.push(new SBFNode({parent:this.#parent,...child}))
+          this.childrens.push(new SBFNode({parent:this,...child}))
         }
       })
-
     }
     this.type = 'node';
   }

@@ -7,7 +7,7 @@ const draw = async (fieldNode, preventConsole = false) => {
   if (fieldNode.id[0] === 't') {
     !preventConsole && console.log(`======== SBTree Tree ========`);
     !preventConsole && console.log(`=== Id : ${fieldNode.id}`)
-    !preventConsole && console.log(`=== Order :  ${fieldNode.options.order}`)
+    !preventConsole && console.log(`=== Order :  ${fieldNode.order}`)
     if (Object.keys(fieldNode.fieldTrees).length === 0) {
       !preventConsole && console.log(`=== Empty.`)
       return [];
@@ -23,7 +23,7 @@ const draw = async (fieldNode, preventConsole = false) => {
 
   !preventConsole && console.log(`======== SBTree Node ========`);
   !preventConsole && console.log(`=== Id : ${fieldNode.id}`)
-  !preventConsole && console.log(`=== Order :  ${fieldNode.options.order}`)
+  !preventConsole && console.log(`=== Order :  ${fieldNode.order}`)
   !preventConsole && console.log(`=== Field :  ${fieldNode.fieldName}`)
 
   const {root} = fieldNode;

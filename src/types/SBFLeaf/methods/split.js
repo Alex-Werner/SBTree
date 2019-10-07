@@ -1,11 +1,18 @@
 async function split(){
+  console.log('Leaf - split')
+
   const SBFLeaf = require('../SBFLeaf');
 
   const parent = this.getParent();
+  console.log({parent})
+  console.log(parent.childrens)
+  // console.log(parent.type === 'node' && parent.getParent())
+  // console.log({parent})
+
   const adapter = parent.getAdapter();
 
   const newLeaf = new SBFLeaf({parent});
-  // console.log(parent)
+
   // console.log(parent)
   // console.log(parent)
   // console.log(parent)
@@ -16,6 +23,13 @@ async function split(){
   const index = await parent.insertReferenceKey(midKey);
 
   await parent.attachLeaf(index+1,newLeaf);
+  if(parent.keys[0] === 4){
+
+  console.log('PARENT', parent)
+    console.log(this.id, await this.getAll())
+    console.log(newLeaf.id, await newLeaf.getAll())
+  console.log('PARENT', parent.getParent())
+  }
 
 };
 module.exports = split;

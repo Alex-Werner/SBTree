@@ -1,14 +1,5 @@
-class Meta {
-  constructor(props = {}) {
-    this.size = (props.size) ? props.size : 0;
-    this.identifiers = [];
-  }
-}
-class Data {
-  constructor(props){
-    this.keys=[]
-  }
-}
+const Data = require('../types/Data')
+const Meta = require('../types/Meta')
 
 async function createLeaf(leafName){
   if(this.leafs[leafName]) {
