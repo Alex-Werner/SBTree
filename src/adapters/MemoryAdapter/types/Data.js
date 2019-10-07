@@ -1,5 +1,5 @@
 class Data {
-  constructor(props) {
+  constructor(props = {}) {
     this.keys = (props.keys) ? props.keys : []
   }
 }

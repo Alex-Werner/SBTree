@@ -10,7 +10,6 @@ class SBFNode {
   #parent
   constructor(props){
     if(!props.parent){
-      console.log(props)
       throw new Error(`SBFNode initialized without parent reference`)
     }
     this.#parent = props.parent;

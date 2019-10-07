@@ -1,7 +1,6 @@
 async function insert(identifier, value){
   console.log('SBFLeaf - insert - ', value)
   const parent = this.getParent();
-  console.log(parent)
 
   const adapter = parent.getAdapter();
   await adapter.addInLeaf(this.id, identifier, value);

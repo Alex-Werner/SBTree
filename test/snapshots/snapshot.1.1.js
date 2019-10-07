@@ -43,21 +43,21 @@ describe('Snapshots', function suite() {
       // console.log(incTree.toJSON())
 
       // console.log(incTree.toJSON())
-      const snapshot3 = await draw(incTree, preventConsole);
+      const snapshot3 = await draw(incTree, false);
       const expectedSnapshot3 = [[3], [[2], [4]], [[1], [2], [3], [4, 5]]];
       expect(snapshot3).to.deep.equal(expectedSnapshot3);
     });
     it('should match the snapshot on removing', async function () {
-      // await incTree.deleteDocuments({age:5});
+      await incTree.deleteDocuments({age:5});
       // const snapshot = await draw(incTree, false);
       // const expectedSnapshot = [[2,3], [[1], [2], [3,4]]];
       // expect(snapshot).to.deep.equal(expectedSnapshot);
 
-      // const expectedSnapshot2 = [[2,3], [[1], [2], [3]]];
-      // await incTree.insertDocuments({age: 5})
-      // const snapshot2 = await draw(incTree, false);
-      // console.log(snapshot2)
-      // expect(snapshot2).to.deep.equal(expectedSnapshot2);
+      const expectedSnapshot2 = [[3], [[2], [4]],[[1],[2],[3],[4,5]]];
+      await incTree.insertDocuments({age: 5})
+      const snapshot2 = await draw(incTree, false);
+      console.log(snapshot2)
+      expect(snapshot2).to.deep.equal(expectedSnapshot2);
 
       // const snapshot4 = await draw(incTree, false);
       // await incTree.deleteDocuments({age:5});

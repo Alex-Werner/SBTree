@@ -57,7 +57,6 @@ class SBTree extends EventEmitter {
         this.setFieldTree(_fieldTree);
       })
     }
-    console.log(this)
     if(this.adapter.attachParent){
       this.adapter.attachParent(this).then(()=>{
         this.emit('ready');

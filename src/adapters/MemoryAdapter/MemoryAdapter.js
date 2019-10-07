@@ -12,7 +12,7 @@ const parseLeafs = (_leafs)=>{
   return leafs;
 };
 class MemoryAdapter {
-  constructor(props){
+  constructor(props = {}){
     this.name = "MemoryAdapter";
     this.leafs = (props.leafs) ? parseLeafs(props.leafs) : {};
     this.documents = (props.documents) ? props.documents : {};
