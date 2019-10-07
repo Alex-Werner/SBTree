@@ -62,6 +62,6 @@ describe('SBFLeaf', () => {
   });
   it('should find', async function () {
     const find = await sharedNode.find('Alex');
-    expect(find).to.deep.equal(['507f1f77bcf86cd799439011'])
+    expect(find).to.deep.equal({identifiers:['507f1f77bcf86cd799439011'], keys:['Alex']})
   });
 });

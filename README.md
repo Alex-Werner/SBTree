@@ -6,6 +6,7 @@
 > Fast document store using B+ Tree for fields. Adapters support for In-Memory and FileSystem 
 
 Complexity : `O(log(n))` - Help welcome to pass it `O(n)`.  
+State : NOT FOR PRODUCTION (see remaining TODO / FIXME / ISSUES).
 
 This library's goal is to provide a way to quickly store document-based data in-memory or on the filesystem.  
 It uses a field-specific indexing system relaying on B+Tree structure.  
