@@ -27,7 +27,7 @@ let standard = {
   }
 }
 describe('SBTree - Performance - Multi-Trees (index/field) benchmark within test ', async function () {
-  this.timeout(10000)
+  this.timeout(20000)
   before((done) => {
     console.log(`Will process ${fakeData.length} elements`);
     tree = new SBTree({order: 127});

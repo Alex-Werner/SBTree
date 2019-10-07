@@ -62,7 +62,7 @@ let standard = {
   }
 }
 describe('SBTree - Performance - Extended Benchmark within test ', async function () {
-  this.timeout(90000)
+  this.timeout(150000)
   before((done) => {
     console.log(`Will process ${fakeData.length} elements`);
     tree = new SBTree({order: 127});
