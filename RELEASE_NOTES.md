@@ -1,3 +1,11 @@
+## 2.0.1 (2019-10-08)
+
+- https://github.com/Alex-Werner/SBTree/pull/5
+
+## 2.0.0 (2019-10-08)
+
+- https://github.com/Alex-Werner/SBTree/pull/4
+
 ## 1.3.0 (2019-09-)
 ## 1.2.1 (2019-09-07)
 
