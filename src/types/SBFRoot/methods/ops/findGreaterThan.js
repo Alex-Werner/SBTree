@@ -1,5 +1,5 @@
 async function findGreaterThan(key, includeKey=false){
-  let result = [];
+  let result = {identifiers:[], keys:[]};
 
   // We first see where our key is located;
   let leafIndex = 0;
@@ -14,6 +14,7 @@ async function findGreaterThan(key, includeKey=false){
 
   // first, we lookup for all greater than matches in the actual leaf where we had our el.
   p.push(this.childrens[leafIndex].findGreaterThan(key, includeKey));
+
   // If our key is in the keys, then right item will contains our key and it's superior elements
   // We need this extra step first
   let start = leafIndex+1;
@@ -25,13 +26,14 @@ async function findGreaterThan(key, includeKey=false){
   // All bigger leaf that our leafIndex needs to be included
   if(leafIndex<this.childrens.length-1){
     this.childrens.slice(start).forEach((child, i)=>{
-      p.push(child.findAll());
+      p.push(child.getAll());
     });
   }
 
   await Promise.all(p).then((res)=>{
     res.forEach((p)=>{
-      result = result.concat(p);
+      result.identifiers.push(...p.identifiers);
+      result.keys.push(...p.keys);
     })
   });
   return result;

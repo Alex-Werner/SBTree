@@ -28,6 +28,12 @@ const crypto = {
   insecureRandomBytes,
   randomBytes: (isWindowContext) ? browserRandomBytes : getRandomBytes(),
 }
-crypto.generateLeafName = () => (Date.now().toString(16) + crypto.randomBytes(1).toString('hex'));
+crypto.generateRandId = (prefix='') => prefix+(Date.now().toString(16) + crypto.randomBytes(4).toString('hex'));
+
+crypto.generateLeafId = () => crypto.generateRandId('l');
+crypto.generateFieldTreeId = () => crypto.generateRandId('f');
+crypto.generateTreeId = () => crypto.generateRandId('t');
+crypto.generateNodeId = () => crypto.generateRandId('n');
+crypto.generateRootId = () => crypto.generateRandId('r');
 
 module.exports = crypto;

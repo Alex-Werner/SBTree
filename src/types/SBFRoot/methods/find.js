@@ -2,56 +2,60 @@ const findEquals = require('./ops/findEquals');
 const findLowerThan = require('./ops/findLowerThan');
 const findGreaterThan = require('./ops/findGreaterThan');
 const {xor, difference, pullAll} = require('lodash');
-async function find(key, operator = '$eq'){
+async function find(value, operator = '$eq'){
   const self = this;
   const p = [];
-  const results = [];
+  const results = {identifiers:[], keys:[]};
 
   switch (operator) {
     case '$eq':
-      return findEquals.call(this,key);
+      return findEquals.call(this,value);
     case '$ne':
-      const findAllIdentifier = await this.findAll();
-      const excludedIdentifiers = await findEquals.call(this, key);
+      const getAllIdentifier = await this.getAll();
+      const excludedIdentifiers = await findEquals.call(this, value);
 
-      excludedIdentifiers.forEach((id)=>{
-        const idOf = findAllIdentifier.indexOf(id);
+      excludedIdentifiers.identifiers.forEach((id)=>{
+        const idOf = getAllIdentifier.identifiers.indexOf(id);
         if(idOf>-1){
-          findAllIdentifier.splice(idOf,1);
+          getAllIdentifier.identifiers.splice(idOf,1);
+          getAllIdentifier.keys.splice(idOf,1);
         }
       });
-      return findAllIdentifier;
+      return getAllIdentifier;
     case '$lte':
-      return findLowerThan.call(this, key, true);
+      return findLowerThan.call(this, value, true);
     case '$lt':
-      return findLowerThan.call(this, key, false);
+      return findLowerThan.call(this, value, false);
     case '$gt':
-      return findGreaterThan.call(this, key, false);
+      return findGreaterThan.call(this, value, false);
     case '$gte':
-      return findGreaterThan.call(this, key, true);
+      return findGreaterThan.call(this, value, true);
     case '$in':
-      if(!Array.isArray(key)) throw new Error(`$in operator expect key to be an array`);
-      for(let el of key){
+      if(!Array.isArray(value)) throw new Error(`$in operator expect key to be an array`);
+      for(let el of value){
         p.push(self.find(el))
       }
       await Promise.all(p).then((resolvedP) => {
         resolvedP.forEach((p) => {
-          results.push(...p);
+          results.identifiers.push(...p.identifiers)
+          results.keys.push(...p.keys)
         })
       });
       return results;
     case '$nin':
-      if(!Array.isArray(key)) throw new Error(`$nin operator expect key to be an array`);
+      if(!Array.isArray(value)) throw new Error(`$nin operator expect key to be an array`);
 
-      const findAllIdentifiers = await this.findAll();
-      const includingIdentifiers = await this.find(key, '$in');
-      includingIdentifiers.forEach((id)=>{
-        const idOf = findAllIdentifiers.indexOf(id);
+      const getAllIdentifiers = await this.getAll();
+      const includingIdentifiers = await this.find(value, '$in');
+
+      includingIdentifiers.identifiers.forEach((id)=>{
+        const idOf = getAllIdentifiers.identifiers.indexOf(id);
         if(idOf>-1){
-          findAllIdentifiers.splice(idOf,1);
+          getAllIdentifiers.identifiers.splice(idOf,1);
+          getAllIdentifiers.keys.splice(idOf,1);
         }
       })
-      return findAllIdentifiers;
+      return getAllIdentifiers;
     default:
       throw new Error(`Not handled operator ${operator}`)
   }

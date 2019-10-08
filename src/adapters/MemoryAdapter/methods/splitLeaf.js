@@ -1,12 +1,12 @@
 module.exports = async function splitLeaf(sourceLeaf, siblingLeaf){
-  if(!this.leafs[sourceLeaf.name]){
+  if(!this.leafs[sourceLeaf.id]){
     throw new Error(`Source leaf do not exist`)
   }
-  const source = this.leafs[sourceLeaf.name];
-  if(!this.leafs[siblingLeaf.name]){
+  const source = this.leafs[sourceLeaf.id];
+  if(!this.leafs[siblingLeaf.id]){
     throw new Error(`Sibbling leaf do not exist`);
   }
-  const sibling = this.leafs[siblingLeaf.name];
+  const sibling = this.leafs[siblingLeaf.id];
   const midIndex = ~~(source.data.keys.length/2);
 
   // console.log(this.leafs,sourceLeaf.name,{source:source.data.keys})

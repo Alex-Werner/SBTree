@@ -1,30 +1,39 @@
-module.exports = async function findEquals(key){
+module.exports = async function findEquals(value){
+  let result = {identifiers:[], keys:[]};
+
   let leafIndex = 0;
   this.keys.forEach((_key)=>{
-    if(key<=_key) return;
+    if(value<=_key) return;
     leafIndex++;
   });
 
-  let result = [];
   let p = []
 
   const {childrens} = this;
-  const left = childrens[leafIndex];
-  if(left){
-    p.push(left.find(key));
+  if(childrens.length===0){
+    if(this.identifiers[leafIndex]){
+      result.identifiers.push(this.identifiers[leafIndex])
+      result.keys.push(this.keys[leafIndex])
+    }
+  }else{
+    const left = childrens[leafIndex];
+    if(left){
+      p.push(left.find(value));
+    }
+    // We also check the leaf nearby
+    if(childrens.length>leafIndex+1){
+      const right = childrens[leafIndex+1];
+      p.push(right.find(value));
+    }
+    await Promise.all(p).then((res)=>{
+      if(res.length>0){
+        res.forEach((_pRes)=>{
+          result.identifiers.push(..._pRes.identifiers);
+          result.keys.push(..._pRes.keys);
+        })
+      }
+    });
   }
-
-  // We also check the leaf nearby
-  if(childrens.length>leafIndex+1){
-    const right = childrens[leafIndex+1];
-    p.push(right.find(key));
-  }
-
-  await Promise.all(p).then((res)=>{
-    res.forEach((_pRes)=>{
-
-      result = result.concat(_pRes);
-    })
-  });
   return result;
+
 };

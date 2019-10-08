@@ -1,10 +1,10 @@
-async function get(id) {
-  if (!id) throw new Error('Expected an objectid')
+async function get(identifier) {
+  if (!identifier) throw new Error('Expected an objectid')
 
   let document = {
-    _id: id
+    _id: identifier
   };
-  const res = await this.adapter.getDocument(id);
+  const res = await this.adapter.getDocument(identifier);
 
   return res || false;
 

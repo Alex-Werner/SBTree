@@ -1,13 +1,20 @@
 const {each}=require('lodash');
 function loadState(state){
 
-  this.options = state.options;
+  this.order = state.order;
+  this.fillFactor = state.fillFactor;
+  this.verbose = state.verbose;
+
+  this.id = state.id;
+
   this.size = state.size;
 
-  each(state.fieldTrees,(fieldRoot, field)=>{
-    this.setFieldTree(field, fieldRoot);
-  })
+  this.uniques = state.uniques;
+  this.exclude = state.exclude;
 
+  each(state.fieldTrees,(fieldRoot, _fieldName)=>{
+    this.setFieldTree({fieldName:_fieldName, root:fieldRoot});
+  })
   return true;
 };
 module.exports = loadState;

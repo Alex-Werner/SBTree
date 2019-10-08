@@ -4,7 +4,7 @@
   "description": "Optimised document store using B+ Tree for fields. Adapters support for In-Memory and FileSystem",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test/ --recursive",
+    "test": "mocha test/ --recursive ",
     "benchmark": "mocha test/z_benchmark --recursive"
   },
   "engines": {

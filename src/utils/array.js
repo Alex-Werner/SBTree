@@ -21,6 +21,11 @@ const array = {
     }
     arr.splice(index, 0, item);
     return index;
+  },
+  forEach: async function(array, eachFn) {
+      for (let index = 0; index < array.length; index++) {
+        await eachFn(array[index], index, array)
+      }
   }
 };
 module.exports = array;

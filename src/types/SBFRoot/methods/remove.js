@@ -1,15 +1,18 @@
+async function remove(remCmd){
+  const value = remCmd.query[this.fieldName];
 
-async function remove(key){
   let leafIndex = 0;
   this.keys.forEach((_key)=>{
-    if(key<=_key) return;
+    if(value<_key) return;
     leafIndex++;
   });
 
   const leaf = this.childrens[leafIndex];
+  await leaf.remove(remCmd);
 
-  // Attention,
-  throw new Error('Not implemented')
-  await leaf.remove(key);
+  // This has been added for the case where previous also contains the same value
+  if(this.childrens[leafIndex-1]){
+    await this.childrens[leafIndex-1].remove(remCmd);
+  }
 };
 module.exports = remove;

@@ -1,11 +1,26 @@
-const {each}=require('lodash');
-function toJSON(){
-  const {size, options, uniques, exclude}=this;
-  const fieldTrees = {};
-  each(this.fieldTrees,(fieldTree, name)=>{
-    fieldTrees[name] = fieldTree.root
-  })
+function toJSON() {
+  const {
+    order,
+    fillFactor,
+    verbose,
+    id,
+    fieldTrees,
+    uniques,
+    exclude,
+    size,
+    adapter
+  } = this;
 
-  return JSON.parse(JSON.stringify({size, options, fieldTrees, uniques, exclude}));
+  return JSON.parse(JSON.stringify({
+    order,
+    fillFactor,
+    verbose,
+    id,
+    fieldTrees,
+    uniques,
+    exclude,
+    size,
+    adapter
+  }));
 };
 module.exports = toJSON;

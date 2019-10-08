@@ -1,6 +1,6 @@
 const {difference} = require('lodash');
 async function findLowerThan(key, includeKey=false){
-  let result = [];
+  let result = {identifiers:[],keys:[]};
 
   // We first see where our key is located;
   let leafIndex = 0;
@@ -15,10 +15,8 @@ async function findLowerThan(key, includeKey=false){
   // All smaller leaf that our leafIndex needs to be included
   if(leafIndex>=1){
     this.childrens.slice(0, leafIndex).forEach((child)=>{
-      p.push(child.findAll());
+      p.push(child.getAll());
     });
-
-
   }
 
   // Finally, we lookup for all lower than matches in the actual leaf where we had our el.
@@ -30,7 +28,8 @@ async function findLowerThan(key, includeKey=false){
 
   await Promise.all(p).then((res)=>{
     res.forEach((p)=>{
-      result = result.concat(p);
+      result.identifiers.push(...p.identifiers);
+      result.keys.push(...p.keys);
     })
   });
 

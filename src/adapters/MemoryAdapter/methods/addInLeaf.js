@@ -1,6 +1,6 @@
 const {insertSorted} = require('../../../utils/array');
 
-async function addInLeaf(leafName, field, identifier, key){
+async function addInLeaf(leafName, identifier, value){
   if(!this.leafs[leafName]){
     await this.createLeaf(leafName);
   }
@@ -9,13 +9,12 @@ async function addInLeaf(leafName, field, identifier, key){
     return false;
   }
 
-  const index = insertSorted(this.leafs[leafName].data.keys, key);
+  const index = insertSorted(this.leafs[leafName].data.keys, value);
 
   // if(!this.documents[identifier]){
   //   this.documents[identifier] = {_id: identifier}
   // }
   // this.documents[identifier][field] = key;
-
   this.leafs[leafName].meta.size +=1;
   this.leafs[leafName].meta.identifiers.splice(index, 0, identifier);
 }
