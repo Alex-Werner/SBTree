@@ -1,8 +1,9 @@
 const EventEmitter = require('events');
 const {MemoryAdapter, FsAdapter} = require('../../adapters');
 const {generateTreeId} = require('../../utils/crypto');
+const {waitFor} = require('../../utils/fn');
 const {each}=require('lodash');
-const SBFTree = require('../SBFTree/SBFTree');
+// const SBFTree = require('../SBFTree/SBFTree');
 
 const Adapters = {MemoryAdapter, FsAdapter};
 const parseAdapter = (_adapterOpts) =>{
@@ -11,13 +12,7 @@ const parseAdapter = (_adapterOpts) =>{
   }
   return new Adapters[_adapterOpts.name](_adapterOpts)
 }
-const parseFieldTrees = (_fieldTrees)=>{
-  const fieldTrees = {};
-  each(_fieldTrees, (_fieldTree, _fieldTreeName)=>{
-    fieldTrees[_fieldTreeName] = new SBFTree(_fieldTree);
-  })
-  return fieldTrees;
-};
+
 /**
  * SBTree
  *
@@ -26,6 +21,7 @@ class SBTree extends EventEmitter {
   #emitter = new EventEmitter();
   constructor(props = {}) {
     super();
+    const self = this;
     Object.assign(SBTree.prototype, {
       setFieldTree: require('./methods/setFieldTree')
     });
@@ -40,6 +36,13 @@ class SBTree extends EventEmitter {
       uniques:[],
     };
     this.adapter = (props.adapter) ? parseAdapter(props.adapter) : new MemoryAdapter();
+    this.isReady = true;
+
+    if(this.adapter.name !== 'MemoryAdapter'){
+      // We will need to sync up first
+      this.isReady = false;
+      waitFor(self.adapter,'isReady', ()=> self.isReady = true);
+    }
 
     this.order= (props.order) ? props.order : defaultProps.order;
     this.fillFactor= (props.fillFactor) ? props.fillFactor : defaultProps.fillFactor;

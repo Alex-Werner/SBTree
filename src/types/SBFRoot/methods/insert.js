@@ -1,7 +1,9 @@
 const SBFLeaf = require('../../SBFLeaf/SBFLeaf');
 
 async function insert(identifier, value = null){
+
   if(this.childrens.length===0){
+
     // if(this.keys.length===0){
       const idx = await this.insertReferenceKey(value)
       this.identifiers.splice(idx, 0, identifier);
@@ -19,9 +21,11 @@ async function insert(identifier, value = null){
     });
     const leaf = this.childrens[leafIndex];
     await leaf.insert(identifier, value);
+
   }
 
   if(this.isFull()){
+
     await this.split();
   }
 

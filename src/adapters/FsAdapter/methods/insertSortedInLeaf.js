@@ -1,12 +1,12 @@
 const {insertSorted} = require('../../../utils/array')
-module.exports = async function insertSortedInLeaf(leafName, value){
-  const data = await this.openLeafData(leafName);
+module.exports = async function insertSortedInLeaf(leafId, value){
+  const data = await this.openLeafData(leafId);
   if(!data || !data.keys){
-    console.error(`Leafname ${leafName} was not present, had to recreate`)
-    await this.createLeaf(leafName);
-    return this.insertSortedInLeaf(leafName, value)
+    console.error(`leafId ${leafId} was not present, had to recreate`)
+    await this.createLeaf(leafId);
+    return this.insertSortedInLeaf(leafId, value)
   }
   const index = insertSorted(data.keys,value);
-  await this.saveLeafData(leafName, data)
+  await this.saveLeafData(leafId, data)
   return index;
 }

@@ -6,7 +6,7 @@ function toJSON() {
     id,
     fieldTrees,
     uniques,
-    excludes,
+    exclude,
     size,
     adapter
   } = this;
@@ -18,7 +18,7 @@ function toJSON() {
     id,
     fieldTrees,
     uniques,
-    excludes,
+    exclude,
     size,
     adapter
   }));

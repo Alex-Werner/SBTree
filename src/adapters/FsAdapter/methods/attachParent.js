@@ -1,8 +1,8 @@
 const autosave = require('./ops/autosave')
 async function attachParent(parent) {
-  this.parent = parent;
+  this.setParent(parent);
 
-  if (this.options.autoLoad) {
+  if (this.autoLoad) {
     try{
       await this.loadDatabase()
       if (this.autoLoadCallback && typeof this.autoLoadCallback === 'function') {
@@ -13,7 +13,7 @@ async function attachParent(parent) {
       process.exit(1);
     }
   };
-  if (this.options.autoSave === true) {
+  if (this.autoSave === true) {
     autosave(this);
   }
   this.emit('ready');

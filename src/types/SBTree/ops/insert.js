@@ -1,6 +1,9 @@
 const {map} = require('lodash')
 
 async function insert(document) {
+  if(!document){
+    throw new Error('Cannot insert empty document');
+  }
   if (!document._id) {
     throw new Error('Expecting all document to have an _id');
   }

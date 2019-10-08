@@ -1,8 +1,25 @@
 const {insertSorted} = require('../../utils/array');
 const {comparatorString, comparatorNum} = require('../../utils/comparators')
 const {generateRootId} = require('../../utils/crypto');
+const {each}=require('lodash');
+const SBFLeaf = require('../SBFLeaf/SBFLeaf');
+const SBFNode = require('../SBFNode/SBFNode');
 
+const parseChildrens = (_childrens, _parent)=>{
+  const childrens = [];
 
+  each(_childrens, (_children)=>{
+    const fieldName = _children.fieldName;
+
+      if(_children.type==='leaf'){
+        childrens.push(new SBFLeaf({fieldName,parent:_parent,..._children}))
+      }
+      else if(_children.type==='node'){
+        childrens.push(new SBFNode({fieldName,parent:_parent,..._children}))
+      }
+  })
+  return childrens;
+};
 /**
  * SBFRoot
  *
@@ -23,7 +40,7 @@ class SBFRoot {
     // Used when SBFRoot holds value (when size = 0)
     this.identifiers = (props.identifiers) ? props.identifiers : [];
 
-    this.childrens = (props.childrens) ? props.childrens : [];
+    this.childrens = (props.childrens) ? parseChildrens(props.childrens, this) : [];
 
     this.type = 'root';
   }

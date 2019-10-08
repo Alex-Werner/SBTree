@@ -5,7 +5,7 @@ module.exports = async function autosave(self){
     }
     setTimeout(async ()=>{
       await next(self);
-    }, self.options.autoSaveInterval)
+    }, self.autoSaveInterval)
   }
   await next(self);
 }

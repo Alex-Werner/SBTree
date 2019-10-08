@@ -5,6 +5,7 @@ const {generateFieldTreeId} = require('../../utils/crypto');
  *
  */
 class SBFTree {
+  #adapter
   constructor(props={}){
     const defaultOpts = {
       order: 511,
@@ -35,8 +36,13 @@ class SBFTree {
     if(!props.adapter){
       throw new Error(`SBFTree expect an adapter to be initialized`);
     }
-    this.adapter = props.adapter;
+    this.#adapter = props.adapter;
   }
+
+  getAdapter(){
+    return this.#adapter;
+  }
+
   getOptions(){
     const {order, fillFactor, verbose}= this;
     return {
@@ -47,7 +53,6 @@ class SBFTree {
 
 SBFTree.prototype.find = require('./methods/find');
 SBFTree.prototype.get = require('./methods/get');
-SBFTree.prototype.getAdapter = require('./methods/getAdapter');
 SBFTree.prototype.insert = require('./methods/insert');
 SBFTree.prototype.remove = require('./methods/remove');
 module.exports = SBFTree;

@@ -1,10 +1,10 @@
-module.exports = async function getAllInLeaf(leafName){
+module.exports = async function getAllInLeaf(leafId){
 
-  let {keys} = await this.openLeafData(leafName);
+  let {keys} = await this.openLeafData(leafId);
   if(!keys){
-    console.error(`Leafname ${leafName} was not present, had to recreate`)
-    await this.createLeaf(leafName);
-    return this.getAllInLeaf(leafName);
+    console.error(`leafId ${leafId} was not present, had to recreate`)
+    await this.createLeaf(leafId);
+    return this.getAllInLeaf(leafId);
   }
-  return JSON.parse(JSON.stringify(this.leafs[leafName].meta.identifiers));
+  return JSON.parse(JSON.stringify({identifiers:this.leafs[leafId].meta.identifiers, keys:keys}));
 }

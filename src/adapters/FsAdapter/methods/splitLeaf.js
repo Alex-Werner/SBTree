@@ -1,15 +1,15 @@
 module.exports = async function splitLeaf(sourceLeaf, siblingLeaf) {
-  if (!this.leafs[sourceLeaf.name]) {
+  if (!this.leafs[sourceLeaf.id]) {
     throw new Error(`Source leaf do not exist`)
   }
-  const source = this.leafs[sourceLeaf.name];
-  const leaf = this.leafs[siblingLeaf.name];
-  if (!this.leafs[siblingLeaf.name]) {
+  const source = this.leafs[sourceLeaf.id];
+  const leaf = this.leafs[siblingLeaf.id];
+  if (!this.leafs[siblingLeaf.id]) {
     throw new Error(`Sibbling leaf do not exist`);
   }
 
-  const sibling = await this.openLeafData(siblingLeaf.name);
-  const leafData = await this.openLeafData(sourceLeaf.name);
+  const sibling = await this.openLeafData(siblingLeaf.id);
+  const leafData = await this.openLeafData(sourceLeaf.id);
 
   const midIndex = ~~(leafData.keys.length / 2);
   const rightKeys = leafData.keys.splice(midIndex);
@@ -23,7 +23,7 @@ module.exports = async function splitLeaf(sourceLeaf, siblingLeaf) {
   leaf.meta.identifiers = rightIdentifiers;
   source.meta.size = source.meta.identifiers.length
 
-  await this.saveLeafData(sourceLeaf.name, leafData);
-  await this.saveLeafData(siblingLeaf.name, sibling);
+  await this.saveLeafData(sourceLeaf.id, leafData);
+  await this.saveLeafData(siblingLeaf.id, sibling);
   return midKey;
 }

@@ -6,8 +6,6 @@ async function split() {
   const rightKeys = this.keys.splice(midIndex);
   const leftKeys = this.keys.splice(0);
 
-
-
   if(this.childrens.length>0)
   {
     const midKey = rightKeys.splice(0, 1)[0];
@@ -23,8 +21,6 @@ async function split() {
       child.setParent(right);
     })
 
-
-
     const left = new SBFNode({fieldName: this.fieldName, parent: this});
     left.keys = leftKeys;
     left.childrens = leftChildrens;
@@ -34,6 +30,7 @@ async function split() {
 
     this.keys.push(midKey);
     this.childrens = [left, right];
+
   }else{
     const midKey = rightKeys.slice(0)[0];
 
@@ -41,16 +38,24 @@ async function split() {
     const leftIdentifiers = this.identifiers.splice(0);
 
     const right = new SBFLeaf({parent: this});
+    //FIXME
+    await this.getAdapter().createLeaf(right.id);
+
     await forEach(rightKeys, async (key,i)=>{
       await right.insert(rightIdentifiers[i], key);
     })
 
+    //FIXME
     const left = new SBFLeaf({parent: this});
+    await this.getAdapter().createLeaf(left.id);
+
     await forEach(leftKeys, async (key,i)=>{
       await left.insert(leftIdentifiers[i], key);
     })
 
+
     this.keys.push(midKey);
+
     this.childrens = [left, right];
   }
 
