@@ -16,6 +16,7 @@ class MemoryAdapter {
     this.name = "MemoryAdapter";
     this.leafs = (props.leafs) ? parseLeafs(props.leafs) : {};
     this.documents = (props.documents) ? props.documents : {};
+    this.isReady = true;
   }
 };
 MemoryAdapter.prototype.addInLeaf = require('./methods/addInLeaf')

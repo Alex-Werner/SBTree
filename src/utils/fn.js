@@ -1,16 +1,21 @@
 const waitFor = async (watchedObject, watchedProp, successCallback) => {
-  let int = null;
-  return new Promise(async (resolve, reject) => {
+  return new Promise( (resolve, reject) => {
+    let int = null;
     const resolver = () => {
+      console.log('exec')
+
       if (watchedObject[watchedProp]) {
         if(successCallback){
           successCallback();
         }
-        clearInterval(int);
+        console.log('clear')
+        int = clearInterval(int);
         return resolve(true)
       }
     };
-    int = setInterval(resolver, 100)
+    console.log('set')
+    int = setInterval(resolver, 20)
+    setTimeout(resolver, 10000);
   });
 };
 module.exports = {waitFor};

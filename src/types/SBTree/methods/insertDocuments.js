@@ -6,8 +6,9 @@ const {waitFor} = require('../../../utils/fn');
 async function insertDocuments(documents) {
   // This will wait for SBTree to have isReady = true.
   // When so, it will then perform the insertion.
-
-  await waitFor(this, 'isReady');
+  if(!this.isReady){
+    await waitFor(this, 'isReady');
+  }
 
   if (Array.isArray(documents)) {
     for (const document of documents) {

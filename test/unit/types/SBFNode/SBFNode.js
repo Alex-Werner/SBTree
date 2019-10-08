@@ -10,7 +10,8 @@ const fakeTree = {
   adapter,
   getOptions: () =>{
     return {order:fakeTree.order, fillFactor:fakeTree.fillFactor}
-  }
+  },
+  getAdapter:()=> adapter
 }
 const fakeParent = {
   fieldName: 'firstname',

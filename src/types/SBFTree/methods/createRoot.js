@@ -6,8 +6,9 @@ module.exports = function createRoot(root = null){
     throw new Error("Already existing root.");
   }
   if(root){
-    root.root.tree = this;
-    this.root = new SBFRoot(root.root);
+    let _root = (root.root) ? root.root : root;
+    _root.tree = this;
+    this.root = new SBFRoot(_root);
   }else{
     const {fieldName} = this;
     let keys = (root && root.keys) ? root.keys : null;
