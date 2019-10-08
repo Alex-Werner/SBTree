@@ -1,5 +1,5 @@
 module.exports = async function openDocument(identifer) {
-  const job = await this.queue.add('File.read', `${this.options.path}/d/${identifer}.dat`);
+  const job = await this.queue.add('File.read', `${this.path}/d/${identifer}.dat`);
   await job.execution();
   let data = {}
   if (job.results.constructor.name !== Error.name) {
