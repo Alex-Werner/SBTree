@@ -28,8 +28,10 @@ module.exports = async function findEquals(value){
     await Promise.all(p).then((res)=>{
       if(res.length>0){
         res.forEach((_pRes)=>{
-          result.identifiers.push(..._pRes.identifiers);
-          result.keys.push(..._pRes.keys);
+          if(_pRes.identifiers){
+            result.identifiers.push(..._pRes.identifiers);
+            result.keys.push(..._pRes.keys);
+          }
         })
       }
     });
