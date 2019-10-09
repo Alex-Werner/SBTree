@@ -1,3 +1,5 @@
+const {clone} = require('lodash');
+
 module.exports = async function getRightInLeaf(leafId){
   const leaf = this.leafs[leafId];
 
@@ -5,5 +7,5 @@ module.exports = async function getRightInLeaf(leafId){
   const identifier = leaf.meta.identifiers[len-1];
   const key = leaf.data.keys[len-1];
 
-  return JSON.parse(JSON.stringify({identifier, key }))
+  return clone({identifier, key })
 }

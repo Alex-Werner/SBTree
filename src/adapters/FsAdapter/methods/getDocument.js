@@ -1,3 +1,4 @@
-module.exports = async function getDocument(identifier){
-  return JSON.parse(JSON.stringify(await this.openDocument(identifier)));
+const {clone} = require('lodash');
+module.exports = async function getDocument(identifier) {
+  return clone(await this.openDocument(identifier));
 }
