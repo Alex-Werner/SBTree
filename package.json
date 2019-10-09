@@ -1,6 +1,6 @@
 {
   "name": "sbtree",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Optimised document store using B+ Tree for fields. Adapters support for In-Memory and FileSystem",
   "main": "index.js",
   "scripts": {

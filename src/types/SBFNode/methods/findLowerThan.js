@@ -15,7 +15,7 @@ async function findLowerThan(value, includeKey = false) {
 
     // We first look up all smaller value
     childrens.slice(0, leafIndex).forEach((child) => {
-      p.push(child.findAll())
+      p.push(child.getAll())
     });
 
     // And then we lookup in our children

@@ -1,12 +1,19 @@
 async function remove(remCmd){
   const value = remCmd.query[this.fieldName];
-  const {keys, childrens} = this;
+  const {identifiers, keys, childrens} = this;
   let leafIndex = 0;
   keys.forEach((_key)=>{
     if(value<_key) return;
     leafIndex++;
   });
 
+  if(!childrens.length){
+    const item = this.keys[leafIndex-1]
+    if(item){
+      keys.splice(leafIndex-1,1)
+      identifiers.splice(leafIndex-1,1)
+    }
+  }
   const leaf = childrens[leafIndex];
   if(leaf){
     await leaf.remove(remCmd);

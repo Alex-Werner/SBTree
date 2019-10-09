@@ -10,10 +10,15 @@ module.exports = async function findEquals(value){
 
   let p = []
 
+
   if(childrens.length===0){
     if(identifiers[leafIndex]){
-      result.identifiers.push(identifiers[leafIndex])
-      result.keys.push(keys[leafIndex])
+      keys.slice(leafIndex).forEach((_key, i)=>{
+        if(_key === value){
+          result.identifiers.push(identifiers[leafIndex+i])
+          result.keys.push(_key)
+        }
+      })
     }
   }else{
     const left = childrens[leafIndex];
