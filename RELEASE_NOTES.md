@@ -1,10 +1,17 @@
-## 2.0.1 (2019-10-08)
+## 2.1.0 (2019-10-08)
+https://github.com/Alex-Werner/SBTree/pull/6
 
-- https://github.com/Alex-Werner/SBTree/pull/5
+- feat: added basic nested object support
+
+## 2.0.1 (2019-10-08)
+https://github.com/Alex-Werner/SBTree/pull/5
+
+- fix: FsAdapter support for 2.0.0
 
 ## 2.0.0 (2019-10-08)
+https://github.com/Alex-Werner/SBTree/pull/4
 
-- https://github.com/Alex-Werner/SBTree/pull/4
+- feat: added remove documents supports
 
 ## 1.3.0 (2019-09-)
 ## 1.2.1 (2019-09-07)
