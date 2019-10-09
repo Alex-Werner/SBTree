@@ -4,18 +4,20 @@ async function addInLeaf(leafName, identifier, value){
   if(!this.leafs[leafName]){
     await this.createLeaf(leafName);
   }
-  if(this.leafs[leafName].meta.identifiers.includes(identifier)){
+  const {meta, data} = this.leafs[leafName];
+
+  if(meta.identifiers.includes(identifier)){
     //TODO : except unique:false?
     return false;
   }
 
-  const index = insertSorted(this.leafs[leafName].data.keys, value);
+  const index = insertSorted(data.keys, value);
 
   // if(!this.documents[identifier]){
   //   this.documents[identifier] = {_id: identifier}
   // }
   // this.documents[identifier][field] = key;
-  this.leafs[leafName].meta.size +=1;
-  this.leafs[leafName].meta.identifiers.splice(index, 0, identifier);
+  meta.size +=1;
+  meta.identifiers.splice(index, 0, identifier);
 }
 module.exports = addInLeaf;

@@ -36,7 +36,8 @@ async function query(query) {
     }
 
     // We try to look up the easy cases, strict equality
-    if (['string', 'number'].includes(typeof queryFieldValue)) {
+    const queryFieldType = typeof queryFieldValue
+    if (['string', 'number'].includes(queryFieldType)) {
 
       let operator = '$eq';
       const value = await fieldTree.find(queryFieldValue, operator);
@@ -49,7 +50,7 @@ async function query(query) {
       }
     } else {
       if (Array.isArray(queryFieldValue)) throw new Error(`Not supported array input. Please open a Github issue to specify your need.`);
-      if (typeof queryFieldValue === "object" && !Array.isArray(queryFieldValue)) {
+      if (queryFieldType === "object" && !Array.isArray(queryFieldValue)) {
         const operators = Object.keys(queryFieldValue).filter((el) => el[0] === '$');
 
         // TODO : Move to Promise.all. Expect changes, no point to not parallel the calls. We use this for now.
