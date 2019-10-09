@@ -14,10 +14,15 @@ async function findLowerThan(key, includeKey = false) {
 
   if(childrens.length===0){
     if(identifiers[leafIndex]){
-      keys.forEach((_key)=>{
-        if(_key<key){
-          result.identifiers.push(identifiers[leafIndex])
-          result.keys.push(keys[leafIndex])
+      const last = keys.lastIndexOf(key);
+
+      keys.slice(0, last+1 || leafIndex+1).forEach((_key, i)=>{
+        if(_key<=key){
+          if(_key === key && !includeKey){
+            return;
+          }
+          result.identifiers.push(identifiers[i])
+          result.keys.push(keys[i])
         }
       })
     }
@@ -43,8 +48,8 @@ async function findLowerThan(key, includeKey = false) {
       })
     });
 
-    return result;
   }
+  return result;
 
 };
 module.exports = findLowerThan;

@@ -14,10 +14,13 @@ async function findGreaterThan(key, includeKey=false){
 
   if(childrens.length===0){
     if(identifiers[leafIndex]){
-      keys.forEach((_key)=>{
-        if(_key>key){
-          result.identifiers.push(identifiers[leafIndex])
-          result.keys.push(keys[leafIndex])
+      keys.slice(leafIndex).forEach((_key, i)=>{
+        if(_key>=key){
+          if(_key === key && !includeKey){
+            return;
+          }
+          result.identifiers.push(identifiers[leafIndex+i])
+          result.keys.push(_key)
         }
       })
     }
@@ -46,8 +49,9 @@ async function findGreaterThan(key, includeKey=false){
         result.keys.push(...p.keys);
       })
     });
-    return result;
   }
+
+  return result;
 
 };
 module.exports = findGreaterThan;

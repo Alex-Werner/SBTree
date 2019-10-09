@@ -1,6 +1,6 @@
-const getStrictMatchingKeys = require('./ops/getStrictMatchingKeys');
 const lowerThanKeys = require('./ops/lowerThanKeys');
 const greaterThanKeys = require('./ops/greaterThanKeys');
+const {range}=require('lodash');
 module.exports = async function findInLeaf(leafId, value, op = '$eq') {
   const leaf = this.leafs[leafId];
 
@@ -13,19 +13,21 @@ module.exports = async function findInLeaf(leafId, value, op = '$eq') {
   };
   const {keys} = leaf.data;
   const {identifiers} = leaf.meta;
-  const strictMatchingKeys = getStrictMatchingKeys(keys, value);
-  const strictMatchingKeysLen = strictMatchingKeys.length;
+
+  const firstIdx = keys.indexOf(value);
+  const lastIdx = keys.lastIndexOf(value);
+
+  const strictMatchingKeysLen = (firstIdx>-1) ? 1+(lastIdx-firstIdx) : 0;
   switch (op) {
     case "$eq":
-      if (!strictMatchingKeys.length) {
+      if (!strictMatchingKeysLen) {
         return result;
       }
-      const start = strictMatchingKeys[0];
-      const end = strictMatchingKeys[0] + strictMatchingKeysLen;
+      // const start = strictMatchingKeys[0];
+      // const end = strictMatchingKeys[0] + strictMatchingKeysLen;
 
-      result.identifiers.push(...identifiers.slice(start, end));
-      result.keys.push(...keys.slice(start, end));
-
+      result.identifiers.push(...identifiers.slice(firstIdx, lastIdx+1));
+      result.keys.push(...keys.slice(firstIdx, lastIdx+1));
       return result;
       // return this.leafs[leafId].meta.identifiers.slice(start, end);
       break;
@@ -41,7 +43,7 @@ module.exports = async function findInLeaf(leafId, value, op = '$eq') {
       // return resLte;
       return result;
     case "$lt":
-      if (strictMatchingKeysLen) {
+      if (firstIdx>-1) {
         const localIndex = keys.indexOf(value);
         if (localIndex !== 0) {
           result.identifiers.push(...identifiers.slice(0, localIndex));
@@ -56,7 +58,7 @@ module.exports = async function findInLeaf(leafId, value, op = '$eq') {
       }
       return result;
     case "$gt":
-      if (strictMatchingKeysLen) {
+      if (firstIdx>-1) {
         const localIndex = keys.indexOf(value);
         if (localIndex !== -1) {
           result.identifiers.push(...identifiers.slice(localIndex + strictMatchingKeysLen));

@@ -13,10 +13,10 @@ module.exports = async function findEquals(value){
 
   if(childrens.length===0){
     if(identifiers[leafIndex]){
-      keys.forEach((_key)=>{
-        if(_key===value){
-          result.identifiers.push(identifiers[leafIndex])
-          result.keys.push(keys[leafIndex])
+      keys.slice(leafIndex).forEach((_key, i)=>{
+        if(_key === value){
+          result.identifiers.push(identifiers[leafIndex+i])
+          result.keys.push(_key)
         }
       })
     }

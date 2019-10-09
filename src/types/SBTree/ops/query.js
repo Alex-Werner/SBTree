@@ -10,69 +10,76 @@ async function resolveDocuments(self, objectIds) {
   }
   return documents;
 }
-const findIntersectingIdentifiers = (listOfFind)=>{
+
+const findIntersectingIdentifiers = (listOfListOfIdentifiers) => {
   const identifiers = [];
 
-  listOfFind.forEach((fieldRes)=>{
-    identifiers.push(...fieldRes.identifiers)
+  listOfListOfIdentifiers.forEach((listOfIdentifiers) => {
+    identifiers.push(listOfIdentifiers);
   })
-  return intersection(identifiers);
+  return intersection(...identifiers);
 }
 
 async function query(query) {
-  const self = this;
-  let listOfFieldLookup = [];
-  if(query===undefined) return [];
-  if (query._id && Object.keys(query).length === 1) {
-    const {_id} = query;
-    return [await get.call(this, _id)]
+  const fields = Object.keys(query);
+  const fieldsResults = {};
+  const result = [];
+
+  // When our search is based on _id and only _id, we can just get document.
+  if (fields.length === 1 && fields.indexOf('_id') > -1) {
+    return [await get.call(this, query._id)]
   }
-  for (const queryFieldName in query) {
-    let fieldLookup = []
+
+  const promises = [];
+  fields.forEach((queryFieldName) => {
     const queryFieldValue = query[queryFieldName];
     const fieldTree = this.getFieldTree(queryFieldName);
     if (!fieldTree) {
-      continue;
+      return;
     }
+    const queryFieldType = typeof queryFieldValue;
+    switch (queryFieldType) {
+      case "number":
+      case "string":
+        promises.push(fieldTree.find(queryFieldValue, '$eq'));
+        break;
+      case "object":
+        if (Array.isArray(queryFieldValue)) {
+          throw new Error(`Not supported array input. Please open a Github issue to specify your need.`);
+        } else {
+          const operators = Object.keys(queryFieldValue).filter((el) => el[0] === '$');
 
-    // We try to look up the easy cases, strict equality
-    const queryFieldType = typeof queryFieldValue
-    if (['string', 'number'].includes(queryFieldType)) {
-
-      let operator = '$eq';
-      const value = await fieldTree.find(queryFieldValue, operator);
-
-      if (value) {
-        value.fieldName = queryFieldName;
-        fieldLookup = fieldLookup.concat(value)
-      } else {
-        throw new Error(`No value ${queryFieldName} found : ${value}, query(${JSON.stringify(query)})`)
-      }
-    } else {
-      if (Array.isArray(queryFieldValue)) throw new Error(`Not supported array input. Please open a Github issue to specify your need.`);
-      if (queryFieldType === "object" && !Array.isArray(queryFieldValue)) {
-        const operators = Object.keys(queryFieldValue).filter((el) => el[0] === '$');
-
-        // TODO : Move to Promise.all. Expect changes, no point to not parallel the calls. We use this for now.
-        let p = [];
-        for (let operator of operators) {
-          p.push(fieldTree.find(queryFieldValue[operator], operator));
-        }
-
-        await Promise.all(p).then((value)=>{
-          if (value) {
-            value.fieldName = queryFieldName;
-            fieldLookup = fieldLookup.concat(value)
-          } else {
-            throw new Error(`No value ${queryFieldName} found : ${value}, query(${JSON.stringify(query)})`)
+          if (operators.length === 0) {
+            throw new Error(`Not supported object query with no operator. Please open a Github issue to specify your need.`);
           }
-        });
-      }
+          for(const operator of operators){
+            promises.push(fieldTree.find(queryFieldValue[operator], operator));
+          }
+        }
+        break;
+      default:
+        throw new Error(`Not supported type : ${queryFieldType}`);
     }
+  });
 
-    listOfFieldLookup = listOfFieldLookup.concat(fieldLookup);
-  }
-  const matchingObjectIds = findIntersectingIdentifiers(listOfFieldLookup);
-  return resolveDocuments(self, matchingObjectIds);
-};
+  let intermediateIdentifiers = [];
+  await Promise
+      .all(promises)
+      .then((pResults) => {
+        for(const pResult of pResults){
+          // Whenever we sees that, we can quickly answer an empty response, as [] intersect with nothing.
+          if(pResult.identifiers.length === 0){
+            // We remove any previous findings
+            intermediateIdentifiers = [];
+            break;
+          }
+          intermediateIdentifiers.push(pResult.identifiers);
+        }
+      });
+
+  const matchingObjectIds = findIntersectingIdentifiers(intermediateIdentifiers);
+  return resolveDocuments(this, matchingObjectIds);
+  return result;
+}
+
 module.exports = query;
