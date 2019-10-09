@@ -11,15 +11,22 @@ async function insert(document) {
   const id = document._id.toString();
 
   for (const _fieldName in document) {
-    const _fieldValue = document[_fieldName]
-    if (_fieldName !== '_id') {
-      if (!this.getFieldTree(_fieldName)) {
-        this.setFieldTree({fieldName:_fieldName});
+    const _fieldValue = document[_fieldName];
+
+    const _fieldType = typeof _fieldValue;
+
+    if (['string','number'].includes(_fieldType)) {
+      if(_fieldName !== '_id'){
+        if (!this.getFieldTree(_fieldName)) {
+          this.setFieldTree({fieldName:_fieldName});
+        }
+        const fieldTree = this.getFieldTree(_fieldName);
+        if(fieldTree){
+          await fieldTree.insert(id, _fieldValue);
+        }
       }
-      const fieldTree = this.getFieldTree(_fieldName);
-      if(fieldTree){
-        await fieldTree.insert(id, _fieldValue);
-      }
+    }else{
+      this.verbose && console.log(`No index for ${_fieldName} : Typeof ${_fieldType} : ${JSON.stringify(_fieldValue)}`)
     }
   }
   await this.adapter.saveDocument(document);
