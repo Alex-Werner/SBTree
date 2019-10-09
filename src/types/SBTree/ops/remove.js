@@ -1,6 +1,4 @@
-const {map} = require('lodash')
 const query = require('./query')
-const ascii = require('../../../utils/ascii');
 
 class RemoveCommand {
   constructor(res) {

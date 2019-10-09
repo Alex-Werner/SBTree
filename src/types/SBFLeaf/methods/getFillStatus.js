@@ -11,12 +11,12 @@ async function getFillStatus() {
 
   try {
     const leaf = await adapter.openLeaf(this.id);
-
+    const {size} = leaf.meta;
     return {
       fillFactor,
       order,
-      leafSize: leaf.meta.size,
-      fillFactorFilled: leaf.meta.size >= minKeys
+      leafSize: size,
+      fillFactorFilled: size >= minKeys
     };
   } catch (e) {
     if (e.message === 'Leaf do not exist') {

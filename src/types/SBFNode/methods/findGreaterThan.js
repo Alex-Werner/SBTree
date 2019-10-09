@@ -1,23 +1,24 @@
-async function findGreaterThan(value,includeKey=false) {
+async function findGreaterThan(value, includeKey = false) {
   let result = [];
+  const {childrens, keys} = this;
 
   let leafIndex = 0;
   let p = [];
   // It might be a bug that we have no keys, but in this case, we take first child
-  if(this.keys.length===0 && this.childrens.length===1){
-    p.push(this.childrens[0].findLowerThan(value, includeKey));
-  }else{
+  if (keys.length === 0 && childrens.length === 1) {
+    p.push(childrens[0].findLowerThan(value, includeKey));
+  } else {
     // Let's find our first match leaf
-    this.keys.forEach((_key) => {
+    keys.forEach((_key) => {
       if (value <= _key) return;
       leafIndex++;
     });
 
     // We lookup in our children
-    p.push(this.childrens[leafIndex].findGreaterThan(value, includeKey));
+    p.push(childrens[leafIndex].findGreaterThan(value, includeKey));
 
     // And all greater value
-    this.childrens.slice(leafIndex+1).forEach((child) => {
+    childrens.slice(leafIndex + 1).forEach((child) => {
       p.push(child.findAll())
     });
 
@@ -32,4 +33,5 @@ async function findGreaterThan(value,includeKey=false) {
   });
   return result;
 }
+
 module.exports = findGreaterThan

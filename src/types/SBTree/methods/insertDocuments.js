@@ -1,6 +1,5 @@
 const ObjectId = require('mongo-objectid');
 const insert = require('../ops/insert');
-const {map} = require('lodash');
 const {waitFor} = require('../../../utils/fn');
 const {clone}= require('lodash');
 

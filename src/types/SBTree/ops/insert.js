@@ -1,5 +1,3 @@
-const {map} = require('lodash')
-
 async function insert(document) {
   if(!document){
     throw new Error('Cannot insert empty document');

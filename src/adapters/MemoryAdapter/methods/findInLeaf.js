@@ -2,25 +2,26 @@ const getStrictMatchingKeys = require('./ops/getStrictMatchingKeys');
 const lowerThanKeys = require('./ops/lowerThanKeys');
 const greaterThanKeys = require('./ops/greaterThanKeys');
 module.exports = async function findInLeaf(leafId, value, op = '$eq') {
-  if (!this.leafs[leafId]) {
+  const leaf = this.leafs[leafId];
+
+  if (!leaf) {
     throw new Error(`Trying to search in non-existing leafId ${leafId}`);
   }
   const result = {
     identifiers: [],
     keys: []
   };
-
-
-  const {keys} = this.leafs[leafId].data;
-  const {identifiers} = this.leafs[leafId].meta;
+  const {keys} = leaf.data;
+  const {identifiers} = leaf.meta;
   const strictMatchingKeys = getStrictMatchingKeys(keys, value);
+  const strictMatchingKeysLen = strictMatchingKeys.length;
   switch (op) {
     case "$eq":
       if (!strictMatchingKeys.length) {
         return result;
       }
       const start = strictMatchingKeys[0];
-      const end = strictMatchingKeys[0] + strictMatchingKeys.length;
+      const end = strictMatchingKeys[0] + strictMatchingKeysLen;
 
       result.identifiers.push(...identifiers.slice(start, end));
       result.keys.push(...keys.slice(start, end));
@@ -40,7 +41,7 @@ module.exports = async function findInLeaf(leafId, value, op = '$eq') {
       // return resLte;
       return result;
     case "$lt":
-      if (strictMatchingKeys.length) {
+      if (strictMatchingKeysLen) {
         const localIndex = keys.indexOf(value);
         if (localIndex !== 0) {
           result.identifiers.push(...identifiers.slice(0, localIndex));
@@ -55,11 +56,11 @@ module.exports = async function findInLeaf(leafId, value, op = '$eq') {
       }
       return result;
     case "$gt":
-      if (strictMatchingKeys.length) {
-        const localIndex = this.leafs[leafId].data.keys.indexOf(value);
+      if (strictMatchingKeysLen) {
+        const localIndex = keys.indexOf(value);
         if (localIndex !== -1) {
-          result.identifiers.push(...identifiers.slice(localIndex + strictMatchingKeys.length));
-          result.keys.push(...keys.slice(localIndex + strictMatchingKeys.length));
+          result.identifiers.push(...identifiers.slice(localIndex + strictMatchingKeysLen));
+          result.keys.push(...keys.slice(localIndex + strictMatchingKeysLen));
         }
       } else {
         const gtKeys = greaterThanKeys(keys, value);

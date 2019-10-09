@@ -73,7 +73,6 @@ async function query(query) {
     listOfFieldLookup = listOfFieldLookup.concat(fieldLookup);
   }
   const matchingObjectIds = findIntersectingIdentifiers(listOfFieldLookup);
-  const documents = await resolveDocuments(self, matchingObjectIds);
-  return documents;
+  return resolveDocuments(self, matchingObjectIds);
 };
 module.exports = query;
