@@ -1,7 +1,6 @@
 async function saveDocument(doc){
-  const identifier = doc._id;
-  if(!this.documents[identifier]){
-    this.documents[identifier] = doc;
+  if(!this.documents[doc._id]){
+    this.documents[doc._id] = doc;
   }
 }
-module.exports = saveDocument
+module.exports = saveDocument;

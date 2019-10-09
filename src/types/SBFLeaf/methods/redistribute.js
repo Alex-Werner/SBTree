@@ -7,7 +7,6 @@
 async function redistribute(){
   // console.log('Leaf - redistribute')
   const parent = this.getParent();
-  const adapter = parent.getAdapter();
 
   const selfId = this.id;
   const selfPos = parent.childrens.findIndex((el)=> el.id === selfId);

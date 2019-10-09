@@ -10,8 +10,8 @@ const getFillStatus = async function(){
 
   try {
     const leaf = await adapter.openLeaf(this.id);
-
-    return {fillFactor, order, leafSize:leaf.meta.size, fillFactorFilled: leaf.meta.size>=minKeys};
+    const {size} = leaf.meta;
+    return {fillFactor, order, leafSize:size, fillFactorFilled: size>=minKeys};
   }catch (e) {
     if(e.message === 'Leaf do not exist'){
       await adapter.createLeaf(this.id);

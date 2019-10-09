@@ -8,7 +8,7 @@
 const mergeUp = async function(){
   // console.log('Node - Merge up')
   const parent = this.getParent();
-  const {childrens, keys, id}= this;
+  const {childrens, id}= this;
   // const
   const selfPos = parent.childrens.findIndex((el)=> el.id === id);
   if(childrens.length!==1){

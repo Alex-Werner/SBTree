@@ -1,6 +1,8 @@
 module.exports = async function insert(identifier, value){
-  if(!this.root){
+  let root = this.root;
+  if(!root){
     this.createRoot();
+     root = this.root;
   }
   if(this.isUnique){
     const get = await this.find(value, '$eq');
@@ -8,5 +10,5 @@ module.exports = async function insert(identifier, value){
       return false
     }
   }
-  await this.root.insert(identifier, value);
+  await root.insert(identifier, value);
 }

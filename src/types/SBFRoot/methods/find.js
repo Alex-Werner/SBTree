@@ -1,7 +1,7 @@
 const findEquals = require('./ops/findEquals');
 const findLowerThan = require('./ops/findLowerThan');
 const findGreaterThan = require('./ops/findGreaterThan');
-const {xor, difference, pullAll} = require('lodash');
+
 async function find(value, operator = '$eq'){
   const self = this;
   const p = [];

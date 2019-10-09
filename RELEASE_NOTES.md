@@ -1,7 +1,9 @@
 ## 2.1.0 (2019-10-08)
 https://github.com/Alex-Werner/SBTree/pull/6
+https://github.com/Alex-Werner/SBTree/pull/7
 
 - feat: added basic nested object support
+- impr: performance improvements
 
 ## 2.0.1 (2019-10-08)
 https://github.com/Alex-Werner/SBTree/pull/5

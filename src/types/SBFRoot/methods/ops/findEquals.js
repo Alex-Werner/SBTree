@@ -1,19 +1,19 @@
 module.exports = async function findEquals(value){
   let result = {identifiers:[], keys:[]};
+  const {childrens, identifiers, keys} = this;
 
   let leafIndex = 0;
-  this.keys.forEach((_key)=>{
+  keys.forEach((_key)=>{
     if(value<=_key) return;
     leafIndex++;
   });
 
   let p = []
 
-  const {childrens} = this;
   if(childrens.length===0){
-    if(this.identifiers[leafIndex]){
-      result.identifiers.push(this.identifiers[leafIndex])
-      result.keys.push(this.keys[leafIndex])
+    if(identifiers[leafIndex]){
+      result.identifiers.push(identifiers[leafIndex])
+      result.keys.push(keys[leafIndex])
     }
   }else{
     const left = childrens[leafIndex];

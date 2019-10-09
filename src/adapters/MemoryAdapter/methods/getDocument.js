@@ -1,7 +1,8 @@
-module.exports = async function getDocument(identifier){
+const {clone}= require('lodash');
+module.exports = async function getDocument(identifier) {
   const doc = this.documents[identifier];
-  if(doc){
-    return JSON.parse(JSON.stringify(this.documents[identifier]));
+  if (!doc) {
+    return {_id: identifier};
   }
-  return {_id:identifier};
+  return clone(doc);
 };

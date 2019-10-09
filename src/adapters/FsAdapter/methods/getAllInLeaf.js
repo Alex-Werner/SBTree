@@ -1,3 +1,5 @@
+const {clone} = require('lodash');
+
 module.exports = async function getAllInLeaf(leafId){
 
   let {keys} = await this.openLeafData(leafId);
@@ -6,5 +8,5 @@ module.exports = async function getAllInLeaf(leafId){
     await this.createLeaf(leafId);
     return this.getAllInLeaf(leafId);
   }
-  return JSON.parse(JSON.stringify({identifiers:this.leafs[leafId].meta.identifiers, keys:keys}));
+  return clone({identifiers:this.leafs[leafId].meta.identifiers, keys:keys});
 }
