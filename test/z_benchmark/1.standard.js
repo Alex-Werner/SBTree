@@ -68,7 +68,7 @@ describe('SBTree - Performance - Standard Benchmark within test ', async functio
         const len = findData.length;
         if (len > 0) {
           const rand = Math.floor(Math.random() * (findData.length - 1 + 1) + 0);
-          const query = {age: findData.splice(rand, 1)[0].age};
+          const query = findData.splice(rand, 1)[0];
           return tree.findDocuments(query)
         }
       }],
