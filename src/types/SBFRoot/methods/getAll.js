@@ -11,8 +11,17 @@ async function getAll() {
         .all(p)
         .then((res) => {
           res.forEach((resolvedP) => {
-            result.identifiers.push(...resolvedP.identifiers);
-            result.keys.push(...resolvedP.keys);
+            if(resolvedP.identifiers){
+              result.identifiers.push(...resolvedP.identifiers);
+              result.keys.push(...resolvedP.keys);
+            }else if(Array.isArray(resolvedP)){
+              resolvedP.forEach((item) => {
+                result.identifiers.push(...item.identifiers);
+                result.keys.push(...item.keys);
+              });
+            }else{
+              throw new Error(`Unexpected type of resolvedP - type : ${typeof resolvedP}`)
+            }
           });
           resolve(result);
         });

@@ -8,7 +8,9 @@ async function remove(remCmd){
   });
 
   const leaf = this.childrens[leafIndex];
-  await leaf.remove(remCmd);
+  if(leaf){
+    await leaf.remove(remCmd);
+  }
 };
 module.exports = remove;
 
