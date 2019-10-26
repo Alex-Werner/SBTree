@@ -7,7 +7,7 @@ const timer = new Timer();
 
 const start = async function () {
   timer.start();
-  console.log('-- Inserting...')
+
 
   await tree.insertDocuments({age:43, country:'United States', email:'bob@valjean.fr', _id:'5d6dc94e3c7734812f051d7b'});
   await tree.insertDocuments({age:21, country:'Russia',email:'julia@valjean.fr', _id:'5d6dc94e3c7734812f051d7c'});

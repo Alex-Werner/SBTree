@@ -9,7 +9,7 @@ async function remove(remCmd){
 
   if(!childrens.length){
     const item = this.keys[leafIndex-1]
-    if(item){
+    if(item!==undefined){
       keys.splice(leafIndex-1,1)
       identifiers.splice(leafIndex-1,1)
     }
