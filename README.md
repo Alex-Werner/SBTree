@@ -64,7 +64,14 @@ const start = async function () {
   const searchEq = await tree.findDocuments({age:28});
 
   // [ { _id: '507f1f77bcf86cd799439011', name: 'Alex', age: 28 } ]
-  const get = await tree.getDocument(doc._id);
+  const [alex] = await tree.getDocument(doc._id);
+  
+  // [ { _id: '...', name: 'Jean', age: 30 } ]
+  const deleteRes = await tree.deleteDocuments({age:30});
+
+  alex.age = 29;
+  const replaceRes = await tree.replaceDocuments(alex)
+
 }
 tree.on('ready', start);
 ```

@@ -1,7 +1,8 @@
 const {comparatorString, comparatorNum} = require('./comparators')
+const {validTypes} = require('../constants');
 const array = {
   insertSorted:(arr, item)=>{
-    if(!['number','string'].includes(typeof item )){
+    if(!validTypes.includes(typeof item )){
       throw new Error(`Unsupported type typeof ${typeof item}`)
     }
     const comparator = (typeof item ==='string') ? comparatorString : comparatorNum;

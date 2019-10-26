@@ -92,6 +92,7 @@ SBTree.prototype.getAdapter = require('./methods/getAdapter');
 SBTree.prototype.getDocument = require('./methods/getDocument')
 SBTree.prototype.getFieldTree = require('./methods/getFieldTree')
 SBTree.prototype.insertDocuments = require('./methods/insertDocuments')
+SBTree.prototype.replaceDocuments = require('./methods/replaceDocuments')
 SBTree.prototype.loadState = require('./methods/loadState')
 SBTree.prototype.setFieldTree = require('./methods/setFieldTree')
 SBTree.prototype.toJSON = require('./methods/toJSON')

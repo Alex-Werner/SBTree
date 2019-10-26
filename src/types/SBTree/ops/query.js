@@ -40,6 +40,7 @@ async function query(query) {
     const queryFieldType = typeof queryFieldValue;
     switch (queryFieldType) {
       case "number":
+      case "boolean":
       case "string":
         promises.push(fieldTree.find(queryFieldValue, '$eq'));
         break;
