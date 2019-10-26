@@ -21,10 +21,9 @@ describe('E2E - Classic UseCase', function suite() {
       const doc = await customTree.findDocuments({name:"Alex"});
       expect(doc).to.deep.equal([alex])
     });
-    it('should not be able to find document on nested',async function () {
-      // May be we should warn user in some way ?
+    it('should be able to find document on nested',async function () {
       const doc = await customTree.findDocuments({infos:{job:{sector:"IT"}}});
-      expect(doc).to.deep.equal([]);
+      expect(doc).to.deep.equal([alex]);
     });
   });
 })

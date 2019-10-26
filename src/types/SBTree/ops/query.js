@@ -24,15 +24,19 @@ const findIntersectingIdentifiers = (listOfListOfIdentifiers) => {
 
 async function query(query) {
   const self = this;
-  const findNested = function(_promises, _queryFieldName, _queryFieldValue) {
+  const findNested = async function(_promises, _queryFieldName, _queryFieldValue) {
     for(const nestedQueryFieldName in _queryFieldValue){
       const nestedQueryFieldValue = _queryFieldValue[nestedQueryFieldName];
       const nestedQueryFieldType = typeof nestedQueryFieldValue;
 
       if(['number','string','boolean'].includes(nestedQueryFieldType)){
-        _promises.push(self.getFieldTree(`${_queryFieldName}.${nestedQueryFieldName}`).find(nestedQueryFieldValue, '$eq'));
+        const fTree = self.getFieldTree(`${_queryFieldName}.${nestedQueryFieldName}`);
+        // Sometimes, like when excluded, this can not resolve.
+        if(fTree){
+          _promises.push(fTree.find(nestedQueryFieldValue, '$eq'));
+        }
       }else if (nestedQueryFieldType==='object' && !Array.isArray(nestedQueryFieldValue)){
-        findNested(_promises, `${_queryFieldName}.${nestedQueryFieldName}`, nestedQueryFieldValue);
+        await findNested(_promises, `${_queryFieldName}.${nestedQueryFieldName}`, nestedQueryFieldValue);
       }else{
         throw new Error(`Not supported type : ${nestedQueryFieldType}`);
       }
@@ -75,7 +79,7 @@ async function query(query) {
 
           if (operators.length === 0) {
             // Then we iterate on values to perform find on all trees of nested object
-            findNested(promises, queryFieldName, queryFieldValue)
+             findNested(promises, queryFieldName, queryFieldValue)
           }else{
             fieldTree = this.getFieldTree(queryFieldName);
             for(const operator of operators){

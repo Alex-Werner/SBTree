@@ -47,7 +47,6 @@ async function replace(currentDocument, newDocument) {
   const changedField = findChangedFields(newDocument, currentDocument);
   const deletedFields = findDeletedFields(newDocument, currentDocument);
 
-  console.log(addedFields)
   // We add all extra fields
   for (const _addedFieldName in addedFields) {
     const _addedFieldValue = newDocument[_addedFieldName];
@@ -93,8 +92,8 @@ async function replace(currentDocument, newDocument) {
       this.verbose && console.log(`No index for ${_deletedFieldName} : Typeof ${_deletedFieldType} : ${JSON.stringify(_deletedFieldValue)}`)
     }
   }
-
-
+  // Sorry. But was the easiest and quickiest way to do nested things.
+  // Will refactor, hopefully.
   const replaceProp = async function (_fieldName, _fieldValue) {
     const _fieldType = typeof _fieldValue;
     if (['number', 'string', 'boolean'].includes(_fieldType)) {
@@ -124,7 +123,7 @@ async function replace(currentDocument, newDocument) {
         await replaceProp(`${_fieldName}.${_nestedFieldName}`,  _fieldValue[_nestedFieldName]);
       }
     } else {
-      throw new Error(`Not supported type : ${nestedFieldType}`);
+      throw new Error(`Not supported type : ${_fieldType}`);
     }
   }
 
