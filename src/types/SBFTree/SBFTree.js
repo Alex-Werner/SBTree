@@ -55,4 +55,5 @@ SBFTree.prototype.find = require('./methods/find');
 SBFTree.prototype.get = require('./methods/get');
 SBFTree.prototype.insert = require('./methods/insert');
 SBFTree.prototype.remove = require('./methods/remove');
+SBFTree.prototype.replace = require('./methods/replace');
 module.exports = SBFTree;

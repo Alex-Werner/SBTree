@@ -70,7 +70,7 @@ const start = async function () {
   const deleteRes = await tree.deleteDocuments({age:30});
 
   alex.age = 29;
-  const editRes = await tree.updateDocument(alex)
+  const replaceRes = await tree.replaceDocuments(alex)
 
 }
 tree.on('ready', start);

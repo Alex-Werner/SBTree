@@ -36,5 +36,6 @@ SFBLeaf.prototype.isFull = require('./methods/isFull');
 SFBLeaf.prototype.mergeWithSiblings = require('./methods/mergeWithSiblings');
 SFBLeaf.prototype.redistribute = require('./methods/redistribute');
 SFBLeaf.prototype.remove = require('./methods/remove');
+SFBLeaf.prototype.replace = require('./methods/replace');
 SFBLeaf.prototype.split = require('./methods/split');
 module.exports = SFBLeaf;

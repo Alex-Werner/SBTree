@@ -1,3 +1,8 @@
 module.exports = async function remove(remCmd){
-    await this.root.remove(remCmd);
+    let root = this.root;
+    if(!root){
+        this.createRoot();
+        root = this.root;
+    }
+    await root.remove(remCmd);
 }

@@ -66,7 +66,11 @@ const start = async function () {
   console.log(lisa);
   lisa.age = 27;
 
-  console.log(await tree.updateDocuments(lisa));
+  console.log('-- Replace lisa');
+  console.log(await tree.replaceDocuments(lisa));
+
+  // console.log('-- Update {country:{$in:["Greenland"]}');
+  // console.log(await tree.updateDocuments({country:{$in:['Greenland']}},{$set:{canDeliver:false}}));
 
   console.log('-- Find : {country:{$in:[\'Greenland\']}}');
   console.log(await tree.findDocuments({country:{$in:['Greenland']}}));

@@ -11,6 +11,7 @@ async function removeInLeaf(leafId, identifier) {
       data.keys.splice(index, 1);
       identifiers.push({identifier, index});
     }
+
   return identifiers;
 }
 

@@ -57,5 +57,6 @@ SBFNode.prototype.insertReferenceKey = require('./methods/insertReferenceKey')
 SBFNode.prototype.isFull = require('./methods/isFull')
 SBFNode.prototype.mergeUp = require('./methods/mergeUp')
 SBFNode.prototype.remove = require('./methods/remove')
+SBFNode.prototype.replace = require('./methods/replace')
 SBFNode.prototype.split = require('./methods/split')
 module.exports = SBFNode;

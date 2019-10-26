@@ -28,7 +28,7 @@ const start = async function () {
     {age:44, email:'phillipe@valjean.fr',country:'France', _id:'5d6ded6fcb8d55944c7fc5e6'}
   ]);
 
-  await tree.insertDocuments({age:26, country:'Greenland', email:'lisa@lesmund.gl'});
+  await tree.insertDocuments({_id:'5db495cbe4ff47da6068f508',age:26, country:'Greenland', email:'lisa@lesmund.gl', canDeliver:true});
 
   // // If you don't have any _id attach, it will create one for you
   const inserted = await tree.insertDocuments({age: 42, email: 'jean.paul@valjean.fr'});
@@ -59,15 +59,24 @@ const start = async function () {
   console.log('-- Find : {country:{$in:[\'Belgium\']}}');
   console.log(await tree.findDocuments({country:{$in:['Belgium']}}));
 
-  console.log('-- Find : {country:{$in:[\'Greenland\']}}');
+  console.log('-- Find : {canDeliver:true}');
   const [lisa] = await tree.findDocuments({country:{$in:['Greenland']}});
-  console.log(lisa);
   lisa.age = 27;
+  delete lisa.canDeliver;
+  lisa.isPending=true;
 
-  console.log(await tree.updateDocuments(lisa));
+  console.log('-- Replace lisa');
+  console.log(await tree.replaceDocuments(lisa));
 
-  console.log('-- Find : {country:{$in:[\'Greenland\']}}');
-  console.log(await tree.findDocuments({country:{$in:['Greenland']}}));
+
+  console.log('-- Find : {isPending:true}');
+  console.log(await tree.findDocuments({isPending:true}));
+
+  console.log('-- Find : {canDeliver:true}');
+  console.log(await tree.findDocuments({canDeliver:true}));
+
+  console.log('-- Update : {canDeliver:true}, {$set:{canDeliver:false}}');
+  // console.log(await tree.updateDocuments({canDeliver:true}));
 
   timer.stop();
   console.log(timer.duration.s, 'seconds');
