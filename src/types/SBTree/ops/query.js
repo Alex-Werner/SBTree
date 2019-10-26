@@ -1,4 +1,4 @@
-const {intersection} = require('lodash');
+const {cloneDeep, intersection} = require('lodash');
 
 const get = require('./get');
 
@@ -105,8 +105,8 @@ async function query(query) {
       });
 
   const matchingObjectIds = findIntersectingIdentifiers(intermediateIdentifiers);
+
   return resolveDocuments(this, matchingObjectIds);
-  return result;
 }
 
 module.exports = query;

@@ -11,6 +11,7 @@ async function replaceDocuments(documents){
     }
     return documents;
   }
+
   const currentDocument = await this.getDocument(documents._id);
   return (await replace.call(this,currentDocument, documents));
 

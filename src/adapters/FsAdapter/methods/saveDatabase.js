@@ -1,7 +1,7 @@
-const {clone} = require('lodash');
+const {cloneDeep} = require('lodash');
 
 module.exports = async function saveDatabase(){
-  const leafs = clone(this.leafs)
+  const leafs = cloneDeep(this.leafs)
   const tree = this.getParent().toJSON();
   const db = {
     leafs,
