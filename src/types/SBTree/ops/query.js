@@ -20,7 +20,25 @@ const findIntersectingIdentifiers = (listOfListOfIdentifiers) => {
   return intersection(...identifiers);
 }
 
+
+
 async function query(query) {
+  const self = this;
+  const findNested = function(_promises, _queryFieldName, _queryFieldValue) {
+    for(const nestedQueryFieldName in _queryFieldValue){
+      const nestedQueryFieldValue = _queryFieldValue[nestedQueryFieldName];
+      const nestedQueryFieldType = typeof nestedQueryFieldValue;
+
+      if(['number','string','boolean'].includes(nestedQueryFieldType)){
+        _promises.push(self.getFieldTree(`${_queryFieldName}.${nestedQueryFieldName}`).find(nestedQueryFieldValue, '$eq'));
+      }else if (nestedQueryFieldType==='object' && !Array.isArray(nestedQueryFieldValue)){
+        findNested(_promises, `${_queryFieldName}.${nestedQueryFieldName}`, nestedQueryFieldValue);
+      }else{
+        throw new Error(`Not supported type : ${nestedQueryFieldType}`);
+      }
+    }
+  };
+
   const fields = Object.keys(query);
   const fieldsResults = {};
   const result = [];
@@ -31,17 +49,22 @@ async function query(query) {
   }
 
   const promises = [];
+
   fields.forEach((queryFieldName) => {
+
     const queryFieldValue = query[queryFieldName];
-    const fieldTree = this.getFieldTree(queryFieldName);
-    if (!fieldTree) {
-      return;
-    }
     const queryFieldType = typeof queryFieldValue;
+
+    let fieldTree;
+
     switch (queryFieldType) {
       case "number":
       case "boolean":
       case "string":
+        fieldTree = this.getFieldTree(queryFieldName);
+        if (!fieldTree) {
+          return;
+        }
         promises.push(fieldTree.find(queryFieldValue, '$eq'));
         break;
       case "object":
@@ -51,10 +74,13 @@ async function query(query) {
           const operators = Object.keys(queryFieldValue).filter((el) => el[0] === '$');
 
           if (operators.length === 0) {
-            throw new Error(`Not supported object query with no operator. Please open a Github issue to specify your need.`);
-          }
-          for(const operator of operators){
-            promises.push(fieldTree.find(queryFieldValue[operator], operator));
+            // Then we iterate on values to perform find on all trees of nested object
+            findNested(promises, queryFieldName, queryFieldValue)
+          }else{
+            fieldTree = this.getFieldTree(queryFieldName);
+            for(const operator of operators){
+              promises.push(fieldTree.find(queryFieldValue[operator], operator));
+            }
           }
         }
         break;

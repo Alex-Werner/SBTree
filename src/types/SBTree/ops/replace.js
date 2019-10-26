@@ -53,7 +53,6 @@ async function replace(currentDocument, newDocument) {
         }
         const fieldTree = this.getFieldTree(_addedFieldName);
         if(fieldTree){
-          console.log('inserted', _addedFieldValue, _addedFieldName,id)
           await fieldTree.insert(id, _addedFieldValue);
         }
       }
