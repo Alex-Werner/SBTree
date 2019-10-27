@@ -1,3 +1,3 @@
 module.exports= {
-  validTypes:['string', 'number', 'boolean']
+  validTypes:['string', 'number', 'boolean', 'object']
 }

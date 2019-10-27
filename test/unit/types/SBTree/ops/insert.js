@@ -51,6 +51,10 @@ describe('SBTree - ops - insert', () => {
       ['setFieldTree', 'email'],
       ['getFieldTree', 'email'],
 
+      ['getFieldTree', 'address.country'],
+      ['setFieldTree', 'address.country'],
+      ['getFieldTree', 'address.country'],
+
       // Address is not called as we discard it (type is object)
       ['savedDocument', '5d6ebb7e21f1df6ff7482631'],
     ]);

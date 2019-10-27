@@ -13,6 +13,7 @@ async function findGreaterThan(key, includeKey=false){
   let p = [];
 
   if(childrens.length===0){
+
     if(identifiers[leafIndex]){
       keys.slice(leafIndex).forEach((_key, i)=>{
         if(_key>=key){
@@ -25,6 +26,7 @@ async function findGreaterThan(key, includeKey=false){
       })
     }
   }else{
+
     // first, we lookup for all greater than matches in the actual leaf where we had our el.
     p.push(childrens[leafIndex].findGreaterThan(key, includeKey));
 
@@ -32,10 +34,10 @@ async function findGreaterThan(key, includeKey=false){
     // We need this extra step first
     let start = leafIndex+1;
     if(keys.includes(key)){
-
       p.push(childrens[start].findGreaterThan(key, includeKey));
       start+=1;
     }
+
     // All bigger leaf that our leafIndex needs to be included
     if(leafIndex<childrens.length-1){
       childrens.slice(start).forEach((child, i)=>{

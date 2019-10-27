@@ -5,15 +5,15 @@
 
 > Fast document store using B+ Tree for fields. Adapters support for In-Memory and FileSystem 
 
-Complexity : `O(log(n))` - Help welcome to pass it `O(n)`.  
-State : NOT FOR PRODUCTION (see remaining TODO / FIXME / ISSUES).
+State : Not battle tested on production. Many optimisation still to be done.
 
 This library's goal is to provide a way to quickly store document-based data in-memory or on the filesystem.  
 It uses a field-specific indexing system relaying on B+Tree structure.  
 This allow to handle a lot of data, and have them indexed without the need to keep the whole dataset in-memory. 
 Most of the databases uses B-Tree (MongoDB, CouchDB) or B+Tree (InnoDB, MariaDB, MySQL).
 
-Note : By default. Everything except specifically excluded field are indexed    
+Note : By default. Everything except specifically excluded field are indexed.  
+Nested object are also indexed.    
 Optional support for uniques key provided.    
 
 ### Table of Contents
@@ -71,6 +71,9 @@ const start = async function () {
 
   alex.age = 29;
   const replaceRes = await tree.replaceDocuments(alex)
+
+  await tree.insertDocuments({name:'John', nestedField:{isNested:{itIs:true}}});
+  const [john] = await tree.findDocuments({nestedField:{isNested:{itIs:true}}});
 
 }
 tree.on('ready', start);

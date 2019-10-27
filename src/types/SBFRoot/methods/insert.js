@@ -1,26 +1,23 @@
 async function insert(identifier, value = null){
   const {childrens} = this;
-  if(childrens.length===0){
 
-    // if(this.keys.length===0){
+  if(['string', 'number', 'boolean'].includes(typeof value)) {
+    if (childrens.length === 0) {
       const idx = await this.insertReferenceKey(value)
       this.identifiers.splice(idx, 0, identifier);
-    // }else{
-      // const leaf = new SBFLeaf({parent:this});
-      // this.childrens.push(leaf);
-
-      // await leaf.insert(identifier, value);
-    // }
+    } else {
+      let leafIndex = 0;
+      this.keys.forEach((_key) => {
+        if (value <= _key) return;
+        leafIndex++;
+      });
+      const leaf = childrens[leafIndex];
+      await leaf.insert(identifier, value);
+    }
   }else{
-    let leafIndex = 0;
-    this.keys.forEach((_key)=>{
-      if(value<=_key) return;
-      leafIndex++;
-    });
-    const leaf = childrens[leafIndex];
-    await leaf.insert(identifier, value);
+      throw new Error(`Unexpected insertion of type ${typeof value}`);
+    }
 
-  }
 
   if(this.isFull()){
 

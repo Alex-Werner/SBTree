@@ -4,8 +4,6 @@ async function replaceInLeaf(leafId, identifier, value){
   }
   const {meta, data} = this.leafs[leafId];
 
-  console.log('replace in leaf', identifier, value)
-  console.log(meta.identifiers.includes(identifier))
   if(!meta.identifiers.includes(identifier)){
     //TODO : except unique:false?
     throw new Error(`Identifier ${identifier} do not exist`);

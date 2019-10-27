@@ -1,4 +1,4 @@
-const {clone} = require('lodash');
+const {cloneDeep} = require('lodash');
 module.exports = async function getDocument(identifier) {
-  return clone(await this.openDocument(identifier));
+  return cloneDeep(await this.openDocument(identifier));
 }

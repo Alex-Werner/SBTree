@@ -18,7 +18,12 @@ function setFieldTree(_fieldTreeOpts){
   const {adapter} = this;
 
   const isUnique = this.uniques.includes(fieldName);
-  const isExcluded = this.exclude.includes(fieldName);
+  let isExcluded = this.exclude.includes(fieldName);
+  const splittedByDot = fieldName.split('.');
+
+  if(splittedByDot.length>1 && !isExcluded){
+    isExcluded = this.exclude.includes(splittedByDot[0]);
+  }
   if(isExcluded) return;
 
   const fieldTreeOpts = {

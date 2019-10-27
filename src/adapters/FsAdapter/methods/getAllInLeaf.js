@@ -1,4 +1,4 @@
-const {clone} = require('lodash');
+const {cloneDeep} = require('lodash');
 
 module.exports = async function getAllInLeaf(leafId){
 
@@ -8,5 +8,5 @@ module.exports = async function getAllInLeaf(leafId){
     await this.createLeaf(leafId);
     return this.getAllInLeaf(leafId);
   }
-  return clone({identifiers:this.leafs[leafId].meta.identifiers, keys:keys});
+  return cloneDeep({identifiers:this.leafs[leafId].meta.identifiers, keys:keys});
 }

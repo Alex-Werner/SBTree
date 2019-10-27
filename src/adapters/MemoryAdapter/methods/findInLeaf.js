@@ -1,6 +1,6 @@
 const lowerThanKeys = require('./ops/lowerThanKeys');
 const greaterThanKeys = require('./ops/greaterThanKeys');
-const {range}=require('lodash');
+const {cloneDeep, range}=require('lodash');
 module.exports = async function findInLeaf(leafId, value, op = '$eq') {
   const leaf = this.leafs[leafId];
 
@@ -33,8 +33,8 @@ module.exports = async function findInLeaf(leafId, value, op = '$eq') {
       break;
     case "$lte":
       let resLte = [];
-      resLte = resLte.concat(await this.findInLeaf(leafId, value, '$lt'));
-      resLte = resLte.concat(await this.findInLeaf(leafId, value, '$eq'));
+      resLte = resLte.concat(cloneDeep(await this.findInLeaf(leafId, value, '$lt')));
+      resLte = resLte.concat(cloneDeep(await this.findInLeaf(leafId, value, '$eq')));
       resLte.forEach((res) => {
         result.identifiers.push(...res.identifiers)
         result.keys.push(...res.keys)
@@ -61,22 +61,22 @@ module.exports = async function findInLeaf(leafId, value, op = '$eq') {
       if (firstIdx>-1) {
         const localIndex = keys.indexOf(value);
         if (localIndex !== -1) {
-          result.identifiers.push(...identifiers.slice(localIndex + strictMatchingKeysLen));
-          result.keys.push(...keys.slice(localIndex + strictMatchingKeysLen));
+          result.identifiers.push(...identifiers.slice(localIndex + strictMatchingKeysLen))
+          result.keys.push(...keys.slice(localIndex + strictMatchingKeysLen))
         }
       } else {
         const gtKeys = greaterThanKeys(keys, value);
         const len = gtKeys.length;
         if (leafId !== 0 && len > 0) {
-          result.identifiers.push(...identifiers.slice(-len));
-          result.keys.push(...keys.slice(-len));
+          result.identifiers.push(...identifiers.slice(-len))
+          result.keys.push(...keys.slice(-len))
         }
       }
       return result;
     case "$gte":
       let resGte = [];
-      resGte = resGte.concat(await this.findInLeaf(leafId, value, '$eq'));
-      resGte = resGte.concat(await this.findInLeaf(leafId, value, '$gt'));
+      resGte = resGte.concat(cloneDeep(await this.findInLeaf(leafId, value, '$eq')));
+      resGte = resGte.concat(cloneDeep(await this.findInLeaf(leafId, value, '$gt')));
       resGte.forEach((res) => {
         result.identifiers.push(...res.identifiers)
         result.keys.push(...res.keys)
