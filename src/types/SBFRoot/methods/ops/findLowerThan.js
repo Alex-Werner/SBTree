@@ -13,8 +13,10 @@ async function findLowerThan(key, includeKey = false) {
   let p = [];
 
   if(childrens.length===0){
+    if(!identifiers[leafIndex]){
     leafIndex--;
-    if(identifiers[leafIndex]){
+    }
+    if (identifiers[leafIndex]) {
       const last = keys.lastIndexOf(key);
 
       keys.slice(0, last+1 || leafIndex+1).forEach((_key, i)=>{
