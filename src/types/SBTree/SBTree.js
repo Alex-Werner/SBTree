@@ -83,6 +83,12 @@ class SBTree extends EventEmitter {
       order, fillFactor, verbose
     }
   }
+  async isReady() {
+    return new Promise(((resolve) => {
+      if (this.state.isReady) return resolve(true);
+      this.on('ready', () => resolve(true));
+    }));
+  }
 }
 
 
