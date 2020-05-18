@@ -17,6 +17,17 @@ describe('SBTree', () => {
     expect(tree.fieldTrees).to.deep.equal({});
     expect(tree.size).to.equal(0);
   });
+  it('should provide isReady ', async function () {
+    const treeNeedReadiness = new SBTree({adapter: {name:'FsAdapter'}});
+    expect(treeNeedReadiness.state.isReady).to.equal(false);
+    await treeNeedReadiness.isReady();
+    expect(treeNeedReadiness.state.isReady).to.equal(true);
+
+    // Both of these are done to release any interval working
+    treeNeedReadiness.adapter.autoSave = false;
+    treeNeedReadiness.adapter.queue.stop();
+  });
+  return;
   it('should correctly default', function () {
     const t = new SBTree();
     expect(t.order).to.equal(511)
