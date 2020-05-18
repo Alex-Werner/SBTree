@@ -1,9 +1,8 @@
 const replace = require('../ops/replace');
-const {waitFor} = require('../../../utils/fn');
 
 async function replaceDocuments(documents){
-  if(!this.isReady){
-    await waitFor(this, 'isReady');
+  if(!this.state.isReady){
+    await this.isReady();
   }
   if (Array.isArray(documents)) {
     for (const document of documents) {

@@ -1,7 +1,6 @@
 const EventEmitter = require('events');
 const {MemoryAdapter, FsAdapter} = require('../../adapters');
 const {generateTreeId} = require('../../utils/crypto');
-const {waitFor} = require('../../utils/fn');
 const {each}=require('lodash');
 // const SBFTree = require('../SBFTree/SBFTree');
 
@@ -35,13 +34,16 @@ class SBTree extends EventEmitter {
       exclude:[],
       uniques:[],
     };
+
+    this.state = {
+      isReady: true
+    }
     this.adapter = (props.adapter) ? parseAdapter(props.adapter) : new MemoryAdapter();
-    this.isReady = true;
 
     if(this.adapter.name !== 'MemoryAdapter'){
       // We will need to sync up first
-      this.isReady = false;
-      waitFor(self.adapter,'isReady', ()=> self.isReady = true);
+      this.state.isReady = false;
+      self.adapter.on('ready', ()=> self.state.isReady = true);
     }
 
     this.order= (props.order) ? props.order : defaultProps.order;
@@ -84,10 +86,10 @@ class SBTree extends EventEmitter {
     }
   }
   async isReady() {
-    return new Promise(((resolve) => {
+    return new Promise((resolve) => {
       if (this.state.isReady) return resolve(true);
       this.on('ready', () => resolve(true));
-    }));
+    });
   }
 }
 
