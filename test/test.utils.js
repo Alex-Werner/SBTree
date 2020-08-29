@@ -1,16 +1,15 @@
-const {expect} = require('chai');
+const { expect } = require('chai');
 
 const expectThrowsAsync = async (method, errorMessage) => {
-  let error = null
+  let error = null;
   try {
-    await method()
+    await method();
+  } catch (err) {
+    error = err;
   }
-  catch (err) {
-    error = err
-  }
-  expect(error).to.be.an('Error')
+  expect(error).to.be.an('Error');
   if (errorMessage) {
-    expect(error.message).to.equal(errorMessage)
+    expect(error.message).to.equal(errorMessage);
   }
 };
-module.exports = {expectThrowsAsync};
+module.exports = { expectThrowsAsync };

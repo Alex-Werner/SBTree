@@ -4,4 +4,4 @@ module.exports = {
   comparators: require('./comparators'),
   crypto: require('./crypto'),
   time: require('./time'),
-}
+};

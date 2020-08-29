@@ -1,7 +1,7 @@
-function isFull(){
+function isFull() {
   const tree = this.getTree();
-  const order = tree.order;
+  const { order } = tree;
 
-  return this.keys.length>=order;
-};
+  return this.keys.length >= order;
+}
 module.exports = isFull;

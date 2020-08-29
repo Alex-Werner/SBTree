@@ -5,7 +5,7 @@ const findGreaterThan = require('./ops/findGreaterThan');
 async function find(value, operator = '$eq') {
   const self = this;
   const p = [];
-  const results = {identifiers: [], keys: []};
+  const results = { identifiers: [], keys: [] };
 
   switch (operator) {
     case '$eq':
@@ -31,23 +31,23 @@ async function find(value, operator = '$eq') {
     case '$gte':
       return findGreaterThan.call(this, value, true);
     case '$in':
-      if (!Array.isArray(value)) throw new Error(`$in operator expect key to be an array`);
-      for (let el of value) {
-        p.push(self.find(el))
+      if (!Array.isArray(value)) throw new Error('$in operator expect key to be an array');
+      for (const el of value) {
+        p.push(self.find(el));
       }
       await Promise
-          .all(p)
-          .then((resolvedP) => {
-            resolvedP.forEach((p) => {
-              results.identifiers.push(...p.identifiers)
-              results.keys.push(...p.keys)
-            })
-          }).catch((err)=>{
-            console.error('err',err);
-          })
+        .all(p)
+        .then((resolvedP) => {
+          resolvedP.forEach((p) => {
+            results.identifiers.push(...p.identifiers);
+            results.keys.push(...p.keys);
+          });
+        }).catch((err) => {
+          console.error('err', err);
+        });
       return results;
     case '$nin':
-      if (!Array.isArray(value)) throw new Error(`$nin operator expect key to be an array`);
+      if (!Array.isArray(value)) throw new Error('$nin operator expect key to be an array');
 
       const getAllIdentifiers = await this.getAll();
       const includingIdentifiers = await this.find(value, '$in');
@@ -58,10 +58,10 @@ async function find(value, operator = '$eq') {
           getAllIdentifiers.identifiers.splice(idOf, 1);
           getAllIdentifiers.keys.splice(idOf, 1);
         }
-      })
+      });
       return getAllIdentifiers;
     default:
-      throw new Error(`Not handled operator ${operator}`)
+      throw new Error(`Not handled operator ${operator}`);
   }
 }
 

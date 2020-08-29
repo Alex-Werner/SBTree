@@ -5,15 +5,15 @@ const c = chance();
 
 const firstname = c.first();
 const lastname = c.last();
-const country = c.country({raw:true})
+const country = c.country({ raw: true });
 
 const doc = {
-  _id : new ObjectID().toString(),
-  age : c.age(),
-  firstname:firstname,
-  lastname:firstname,
-  country:country.name,
-  gender:c.gender(),
-  email:`${firstname.toLowerCase()}@${lastname.toLowerCase()}.${country.abbreviation.toLowerCase()}`
-}
-console.log(doc)
+  _id: new ObjectID().toString(),
+  age: c.age(),
+  firstname,
+  lastname: firstname,
+  country: country.name,
+  gender: c.gender(),
+  email: `${firstname.toLowerCase()}@${lastname.toLowerCase()}.${country.abbreviation.toLowerCase()}`,
+};
+console.log(doc);

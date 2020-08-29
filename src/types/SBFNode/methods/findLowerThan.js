@@ -1,8 +1,8 @@
 async function findLowerThan(value, includeKey = false) {
-  let result = {identifiers: [], keys: []};
-  const {childrens, keys} = this;
+  const result = { identifiers: [], keys: [] };
+  const { childrens, keys } = this;
   let leafIndex = 0;
-  let p = [];
+  const p = [];
   // It might be a bug that we have no keys, but in this case, we take first child
   if (keys.length === 0 && childrens.length === 1) {
     p.push(childrens[0].findLowerThan(value, includeKey));
@@ -15,7 +15,7 @@ async function findLowerThan(value, includeKey = false) {
 
     // We first look up all smaller value
     childrens.slice(0, leafIndex).forEach((child) => {
-      p.push(child.getAll())
+      p.push(child.getAll());
     });
 
     // And then we lookup in our children
@@ -28,12 +28,11 @@ async function findLowerThan(value, includeKey = false) {
   }
   await Promise.all(p).then((res) => {
     res.forEach((p) => {
-
       result.identifiers.push(...p.identifiers);
       result.keys.push(...p.keys);
-    })
+    });
   });
   return result;
 }
 
-module.exports = findLowerThan
+module.exports = findLowerThan;

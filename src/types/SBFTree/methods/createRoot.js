@@ -1,18 +1,18 @@
 const SBFRoot = require('../../SBFRoot/SBFRoot');
 // const SBFLeaf = require('../../SBFLeaf/SBFLeaf');
 // const SBFNode = require('../../SBFNode/SBFNode');
-module.exports = function createRoot(root = null){
-  if(this.root){
-    throw new Error("Already existing root.");
+module.exports = function createRoot(root = null) {
+  if (this.root) {
+    throw new Error('Already existing root.');
   }
-  if(root){
-    let _root = (root.root) ? root.root : root;
+  if (root) {
+    const _root = (root.root) ? root.root : root;
     _root.tree = this;
     this.root = new SBFRoot(_root);
-  }else{
-    const {fieldName} = this;
-    let keys = (root && root.keys) ? root.keys : null;
-    this.root = new SBFRoot({tree:this, keys,fieldName});
+  } else {
+    const { fieldName } = this;
+    const keys = (root && root.keys) ? root.keys : null;
+    this.root = new SBFRoot({ tree: this, keys, fieldName });
   }
   // const {fieldName} = this;
   // let keys = (root && root.keys) ? root.keys : null;
