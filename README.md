@@ -118,3 +118,4 @@ And adapter being called beforehand (for props passing). You need to listen for 
 ### Others links 
 
 - [TODO](TODO.md)
+

@@ -4,6 +4,6 @@ async function get(identifier) {
 
   const res = await this.adapter.getDocument(identifier);
 
-  return cloneDeep(res) || false;
+  return cloneDeep(res) || null;
 };
 module.exports = get;
