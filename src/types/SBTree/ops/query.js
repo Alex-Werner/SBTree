@@ -20,7 +20,13 @@ const findIntersectingIdentifiers = (listOfListOfIdentifiers) => {
   return intersection(...identifiers);
 };
 
+/**
+ *
+ * @param query
+ * @returns {Promise<[]>}
+ */
 async function query(query) {
+
   const self = this;
   const findNested = async function (_promises, _queryFieldName, _queryFieldValue) {
     for (const nestedQueryFieldName in _queryFieldValue) {
@@ -40,8 +46,10 @@ async function query(query) {
       }
     }
   };
+  if(!query) return [];
 
   const fields = Object.keys(query);
+
   const fieldsResults = {};
   const result = [];
 
@@ -89,6 +97,7 @@ async function query(query) {
         throw new Error(`Not supported type : ${queryFieldType}`);
     }
   });
+
 
   let intermediateIdentifiers = [];
   await Promise
