@@ -4,7 +4,9 @@ module.exports = async function autosave(self){
       await self.saveDatabase();
     }
     setTimeout(async ()=>{
-      await next(self);
+      if(self.autoSave){
+        await next(self);
+      }
     }, self.autoSaveInterval)
   }
   await next(self);
