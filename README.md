@@ -6,7 +6,9 @@
 [![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen)](https://github.com/RichardLitt/standard-readme)
 > Fast document store using B+ Tree for fields. Adapters support for In-Memory and FileSystem 
 
-State : Not battle tested on production. Many optimisation still to be done.
+> State : Optimisation, features and stability works in progress.
+
+> Documentation : https://alex-werner.github.io/SBTree
 
 This library's goal is to provide a way to quickly store document-based data in-memory or on the filesystem.  
 It uses a field-specific indexing system relaying on B+Tree structure.  
@@ -86,7 +88,7 @@ tree.on('ready', start);
 - [API](/doc/api.md)
 - [Queries](/doc/queries.md)
 
-
+Also : [https://alex-werner.github.io/SBTree](On github.io)
 ## Adapters 
 
 - `MemoryAdapter` : Default adapter. Set Store inMemory. Limited by heap memory available (good enough).
