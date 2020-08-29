@@ -9,6 +9,6 @@ async function deleteDocuments(query) {
     await this.isReady();
   }
 
-  return ([await remove.call(this, query)]);
+  return (await remove.call(this, query));
 }
 module.exports = deleteDocuments;
