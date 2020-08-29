@@ -2,7 +2,8 @@
 
 [![NPM Version](https://img.shields.io/npm/v/sbtree.svg?&style=flat-square)](https://www.npmjs.org/package/sbtree)
 [![Build Status](https://api.travis-ci.org/Alex-Werner/SBTree.svg?branch=master)](https://travis-ci.com/Alex-Werner/SBTree)
-
+[![Release Date](https://img.shields.io/github/release-date/Alex-Werner/SBTree)](https://github.com/alex-werner/sbtree/releases/latest)
+[![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen)](https://github.com/RichardLitt/standard-readme)
 > Fast document store using B+ Tree for fields. Adapters support for In-Memory and FileSystem 
 
 State : Not battle tested on production. Many optimisation still to be done.
