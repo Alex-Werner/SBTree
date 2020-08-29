@@ -1,4 +1,4 @@
-const isEqual = require('lodash.isEqual');
+const isEqual = require('lodash.isequal');
 const get = require('lodash.get');
 const set = require('lodash.set');
 const isObject = require('lodash.isObject');
