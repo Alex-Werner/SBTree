@@ -10,10 +10,10 @@
     "test:unit": "nyc mocha 'src/**/*.spec.js'",
     "test:benchmark": "mocha test/benchmark --recursive",
     "test:functional": "nyc mocha 'test/functional/*.spec.js'",
-    "test": "npm run test:unit && npm run test:functional && npm run test:benchmark"
+    "test": "npm run test:unit && npm run test:functional"
   },
   "engines": {
-    "node": ">= 12.0.0"
+    "node": ">= 14.0.0"
   },
   "repository": {
     "type": "git",
