@@ -1,3 +1,5 @@
+- Getting Started
+    - [Core Concepts](getting-started/core-concepts.md) 
 - Primitives 
     - [SBTree](primitives/SBTree.md)
 - Usage
