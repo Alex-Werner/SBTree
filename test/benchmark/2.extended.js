@@ -3,7 +3,9 @@ const {SBTree} = require('../../index');
 const fakeData = require('../fixtures/age')
 const {Timer} = require('../../src/utils/time');
 const {version} = require('../../package.json');
-const {reduce, each} = require('lodash');
+const each = require('lodash.foreach');
+const reduce = require('lodash.reduce');
+
 let tree;
 
 const len = 5000;

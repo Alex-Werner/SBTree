@@ -1,7 +1,7 @@
 async function insert(identifier, value = null){
   const {childrens} = this;
 
-  if(['string', 'number', 'boolean'].includes(typeof value)) {
+  if(['string', 'number', 'boolean', 'object'].includes(typeof value)) {
     if (childrens.length === 0) {
       const idx = await this.insertReferenceKey(value)
       this.identifiers.splice(idx, 0, identifier);

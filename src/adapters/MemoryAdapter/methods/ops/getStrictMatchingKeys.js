@@ -1,4 +1,3 @@
-const {equals}= require('lodash');
 function getStrictMatchingKeys(arr, val) {
   let indexes = [], i = -1;
   while ((i = arr.indexOf(val, i+1)) !== -1){

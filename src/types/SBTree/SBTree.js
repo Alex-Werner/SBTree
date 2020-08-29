@@ -1,7 +1,7 @@
 const EventEmitter = require('events');
 const {MemoryAdapter, FsAdapter} = require('../../adapters');
 const {generateTreeId} = require('../../utils/crypto');
-const {each}=require('lodash');
+const each = require('lodash.foreach');
 // const SBFTree = require('../SBFTree/SBFTree');
 
 const Adapters = {MemoryAdapter, FsAdapter};

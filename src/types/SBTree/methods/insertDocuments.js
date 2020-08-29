@@ -1,6 +1,6 @@
 const ObjectId = require('mongo-objectid');
 const insert = require('../ops/insert');
-const {cloneDeep}= require('lodash');
+const cloneDeep = require('lodash.clonedeep');
 
 async function insertDocuments(documents) {
   // This will wait for SBTree to have isReady = true.

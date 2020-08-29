@@ -1,6 +1,6 @@
 const LeafData = require('../types/LeafData/LeafData')
 const LeafMeta = require('../types/LeafMeta/LeafMeta')
-const {each} = require('lodash');
+const each = require('lodash.foreach');
 module.exports = async function loadDatabase() {
   const job = await this.queue.add('File.read', `${this.path}/sbtree.meta`);
   await job.execution();

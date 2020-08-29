@@ -12,7 +12,7 @@ async function replaceDocuments(documents){
   }
 
   const currentDocument = await this.getDocument(documents._id);
-  return (await replace.call(this,currentDocument, documents));
+  return ([await replace.call(this,currentDocument, documents)]);
 
 };
 module.exports = replaceDocuments;

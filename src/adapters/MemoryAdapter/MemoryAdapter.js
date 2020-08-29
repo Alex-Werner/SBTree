@@ -1,4 +1,4 @@
-const {each} = require('lodash')
+const each = require('lodash.foreach');
 const Data = require('./types/Data')
 const Meta = require('./types/Meta')
 const parseLeafs = (_leafs)=>{

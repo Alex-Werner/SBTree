@@ -1,4 +1,4 @@
-const { cloneDeep }= require('lodash');
+const cloneDeep = require('lodash.clonedeep');
 async function get(identifier) {
   if (!identifier) throw new Error('Expected an objectid')
 

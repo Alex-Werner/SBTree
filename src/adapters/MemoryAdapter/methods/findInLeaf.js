@@ -1,6 +1,7 @@
 const lowerThanKeys = require('./ops/lowerThanKeys');
 const greaterThanKeys = require('./ops/greaterThanKeys');
-const {cloneDeep, range}=require('lodash');
+const cloneDeep =require('lodash.clonedeep');
+const range =require('lodash.range');
 module.exports = async function findInLeaf(leafId, value, op = '$eq') {
   const leaf = this.leafs[leafId];
 

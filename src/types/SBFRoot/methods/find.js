@@ -2,23 +2,23 @@ const findEquals = require('./ops/findEquals');
 const findLowerThan = require('./ops/findLowerThan');
 const findGreaterThan = require('./ops/findGreaterThan');
 
-async function find(value, operator = '$eq'){
+async function find(value, operator = '$eq') {
   const self = this;
   const p = [];
-  const results = {identifiers:[], keys:[]};
+  const results = {identifiers: [], keys: []};
 
   switch (operator) {
     case '$eq':
-      return findEquals.call(this,value);
+      return findEquals.call(this, value);
     case '$ne':
       const getAllIdentifier = await this.getAll();
       const excludedIdentifiers = await findEquals.call(this, value);
 
-      excludedIdentifiers.identifiers.forEach((id)=>{
+      excludedIdentifiers.identifiers.forEach((id) => {
         const idOf = getAllIdentifier.identifiers.indexOf(id);
-        if(idOf>-1){
-          getAllIdentifier.identifiers.splice(idOf,1);
-          getAllIdentifier.keys.splice(idOf,1);
+        if (idOf > -1) {
+          getAllIdentifier.identifiers.splice(idOf, 1);
+          getAllIdentifier.keys.splice(idOf, 1);
         }
       });
       return getAllIdentifier;
@@ -31,28 +31,32 @@ async function find(value, operator = '$eq'){
     case '$gte':
       return findGreaterThan.call(this, value, true);
     case '$in':
-      if(!Array.isArray(value)) throw new Error(`$in operator expect key to be an array`);
-      for(let el of value){
+      if (!Array.isArray(value)) throw new Error(`$in operator expect key to be an array`);
+      for (let el of value) {
         p.push(self.find(el))
       }
-      await Promise.all(p).then((resolvedP) => {
-        resolvedP.forEach((p) => {
-          results.identifiers.push(...p.identifiers)
-          results.keys.push(...p.keys)
-        })
-      });
+      await Promise
+          .all(p)
+          .then((resolvedP) => {
+            resolvedP.forEach((p) => {
+              results.identifiers.push(...p.identifiers)
+              results.keys.push(...p.keys)
+            })
+          }).catch((err)=>{
+            console.error('err',err);
+          })
       return results;
     case '$nin':
-      if(!Array.isArray(value)) throw new Error(`$nin operator expect key to be an array`);
+      if (!Array.isArray(value)) throw new Error(`$nin operator expect key to be an array`);
 
       const getAllIdentifiers = await this.getAll();
       const includingIdentifiers = await this.find(value, '$in');
 
-      includingIdentifiers.identifiers.forEach((id)=>{
+      includingIdentifiers.identifiers.forEach((id) => {
         const idOf = getAllIdentifiers.identifiers.indexOf(id);
-        if(idOf>-1){
-          getAllIdentifiers.identifiers.splice(idOf,1);
-          getAllIdentifiers.keys.splice(idOf,1);
+        if (idOf > -1) {
+          getAllIdentifiers.identifiers.splice(idOf, 1);
+          getAllIdentifiers.keys.splice(idOf, 1);
         }
       })
       return getAllIdentifiers;
@@ -60,4 +64,5 @@ async function find(value, operator = '$eq'){
       throw new Error(`Not handled operator ${operator}`)
   }
 }
+
 module.exports = find;

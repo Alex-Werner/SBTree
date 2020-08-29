@@ -1,4 +1,4 @@
-const {intersection} = require('lodash');
+const intersection = require('lodash.intersection');
 
 const get = require('./get');
 
@@ -106,7 +106,7 @@ async function query(query) {
           }
           intermediateIdentifiers.push(pResult.identifiers);
         }
-      });
+      })
 
   const matchingObjectIds = findIntersectingIdentifiers(intermediateIdentifiers);
   return resolveDocuments(this, matchingObjectIds);

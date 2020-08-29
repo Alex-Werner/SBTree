@@ -1,4 +1,4 @@
-const {each}=require('lodash');
+const each = require('lodash.foreach');
 function loadState(state){
 
   this.order = state.order;

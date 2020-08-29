@@ -1,4 +1,4 @@
-const {cloneDeep} = require('lodash');
+const cloneDeep = require('lodash.clonedeep');
 
 module.exports = async function getAllInLeaf(leafId){
   const leaf = this.leafs[leafId];

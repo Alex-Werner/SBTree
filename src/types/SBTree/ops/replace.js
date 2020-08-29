@@ -1,13 +1,17 @@
-const _ = require('lodash');
+const isEqual = require('lodash.isEqual');
+const get = require('lodash.get');
+const set = require('lodash.set');
+const isObject = require('lodash.isObject');
+const transform = require('lodash.transform');
 const RemoveCommand = require('./RemoveCommand');
 const {validTypes} = require('../../../constants')
 
 // Returns difference between object. Do not return addition/deletion between object, only diff when existing in both
 function findChangedFields(object, base) {
   function changes(object, base) {
-    return _.transform(object, function (result, value, key) {
-      if (base[key] !== undefined && !_.isEqual(value, base[key])) {
-        result[key] = (_.isObject(value) && _.isObject(base[key])) ? changes(value, base[key]) : value;
+    return transform(object, function (result, value, key) {
+      if (base[key] !== undefined && !isEqual(value, base[key])) {
+        result[key] = (isObject(value) && isObject(base[key])) ? changes(value, base[key]) : value;
       }
     });
   }
@@ -17,9 +21,9 @@ function findChangedFields(object, base) {
 
 function findAddedFields(object, base) {
   function addedChanges(object, base) {
-    return _.transform(object, function (result, value, key) {
+    return transform(object, function (result, value, key) {
       if (base[key] === undefined) {
-        result[key] = (_.isObject(value) && _.isObject(base[key])) ? addedChanges(value, base[key]) : value;
+        result[key] = (isObject(value) && isObject(base[key])) ? addedChanges(value, base[key]) : value;
       }
     });
   }
@@ -107,7 +111,7 @@ async function replace(currentDocument, newDocument) {
       }
       const res = {_id: currentDocument._id};
       // RemoveCommand need current value as it will be used for deletion
-      _.set(res, `${_fieldName}`, _.get(currentDocument, `${_fieldName}`));
+      set(res, `${_fieldName}`, get(currentDocument, `${_fieldName}`));
 
       const remCmd = new RemoveCommand(res);
 
@@ -115,7 +119,7 @@ async function replace(currentDocument, newDocument) {
       await fieldTree.remove(remCmd);
 
       // Insert new value
-      await fieldTree.insert(id, _.get(newDocument, `${_fieldName}`));
+      await fieldTree.insert(id, get(newDocument, `${_fieldName}`));
 
     } else if (_fieldType === 'object' && !Array.isArray(_fieldType)) {
       for (const _nestedFieldName in _fieldValue) {

@@ -49,6 +49,8 @@ async function findLowerThan(key, includeKey = false) {
         result.identifiers.push(...p.identifiers);
         result.keys.push(...p.keys);
       })
+    }).catch((err)=>{
+      console.error('err',err);
     });
 
   }

@@ -6,10 +6,17 @@ async function remove(_query) {
   const self = this;
   const removeNestedProp = async function (_fieldName, _fieldValue, _remCmd) {
     const _fieldValueType = typeof _fieldValue;
-    console.log({_fieldName}, {_fieldValue})
-    if(['number','string','boolean'].includes(_fieldValueType)){
+    if(['number','string','boolean','object'].includes(_fieldValueType)){
+
       const fieldNode = self.getFieldTree(_fieldName);
-      await fieldNode.remove(_remCmd);
+      if(fieldNode === undefined){
+        throw new Error('Field do not exist');
+      }
+      try {
+        await fieldNode.remove(_remCmd);
+      }catch (err){
+        // FIXME: Can be due to already deleted or bug. We need to handle crafted bug properly
+      }
     }else{
       if(_fieldValueType==='object' && !Array.isArray(_fieldValue)){
         for (const _nestedFieldName in _fieldValue) {
@@ -39,7 +46,16 @@ async function remove(_query) {
           if(_fieldValType==='object' && !Array.isArray(_fieldValue)){
             for (const _nestedFieldName in _fieldValue) {
               const _nestedFieldValue = _fieldValue[_nestedFieldName];
-              await removeNestedProp(`${_fieldName}.${_nestedFieldName}`,  _nestedFieldValue, remCmd);
+              try{
+                await removeNestedProp(`${_fieldName}.${_nestedFieldName}`,  _nestedFieldValue, remCmd);
+              }catch (e){
+                switch (e.message){
+                  case 'Field do not exist':
+                    //Already deletedd probably
+                    break;
+                  default: throw e;
+              }
+            }
             }
           }else{
             throw new Error(`Unsupported type ${_fieldValType}`)

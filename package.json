@@ -49,7 +49,16 @@
   },
   "dependencies": {
     "fslockjs": "^2.0.1",
-    "lodash": "^4.17.15",
+    "lodash.clonedeep": "^4.5.0",
+    "lodash.foreach": "^4.5.0",
+    "lodash.set": "^4.3.2",
+    "lodash.get": "^4.4.2",
+    "lodash.intersection": "^4.4.0",
+    "lodash.range": "^3.2.0",
+    "lodash.reduce": "^4.6.0",
+    "lodash.isequal": "^4.5.0",
+    "lodash.isobject": "^3.0.2",
+    "lodash.transform": "^4.6.0",
     "mongo-objectid": "^1.2.1"
   }
 }
