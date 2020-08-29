@@ -1,6 +1,8 @@
+const cloneDeep = require('lodash.clonedeep');
+const range = require('lodash.range');
 const lowerThanKeys = require('./ops/lowerThanKeys');
 const greaterThanKeys = require('./ops/greaterThanKeys');
-const {cloneDeep, range}=require('lodash');
+
 module.exports = async function findInLeaf(leafId, value, op = '$eq') {
   const leaf = this.leafs[leafId];
 
@@ -9,41 +11,41 @@ module.exports = async function findInLeaf(leafId, value, op = '$eq') {
   }
   const result = {
     identifiers: [],
-    keys: []
+    keys: [],
   };
-  const {keys} = leaf.data;
-  const {identifiers} = leaf.meta;
+  const { keys } = leaf.data;
+  const { identifiers } = leaf.meta;
 
   const firstIdx = keys.indexOf(value);
   const lastIdx = keys.lastIndexOf(value);
 
-  const strictMatchingKeysLen = (firstIdx>-1) ? 1+(lastIdx-firstIdx) : 0;
+  const strictMatchingKeysLen = (firstIdx > -1) ? 1 + (lastIdx - firstIdx) : 0;
   switch (op) {
-    case "$eq":
+    case '$eq':
       if (!strictMatchingKeysLen) {
         return result;
       }
       // const start = strictMatchingKeys[0];
       // const end = strictMatchingKeys[0] + strictMatchingKeysLen;
 
-      result.identifiers.push(...identifiers.slice(firstIdx, lastIdx+1));
-      result.keys.push(...keys.slice(firstIdx, lastIdx+1));
+      result.identifiers.push(...identifiers.slice(firstIdx, lastIdx + 1));
+      result.keys.push(...keys.slice(firstIdx, lastIdx + 1));
       return result;
       // return this.leafs[leafId].meta.identifiers.slice(start, end);
       break;
-    case "$lte":
+    case '$lte':
       let resLte = [];
       resLte = resLte.concat(cloneDeep(await this.findInLeaf(leafId, value, '$lt')));
       resLte = resLte.concat(cloneDeep(await this.findInLeaf(leafId, value, '$eq')));
       resLte.forEach((res) => {
-        result.identifiers.push(...res.identifiers)
-        result.keys.push(...res.keys)
-      })
+        result.identifiers.push(...res.identifiers);
+        result.keys.push(...res.keys);
+      });
       // throw new Error('Modification to new format')
       // return resLte;
       return result;
-    case "$lt":
-      if (firstIdx>-1) {
+    case '$lt':
+      if (firstIdx > -1) {
         const localIndex = keys.indexOf(value);
         if (localIndex !== 0) {
           result.identifiers.push(...identifiers.slice(0, localIndex));
@@ -57,34 +59,34 @@ module.exports = async function findInLeaf(leafId, value, op = '$eq') {
         // return this.leafs[leafId].meta.identifiers.slice(0, keys.length);
       }
       return result;
-    case "$gt":
-      if (firstIdx>-1) {
+    case '$gt':
+      if (firstIdx > -1) {
         const localIndex = keys.indexOf(value);
         if (localIndex !== -1) {
-          result.identifiers.push(...identifiers.slice(localIndex + strictMatchingKeysLen))
-          result.keys.push(...keys.slice(localIndex + strictMatchingKeysLen))
+          result.identifiers.push(...identifiers.slice(localIndex + strictMatchingKeysLen));
+          result.keys.push(...keys.slice(localIndex + strictMatchingKeysLen));
         }
       } else {
         const gtKeys = greaterThanKeys(keys, value);
         const len = gtKeys.length;
         if (leafId !== 0 && len > 0) {
-          result.identifiers.push(...identifiers.slice(-len))
-          result.keys.push(...keys.slice(-len))
+          result.identifiers.push(...identifiers.slice(-len));
+          result.keys.push(...keys.slice(-len));
         }
       }
       return result;
-    case "$gte":
+    case '$gte':
       let resGte = [];
       resGte = resGte.concat(cloneDeep(await this.findInLeaf(leafId, value, '$eq')));
       resGte = resGte.concat(cloneDeep(await this.findInLeaf(leafId, value, '$gt')));
       resGte.forEach((res) => {
-        result.identifiers.push(...res.identifiers)
-        result.keys.push(...res.keys)
-      })
+        result.identifiers.push(...res.identifiers);
+        result.keys.push(...res.keys);
+      });
       // throw new Error('Modification to new format')
       // return resGte;
       return result;
     default:
       throw new Error(`Not supported op ${op}`);
   }
-}
+};

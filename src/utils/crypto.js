@@ -18,7 +18,7 @@ function getRandomBytes() {
 }
 
 function browserRandomBytes() {
-  let randomBytes = size => window.crypto.getRandomValues(new Uint8Array(size));
+  const randomBytes = (size) => window.crypto.getRandomValues(new Uint8Array(size));
   return randomBytes;
 }
 
@@ -27,8 +27,8 @@ const isWindowContext = (typeof window !== 'undefined' && window.crypto && windo
 const crypto = {
   insecureRandomBytes,
   randomBytes: (isWindowContext) ? browserRandomBytes : getRandomBytes(),
-}
-crypto.generateRandId = (prefix='') => prefix+(Date.now().toString(16) + crypto.randomBytes(4).toString('hex'));
+};
+crypto.generateRandId = (prefix = '') => prefix + (Date.now().toString(16) + crypto.randomBytes(4).toString('hex'));
 
 crypto.generateLeafId = () => crypto.generateRandId('l');
 crypto.generateFieldTreeId = () => crypto.generateRandId('f');

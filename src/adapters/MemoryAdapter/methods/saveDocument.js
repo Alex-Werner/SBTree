@@ -1,5 +1,5 @@
-async function saveDocument(doc){
-  if(!this.documents[doc._id]){
+async function saveDocument(doc) {
+  if (!this.documents[doc._id]) {
     this.documents[doc._id] = doc;
   }
 }

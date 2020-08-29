@@ -1,11 +1,10 @@
 const get = require('../ops/get');
-const {waitFor} = require('../../../utils/fn');
 
-async function getDocument(identifier){
-  if(!this.isReady){
-    await waitFor(this, 'isReady');
+async function getDocument(identifier) {
+  if (!this.state.isReady) {
+    await this.isReady();
   }
 
-  return (await get.call(this,identifier));
-};
+  return (await get.call(this, identifier));
+}
 module.exports = getDocument;

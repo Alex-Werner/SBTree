@@ -5,9 +5,9 @@
  *
  * @returns {Promise<void>}
  */
-const mergeDown = async function(){
+const mergeDown = async function () {
   const parent = this.getParent();
-  const {childrens, keys, id}= this;
+  const { childrens, keys, id } = this;
 
   // parent.childrens.splice(selfPos, 1, childrens[0]);
   // console.log(selfPos);
@@ -16,7 +16,7 @@ const mergeDown = async function(){
 
   // console.log(this)
   // console.log(await parent.getFillStatus())
-  console.log('Mergeup')
-  throw new Error('Unsupported merge up')
+  console.log('Mergeup');
+  throw new Error('Unsupported merge up');
 };
 module.exports = mergeDown;

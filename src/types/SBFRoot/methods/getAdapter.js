@@ -1,3 +1,3 @@
-module.exports = function getAdapter(){
+module.exports = function getAdapter() {
   return this.getTree().getAdapter();
-}
+};

@@ -1,6 +1,6 @@
-const {each}=require('lodash');
-function loadState(state){
+const each = require('lodash.foreach');
 
+function loadState(state) {
   this.order = state.order;
   this.fillFactor = state.fillFactor;
   this.verbose = state.verbose;
@@ -12,9 +12,9 @@ function loadState(state){
   this.uniques = state.uniques;
   this.exclude = state.exclude;
 
-  each(state.fieldTrees,(fieldRoot, _fieldName)=>{
-    this.setFieldTree({fieldName:_fieldName, root:fieldRoot});
-  })
+  each(state.fieldTrees, (fieldRoot, _fieldName) => {
+    this.setFieldTree({ fieldName: _fieldName, root: fieldRoot });
+  });
   return true;
-};
+}
 module.exports = loadState;

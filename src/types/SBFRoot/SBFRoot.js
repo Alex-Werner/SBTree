@@ -1,7 +1,7 @@
 const {insertSorted} = require('../../utils/array');
 const {comparatorString, comparatorNum} = require('../../utils/comparators')
 const {generateRootId} = require('../../utils/crypto');
-const {each}=require('lodash');
+const each = require('lodash.foreach');
 const SBFLeaf = require('../SBFLeaf/SBFLeaf');
 const SBFNode = require('../SBFNode/SBFNode');
 

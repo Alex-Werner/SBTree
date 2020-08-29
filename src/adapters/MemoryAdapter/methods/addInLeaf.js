@@ -1,13 +1,13 @@
-const {insertSorted} = require('../../../utils/array');
+const { insertSorted } = require('../../../utils/array');
 
-async function addInLeaf(leafName, identifier, value){
-  if(!this.leafs[leafName]){
+async function addInLeaf(leafName, identifier, value) {
+  if (!this.leafs[leafName]) {
     await this.createLeaf(leafName);
   }
-  const {meta, data} = this.leafs[leafName];
+  const { meta, data } = this.leafs[leafName];
 
-  if(meta.identifiers.includes(identifier)){
-    //TODO : except unique:false?
+  if (meta.identifiers.includes(identifier)) {
+    // TODO : except unique:false?
     return false;
   }
 
@@ -17,7 +17,7 @@ async function addInLeaf(leafName, identifier, value){
   //   this.documents[identifier] = {_id: identifier}
   // }
   // this.documents[identifier][field] = key;
-  meta.size +=1;
+  meta.size += 1;
   meta.identifiers.splice(index, 0, identifier);
 }
 module.exports = addInLeaf;

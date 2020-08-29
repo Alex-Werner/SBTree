@@ -1,11 +1,11 @@
-async function replaceInLeaf(leafId, identifier, value){
-  if(!this.leafs[leafId]){
-    throw new Error(`Unexistant leaf id ${leafId}`)
+async function replaceInLeaf(leafId, identifier, value) {
+  if (!this.leafs[leafId]) {
+    throw new Error(`Unexistant leaf id ${leafId}`);
   }
-  const {meta, data} = this.leafs[leafId];
+  const { meta, data } = this.leafs[leafId];
 
-  if(!meta.identifiers.includes(identifier)){
-    //TODO : except unique:false?
+  if (!meta.identifiers.includes(identifier)) {
+    // TODO : except unique:false?
     throw new Error(`Identifier ${identifier} do not exist`);
   }
 

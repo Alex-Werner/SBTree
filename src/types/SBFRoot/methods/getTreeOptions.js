@@ -1,3 +1,3 @@
-module.exports = function getTreeOptions(){
+module.exports = function getTreeOptions() {
   return this.getTree().getOptions();
-}
+};

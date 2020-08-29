@@ -1,5 +1,5 @@
 async function findLowerThan(key, includeKey = false) {
-  let result = {identifiers: [], keys: []};
+  const result = { identifiers: [], keys: [] };
   const { childrens, identifiers, keys } = this;
 
   // We first see where our key is located;
@@ -10,10 +10,10 @@ async function findLowerThan(key, includeKey = false) {
     leafIndex++;
   });
 
-  let p = [];
+  const p = [];
 
   if (childrens.length === 0) {
-    if(!identifiers[leafIndex]){
+    if (!identifiers[leafIndex]) {
       leafIndex--;
     }
     if (identifiers[leafIndex]) {
@@ -24,10 +24,10 @@ async function findLowerThan(key, includeKey = false) {
             return;
           }
 
-          result.identifiers.push(identifiers[i])
-          result.keys.push(keys[i])
+          result.identifiers.push(identifiers[i]);
+          result.keys.push(keys[i]);
         }
-      })
+      });
     }
   } else {
     // All smaller leaf that our leafIndex needs to be included
@@ -48,11 +48,11 @@ async function findLowerThan(key, includeKey = false) {
       res.forEach((p) => {
         result.identifiers.push(...p.identifiers);
         result.keys.push(...p.keys);
-      })
+      });
+    }).catch((err) => {
+      console.error('err', err);
     });
-
   }
   return result;
-
-};
+}
 module.exports = findLowerThan;

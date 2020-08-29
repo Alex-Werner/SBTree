@@ -1,11 +1,9 @@
 const query = require('../ops/query');
-const {waitFor} = require('../../../utils/fn');
 
-async function findDocuments(params){
-  if(!this.isReady){
-    await waitFor(this, 'isReady');
+async function findDocuments(params) {
+  if (!this.state.isReady) {
+    await this.isReady();
   }
-  return (await query.call(this,params));
-
-};
+  return (await query.call(this, params));
+}
 module.exports = findDocuments;

@@ -8,7 +8,7 @@ function toJSON() {
     uniques,
     exclude,
     size,
-    adapter
+    adapter,
   } = this;
 
   return JSON.parse(JSON.stringify({
@@ -20,7 +20,7 @@ function toJSON() {
     uniques,
     exclude,
     size,
-    adapter
+    adapter,
   }));
-};
+}
 module.exports = toJSON;
