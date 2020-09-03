@@ -1,7 +1,17 @@
 - Getting Started
     - [Core Concepts](getting-started/core-concepts.md) 
 - Primitives 
-    - [SBTree](primitives/SBTree.md)
+    - [SBTree](primitives/SBTree/SBTree.md)
+        - [deleteDocuments](primitives/SBTree/methods/deleteDocuments)
+        - [findDocuments](primitives/SBTree/methods/findDocuments)
+        - [getDocument](primitives/SBTree/methods/getDocument)
+        - [insertDocuments](primitives/SBTree/methods/insertDocuments)
+        - [toJSON](primitives/SBTree/methods/toJSON)
+
+    - [SBFTree](primitives/SBFTree/SBFTree.md)
+    - [SBFRoot](primitives/SBFRoot/SBFRoot.md)
+    - [SBFNode](primitives/SBFNode/SBFNode.md)
+    - [SBFLeaf](primitives/SBFLeaf/SBFLeaf.md)
 - Usage
     - [Events](usage/events.md)
     - [Queries](usage/queries.md)
