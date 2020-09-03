@@ -19,9 +19,10 @@ const array = {
       index = Math.floor((min + max) / 2);
     }
     if (Array.isArray(item)) {
-      throw new Error('Not handled');
+      arr.splice(index, 0, ...item);
+    }else{
+      arr.splice(index, 0, item);
     }
-    arr.splice(index, 0, item);
     return index;
   },
   async forEach(array, eachFn) {

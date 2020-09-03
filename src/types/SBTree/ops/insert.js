@@ -17,7 +17,7 @@ async function insert(document) {
 
     if (validTypes.includes(_fieldType)) {
       // When we have to deal with a nested object
-      if (_fieldType === 'object' && !Array.isArray(_fieldType)) {
+      if (_fieldType === 'object' && !Array.isArray(_fieldValue)) {
         // Then we create a nested field tree for each field of the nested object
 
         const self = this;
@@ -30,7 +30,13 @@ async function insert(document) {
             if (fieldTree) {
               if (typeof _fieldValue[_propName] === 'object' && !Array.isArray(_fieldValue)) {
                 for (const _childPropName in _fieldValue[_propName]) {
-                  await insertNested(`${_fieldName}.${_propName}`, _fieldValue[_propName]);
+                  if(Array.isArray(_fieldValue[_propName])){
+                    if(_childPropName === '0') {
+                      await fieldTree.insert(id, _fieldValue[_propName]);
+                    }
+                  } else{
+                    await insertNested(`${_fieldName}.${_propName}`, _fieldValue[_propName]);
+                  }
                 }
               } else {
                 await fieldTree.insert(id, _fieldValue[_propName]);
