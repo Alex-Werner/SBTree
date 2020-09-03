@@ -7,8 +7,12 @@
         - [getDocument](primitives/SBTree/methods/getDocument)
         - [insertDocuments](primitives/SBTree/methods/insertDocuments)
         - [toJSON](primitives/SBTree/methods/toJSON)
-
     - [SBFTree](primitives/SBFTree/SBFTree.md)
+        - [find](primitives/SBFTree/methods/find)
+        - [get](primitives/SBFTree/methods/get)
+        - [insert](primitives/SBFTree/methods/insert)
+        - [remove](primitives/SBFTree/methods/remove)
+        - [replace](primitives/SBFTree/methods/replace)
     - [SBFRoot](primitives/SBFRoot/SBFRoot.md)
     - [SBFNode](primitives/SBFNode/SBFNode.md)
     - [SBFLeaf](primitives/SBFLeaf/SBFLeaf.md)

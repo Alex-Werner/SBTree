@@ -1,4 +1,4 @@
-## SBFLeaf
+### SBFLeaf
 
 SBFLeaf represents the end of the tree. 
 They contain a size, the identifier array, and the set of keys. 

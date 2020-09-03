@@ -1,4 +1,4 @@
-## SBTree API 
+### SBTree 
 
 ```js
 const tree = new SBTree([props]);

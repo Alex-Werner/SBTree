@@ -1,4 +1,4 @@
-## SBFTree API 
+### SBFTree API 
 
 ```js
 const fielTree = new SBFTree([props]);
@@ -19,8 +19,11 @@ The SBFTree is an interface instance specific to a field. For a document {age, n
 
 The Tree has two components, an identifier (of the document), and a value and use a B+Tree.
 
-#### .find
-#### .get
-#### .insert
-#### .remove
-#### .replace
+
+### Methods 
+
+- [find](primitives/SBFTree/methods/find)
+- [get](primitives/SBFTree/methods/get)
+- [insert](primitives/SBFTree/methods/insert)
+- [remove](primitives/SBFTree/methods/remove)
+- [replace](primitives/SBFTree/methods/replace)

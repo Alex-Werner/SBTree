@@ -1,4 +1,4 @@
-## SBFNode
+### SBFNode
 
 SBFNode represents a part of the tree that is not a Leaf (intermediary nodes). 
 

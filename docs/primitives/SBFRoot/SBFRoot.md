@@ -1,4 +1,4 @@
-## SBFRoot
+### SBFRoot
 
 SBFRoot represents the first node of our tree, the starting point from which we perform the insertion, replacement, deletion or search. 
 
