@@ -12,10 +12,11 @@ const tree = new SBTree([props]);
   - `uniques` Array - (def: []) - Allow to set some field unique by adding them to this array
   - `exclude` Array - (def: []) - Allow to exclude from indexing some field (important if you expect field value to be huge or nested).
 
+
 #### async tree.insertDocuments(documents)
 
-Allow to process one or an array of documents and insert them. 
-It returns the inserted object with their _id if not specified in document.
+Allow to process an array (or unique) of documents and get them inserted. 
+It returns the inserted array containing mutated (with their _id if not specified in document) values.
 
 ```js
     await tree.insertDocuments({age:33, name:"Jean",_id:'507f191e810c19729de860ea'})

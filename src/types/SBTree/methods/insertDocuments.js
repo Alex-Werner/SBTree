@@ -10,11 +10,13 @@ async function insertDocuments(documents) {
   }
 
   if (Array.isArray(documents)) {
+    let insertedDocumentsResultats = [];
     for (const document of documents) {
-      await this.insertDocuments(document);
+      insertedDocumentsResultats.push(...await this.insertDocuments(document));
     }
-    return documents;
+    return insertedDocumentsResultats;
   }
+
   const document = cloneDeep(documents);
 
   if (!document._id) {
@@ -24,6 +26,6 @@ async function insertDocuments(documents) {
 
   this.size += 1;
 
-  return document;
+  return [document];
 }
 module.exports = insertDocuments;
