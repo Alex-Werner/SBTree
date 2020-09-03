@@ -2,6 +2,12 @@ const ObjectId = require('mongo-objectid');
 const cloneDeep = require('lodash.clonedeep');
 const insert = require('../ops/insert');
 
+/**
+ * Allow to insert of or multiple documents
+ *
+ * @param documents
+ * @returns {Promise<[{documents}]>} - copy of the inserted (mutated with _id) document.
+ */
 async function insertDocuments(documents) {
   // This will wait for SBTree to have isReady = true.
   // When so, it will then perform the insertion.
@@ -10,11 +16,13 @@ async function insertDocuments(documents) {
   }
 
   if (Array.isArray(documents)) {
+    let insertedDocumentsResultats = [];
     for (const document of documents) {
-      await this.insertDocuments(document);
+      insertedDocumentsResultats.push(...await this.insertDocuments(document));
     }
-    return documents;
+    return insertedDocumentsResultats;
   }
+
   const document = cloneDeep(documents);
 
   if (!document._id) {
@@ -24,6 +32,6 @@ async function insertDocuments(documents) {
 
   this.size += 1;
 
-  return document;
+  return [document];
 }
 module.exports = insertDocuments;

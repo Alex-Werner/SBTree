@@ -1,10 +1,10 @@
-## Queries
+### Queries
 
 Most of the methods in SBTree are straightforward `insert` expect a document to insert, `get` a document id to fetch.   
 
 However the only exception might be for the query syntax, which is actually a subset of the MongoDB query syntax.  
 
-### Comparators 
+#### Comparators 
 
 | Name         	| Description                                                             	| Examples                                       	|
 |--------------	|-------------------------------------------------------------------------	|------------------------------------------------	|
@@ -19,7 +19,7 @@ However the only exception might be for the query syntax, which is actually a su
 | $nin      	| Matches documents that do not have any elements of the specified array. 	| `.findDocuments({country:{$nin:["Antarctica"]})` 	|
 
 
-### Additionals 
+#### Additionals 
 
 N.B : Not available yet. Only comparators are available to use. This documentation documents forthcoming features.
 
@@ -32,6 +32,6 @@ TODO
 - $exists
 - $regex
 
-### Caveats 
+#### Caveats 
 
 Nested object query is not yet an available feature, but it is high on our priority list. 

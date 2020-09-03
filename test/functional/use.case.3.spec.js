@@ -18,8 +18,8 @@ describe('E2E - Classic UseCase', function suite() {
       "country": "Georgia",
       "_id": "5d6ebb7e21f1df6ff7482631"
     };
-    const lilith = {
-      "name": "Lilith",
+    const lilia = {
+      "name": "Lilia",
       "age": 25,
       "gender": "Female",
       "country": "Armenia",
@@ -28,8 +28,10 @@ describe('E2E - Classic UseCase', function suite() {
     it('should insert', async function () {
       await customTree.insertDocuments(devan);
       // Inserting any document without a _id will generate it one
-      const insertedDoc = await customTree.insertDocuments(lilith);
-      insertedDocId = insertedDoc._id;
+      const insertedDoc = await customTree.insertDocuments(lilia);
+      expect(insertedDoc.length).to.equal(1);
+      expect(insertedDoc[0]._id).to.be.an('string');
+      insertedDocId = insertedDoc[0]._id;
       console.log("Inserted doc ", insertedDocId)
 
       // Inserting in bulk is also possible.
@@ -65,15 +67,14 @@ describe('E2E - Classic UseCase', function suite() {
       const res = await customTree.findDocuments({age: {$lt: 45}})
       const res2 = await customTree.findDocuments({age: {$lte: 45}})
       const res3 = await customTree.findDocuments({age: {$lt: 18}})
-      const expectedFirstname = ["Julian","Lucy","Lilith","Alex","Jean","Anastasia","Alice","Devan","Brigitte","Chen","Pascal","Teneti"];
+      const expectedFirstname = ["Julian","Lucy","Lilia","Alex","Jean","Anastasia","Alice","Devan","Brigitte","Chen","Pascal","Teneti"];
       expect(toNames(res)).to.deep.equal(expectedFirstname);
       expect(toNames(res2)).to.deep.equal(expectedFirstname.concat('Bob'));
       expect(res3).to.deep.equal([])
-
     });
     it('should be able to do query with id', async function () {
       const res = (await customTree.findDocuments({_id:insertedDocId}));
-      expect(res).to.deep.equal([Object.assign({_id:insertedDocId}, lilith)])
+      expect(res).to.deep.equal([Object.assign({_id:insertedDocId}, lilia)])
     });
     it('should be able to do special query',async function () {
       const r = await customTree.findDocuments({country:"France"})
@@ -92,7 +93,7 @@ describe('E2E - Classic UseCase', function suite() {
     });
     it('should be able to get doc by id',async function () {
       const res = (await customTree.getDocument(insertedDocId))
-      expect(res).to.deep.equal(Object.assign({_id:insertedDocId}, lilith))
+      expect(res).to.deep.equal(Object.assign({_id:insertedDocId}, lilia))
     });
     it('should be able to remove a document',async function () {
       const res = (await customTree.deleteDocuments({name:'Bob'}))

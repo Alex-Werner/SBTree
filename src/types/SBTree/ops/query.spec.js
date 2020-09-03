@@ -22,6 +22,7 @@ const fakeSelf = {
   getFieldTree: (fieldName) => {
     return {
       find: (key, operator) => {
+        if(fieldName === 'city') return {identifiers: [], keys: []};
         calledFn.push([fieldName, 'find', key, operator]);
         return {identifiers:['5d6ebb7e21f1df6ff7482631'],keys:[33]}
       }
@@ -38,6 +39,10 @@ describe('SBTree - ops - query', () => {
     const res2 = await querySpec.call(fakeSelf, {age: {$gte:33, $lte:50}});
     expect(calledFn[1]).to.deep.equal(['age','find',33, '$gte']);
     expect(calledFn[2]).to.deep.equal(['age','find',50, '$lte']);
+  });
+  it('should return empty array when no answers', async function () {
+    const res3 = await querySpec.call(fakeSelf, {city: 'Nowhere'});
+    expect(res3).to.deep.equal([]);
   });
   it('should detect nested object', async function () {
     //TODO

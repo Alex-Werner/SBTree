@@ -9,7 +9,7 @@
 
 > State : Optimisation, features and stability works in progress.
 
-> Documentation : https://alex-werner.github.io/SBTree
+Documentation : https://alex-werner.github.io/SBTree
 
 This library's goal is to provide a way to quickly store document-based data in-memory or on the filesystem.  
 It uses a field-specific indexing system relaying on B+Tree structure.  

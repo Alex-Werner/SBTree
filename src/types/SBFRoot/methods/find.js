@@ -7,6 +7,10 @@ async function find(value, operator = '$eq') {
   const p = [];
   const results = { identifiers: [], keys: [] };
 
+  const valueKeys = Object.keys(value);
+  if(valueKeys.includes('$in')){
+    return find.call(this, value.$in, '$in');
+  }
   switch (operator) {
     case '$eq':
       return findEquals.call(this, value);
@@ -45,6 +49,7 @@ async function find(value, operator = '$eq') {
         }).catch((err) => {
           console.error('err', err);
         });
+
       return results;
     case '$nin':
       if (!Array.isArray(value)) throw new Error('$nin operator expect key to be an array');
