@@ -20,6 +20,7 @@ module.exports = async function findInLeaf(leafId, value, op = '$eq') {
   const lastIdx = keys.lastIndexOf(value);
 
   const strictMatchingKeysLen = (firstIdx > -1) ? 1 + (lastIdx - firstIdx) : 0;
+
   switch (op) {
     case '$eq':
       if (!strictMatchingKeysLen) {

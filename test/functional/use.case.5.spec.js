@@ -47,7 +47,6 @@ describe('E2E - UseCase nested document', function suite() {
       const findDocRes2 = await customTree.findDocuments({_created: {$lte: doc._created+1000}});
       expect(findDocRes2[0]).to.deep.equal(doc);
       const findDocRes3 = await customTree.findDocuments({value:{_obj:{_value: 12345}}});
-      console.log({findDocRes3});
       expect(findDocRes3[0]).to.deep.equal(doc);
     });
     it.skip('should update', function () {

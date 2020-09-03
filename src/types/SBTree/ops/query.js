@@ -21,20 +21,20 @@ const findIntersectingIdentifiers = (listOfListOfIdentifiers) => {
 };
 
 const getFieldNamesFromQuery = require('../utils/getFieldNamesFromQuery');
+
 /**
  *
  * @param query
  * @returns {Promise<[]>}
  */
 async function query(query) {
-
   const self = this;
   const findNested = async function (_promises, _queryFieldName, _queryFieldValue) {
     for (const nestedQueryFieldName in _queryFieldValue) {
       const nestedQueryFieldValue = _queryFieldValue[nestedQueryFieldName];
       const nestedQueryFieldType = typeof nestedQueryFieldValue;
 
-      if (['number', 'string', 'boolean'].includes(nestedQueryFieldType)) {
+      if (['number', 'string', 'boolean', 'object'].includes(nestedQueryFieldType)) {
         const fTree = self.getFieldTree(`${_queryFieldName}.${nestedQueryFieldName}`);
         // Sometimes, like when excluded, this can not resolve.
         if (fTree) {
@@ -47,12 +47,9 @@ async function query(query) {
       }
     }
   };
-  if(!query) return [];
+  if (!query) return [];
 
   const fields = getFieldNamesFromQuery(query);
-
-  const fieldsResults = {};
-  const result = [];
 
   // When our search is based on _id and only _id, we can just get document.
   if (fields.length === 1 && fields.indexOf('_id') > -1) {
@@ -62,9 +59,16 @@ async function query(query) {
   const promises = [];
 
   fields.forEach((queryFieldName) => {
-    const queryFieldValue = query[queryFieldName];
-    const queryFieldType = typeof queryFieldValue;
 
+    let queryFieldValue;
+
+    queryFieldName.split('.').forEach((subFieldName) => {
+      queryFieldValue = (queryFieldValue && queryFieldValue[subFieldName])
+          ? queryFieldValue[subFieldName]
+          : query[subFieldName];
+    })
+
+    const queryFieldType = typeof queryFieldValue;
     let fieldTree;
 
     switch (queryFieldType) {
@@ -102,18 +106,18 @@ async function query(query) {
 
   let intermediateIdentifiers = [];
   await Promise
-    .all(promises)
-    .then((pResults) => {
-      for (const pResult of pResults) {
-        // Whenever we sees that, we can quickly answer an empty response, as [] intersect with nothing.
-        if (pResult.identifiers.length === 0) {
-          // We remove any previous findings
-          intermediateIdentifiers = [];
-          break;
+      .all(promises)
+      .then((pResults) => {
+        for (const pResult of pResults) {
+          // Whenever we sees that, we can quickly answer an empty response, as [] intersect with nothing.
+          if (pResult.identifiers.length === 0) {
+            // We remove any previous findings
+            intermediateIdentifiers = [];
+            break;
+          }
+          intermediateIdentifiers.push(pResult.identifiers);
         }
-        intermediateIdentifiers.push(pResult.identifiers);
-      }
-    });
+      });
 
   const matchingObjectIds = findIntersectingIdentifiers(intermediateIdentifiers);
   return resolveDocuments(this, matchingObjectIds);

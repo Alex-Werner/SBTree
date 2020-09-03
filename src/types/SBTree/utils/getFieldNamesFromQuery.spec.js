@@ -15,5 +15,8 @@ describe('utils - .getFieldNamesFromQuery', ()=>{
 
     const res4 = getFieldNamesFromQuery({age:23,infos:{job:{sector:"IT"}}});
     expect(res4).to.deep.equal(['age','infos.job.sector']);
+
+    const res5 = getFieldNamesFromQuery({ age: { '$gte': 33, '$lte': 50 } });
+    expect(res5).to.deep.equal(['age']);
   })
 })
