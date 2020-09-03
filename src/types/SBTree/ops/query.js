@@ -20,6 +20,7 @@ const findIntersectingIdentifiers = (listOfListOfIdentifiers) => {
   return intersection(...identifiers);
 };
 
+const getFieldNamesFromQuery = require('../utils/getFieldNamesFromQuery');
 /**
  *
  * @param query
@@ -48,7 +49,7 @@ async function query(query) {
   };
   if(!query) return [];
 
-  const fields = Object.keys(query);
+  const fields = getFieldNamesFromQuery(query);
 
   const fieldsResults = {};
   const result = [];
