@@ -4,8 +4,8 @@ module.exports = async function openLeafData(leafName) {
   const job = await this.queue.add('File.read', `${this.path}/l/${leafName}.dat`);
   await job.execution();
   let data = {};
-  if (job.results.constructor.name !== Error.name) {
-    data = job.results;
+  if (job.result.constructor.name !== Error.name) {
+    data = job.result;
   }
   this.lastChange = Date.now();
 
