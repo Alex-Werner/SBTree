@@ -1,9 +1,8 @@
 module.exports = async function updateDocument(_doc) {
-  const job = await this.queue.add('File.appendJSON', `${this.path}/d/${_doc._id}.dat`, _doc);
-  await job.execution();
+  const job = await this.queue.add('File.appendJSON', `${this.path}/d/${_doc._id}.dat`, _doc).execution();
   let data = {};
-  if (job.results.constructor.name !== Error.name) {
-    data = job.results;
+  if (job.result.constructor.name !== Error.name) {
+    data = job.result;
   }
   this.lastChange = Date.now();
 

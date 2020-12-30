@@ -1,11 +1,10 @@
 module.exports = async function saveLeafData(leafName, data) {
-  const job = await this.queue.add('File.create', `${this.path}/l/${leafName}.dat`, data);
-  await job.execution();
+  const job = await this.queue.add('File.create', `${this.path}/l/${leafName}.dat`, data).execution();
   let res = {};
-  if (!job.results) {
+  if (!job.result) {
   }
-  if (job.results.constructor.name !== Error.name) {
-    res = job.results;
+  if (job.result.constructor.name !== Error.name) {
+    res = job.result;
   }
   this.lastChange = Date.now();
 
