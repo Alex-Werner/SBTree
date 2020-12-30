@@ -34,7 +34,7 @@ const start = async function () {
     age: 27, country: 'France', email: 'valentin@valjean.fr', _id: '5d6dc94e3c7734812f051df4',
   });
   await tree.insertDocuments({
-    age: 33, email: 'goptnik@dourak.ru', country: 'Russia', _id: '5d6dc93f6059937716f41eed',
+    age: 33, email: 'gopnik@durak.ru', country: 'Russia', _id: '5d6dc93f6059937716f41eed',
   });
 
   // Bulk insert also works
@@ -66,9 +66,9 @@ const start = async function () {
   console.log(await tree.getDocument('5d6dc94e3c7734812f051d7b'));
   console.log('-- Find : {age:33}');
   console.log(await tree.findDocuments({ age: 33 }));
-  console.log('-- Find : {email:goptnik@dourak.ru}');
+  console.log('-- Find : {email:gopnik@durak.ru}');
 
-  console.log(await tree.findDocuments({ email: 'goptnik@dourak.ru' }));
+  console.log(await tree.findDocuments({ email: 'gopnik@durak.ru' }));
   console.log('-- Find : {_id:inserted._id}');
   console.log(await tree.findDocuments({ _id: inserted._id }));
   //
