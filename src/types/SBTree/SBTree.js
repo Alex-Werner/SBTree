@@ -76,6 +76,9 @@ class SBTree extends EventEmitter {
   on(){
     this.#emitter.on(...arguments)
   }
+   once(){
+    this.#emitter.once(...arguments)
+  }
   emit(){
     this.#emitter.emit(...arguments)
   }
@@ -88,7 +91,7 @@ class SBTree extends EventEmitter {
   async isReady() {
     return new Promise((resolve) => {
       if (this.state.isReady) return resolve(true);
-      this.on('ready', () => resolve(true));
+      this.once('ready', () => resolve(true));
     });
   }
 }
