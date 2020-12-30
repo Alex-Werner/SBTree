@@ -58,6 +58,7 @@ FsAdapter.prototype.insertSortedInLeaf = require('./methods/insertSortedInLeaf')
 FsAdapter.prototype.loadDatabase = require('./methods/loadDatabase')
 FsAdapter.prototype.openDocument = require('./methods/openDocument')
 FsAdapter.prototype.openLeaf = require('./methods/openLeaf')
+FsAdapter.prototype.removeDocument = require('./methods/removeDocument');
 FsAdapter.prototype.openLeafData = require('./methods/openLeafData')
 FsAdapter.prototype.replaceDocument = require('./methods/replaceDocument')
 FsAdapter.prototype.replaceInLeaf = require('./methods/replaceInLeaf')
