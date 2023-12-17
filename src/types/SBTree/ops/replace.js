@@ -1,6 +1,5 @@
 const isEqual = require('lodash.isequal');
 const get = require('lodash.get');
-const set = require('lodash.set');
 const isObject = require('lodash.isobject');
 const transform = require('lodash.transform');
 const RemoveCommand = require('./RemoveCommand');
@@ -110,7 +109,9 @@ async function replace(currentDocument, newDocument) {
       }
       const res = { _id: currentDocument._id };
       // RemoveCommand need current value as it will be used for deletion
-      set(res, `${_fieldName}`, get(currentDocument, `${_fieldName}`));
+
+      //Alternative without using lodash.set
+      res[_fieldName] = currentDocument[_fieldName];
 
       const remCmd = new RemoveCommand(res);
 
