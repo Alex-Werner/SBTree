@@ -36,4 +36,4 @@ crypto.generateTreeId = () => crypto.generateRandId('t');
 crypto.generateNodeId = () => crypto.generateRandId('n');
 crypto.generateRootId = () => crypto.generateRandId('r');
 
-module.exports = crypto;
+export default crypto;

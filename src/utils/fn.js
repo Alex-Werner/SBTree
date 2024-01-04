@@ -15,4 +15,5 @@ const waitFor = async (watchedObject, watchedProp, successCallback) => {
     setTimeout(resolver, 10000);
   });
 };
-module.exports = { waitFor };
+
+export { waitFor };
