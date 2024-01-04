@@ -1,5 +1,5 @@
-const {expect} = require('chai');
-const MemoryAdapter = require('./MemoryAdapter');
+import {expect} from 'chai';
+import MemoryAdapter from './MemoryAdapter';
 
 describe('Adapters - MemoryAdapter', function suite() {
   it('should initialize', function () {

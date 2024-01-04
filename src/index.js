@@ -1,11 +1,11 @@
-const ObjectID = require('mongo-objectid');
-const SBTree = require('./types/SBTree/SBTree');
-const adapters = require('./adapters/index');
-const utils = require('./utils/index');
+import ObjectID from 'mongo-objectid';
+import SBTree from './types/SBTree/SBTree';
+import adapters from './adapters/index';
+import utils from './utils/index';
 
-module.exports = {
-  SBTree,
-  ObjectID,
-  adapters,
-  utils,
+export default {
+    SBTree,
+    ObjectID,
+    adapters,
+    utils,
 };

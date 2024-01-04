@@ -1,5 +1,5 @@
-const {expect} = require('chai');
-const indexSpec = require('./index');
+import {expect} from 'chai';
+import indexSpec from './index';
 
 describe('SBTree', () => {
   it('should work', function () {
