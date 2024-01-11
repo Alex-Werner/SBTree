@@ -5,7 +5,9 @@
  * @returns {number} - 1 if a > b, -1 if a < b, 0 if equal.
  */
 export function comparatorString(a, b) {
-    return a.localeCompare(b);
+    if (typeof a !== 'string') a = String(a);
+    if (typeof b !== 'string') b = String(b);
+    return a.localeCompare(b, undefined, { sensitivity: 'base' });
 };
 
 /**
@@ -15,6 +17,7 @@ export function comparatorString(a, b) {
  * @returns {number} - 1 if a > b, -1 if a < b, 0 if equal.
  */
 export function comparatorNum(a, b) {
+    // Will return NaN if either a or b is NaN.
     return Math.sign(a - b);
 };
 
