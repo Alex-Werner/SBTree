@@ -48,7 +48,6 @@ describe('Utils - Ascii', () => {
                 ]
             }
         });
-        console.log({res})
         expect(res).to.deep.equal([
             ['alex', 'alain', 'jean', 'yann', 'zachary'],
             [],

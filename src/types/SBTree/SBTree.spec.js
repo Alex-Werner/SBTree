@@ -108,7 +108,6 @@ describe('SBTree', () => {
       //   pseudo: insertedDuplicateKey.pseudo
       // })).to.deep.equal(realJean);
       const findingRes = (await uniqueTree.findDocuments({email: 'jean@valjean.fr'}))
-      console.log(findingRes)
       expect(findingRes.length).to.deep.equal(1);
       expect(findingRes[0].email).to.deep.equal(realJean.email);
       expect(findingRes[0].name).to.deep.equal(realJean.name);

@@ -11,8 +11,6 @@ async function findGreaterThan(key, includeKey = false) {
 
   const p = [];
 
-  console.log("findGreaterThan", {key, includeKey, childrens, identifiers, keys})
-
   if (childrens.length === 0) {
     if (identifiers[leafIndex]) {
       keys.slice(leafIndex).forEach((_key, i) => {
