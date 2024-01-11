@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import crypto from './crypto.js'; // Adjust the path based on your project structure
+import * as crypto from './crypto.js';
 
 describe('crypto module', () => {
   describe('insecureRandomBytes', () => {

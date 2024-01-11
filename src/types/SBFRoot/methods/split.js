@@ -1,7 +1,7 @@
-const SBFNode = require('../../SBFNode/SBFNode');
-const SBFLeaf = require('../../SBFLeaf/SBFLeaf');
-const { forEach } = require('../../../utils/array');
-
+// const { forEach } = require('../../../utils/array');
+import SBFNode from '../../SBFNode/SBFNode.js';
+import SBFLeaf from '../../SBFLeaf/SBFLeaf.js';
+import {forEach} from '../../../utils/array.js';
 async function split() {
   const {
     childrens, identifiers, keys, fieldName,

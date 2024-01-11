@@ -1,6 +1,5 @@
-const SBFRoot = require('../../SBFRoot/SBFRoot');
-// const SBFLeaf = require('../../SBFLeaf/SBFLeaf');
-// const SBFNode = require('../../SBFNode/SBFNode');
+
+import SBFRoot from '../../SBFRoot/SBFRoot.js';
 export default function createRoot(root = null) {
   if (this.root) {
     throw new Error('Already existing root.');
@@ -14,6 +13,11 @@ export default function createRoot(root = null) {
     const keys = (root && root.keys) ? root.keys : null;
     this.root = new SBFRoot({ tree: this, keys, fieldName });
   }
+
+  // Below might have been stopped due to circular dependencies.
+  // Let it here until figuring out if needed and therefore fix, or remains of prior state.
+  // // const SBFLeaf = require('../../SBFLeaf/SBFLeaf');
+  // // const SBFNode = require('../../SBFNode/SBFNode');
   // const {fieldName} = this;
   // let keys = (root && root.keys) ? root.keys : null;
   // this.root = new SBFRoot({tree:this, keys,fieldName});

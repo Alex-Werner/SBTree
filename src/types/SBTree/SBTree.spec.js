@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-const SBTree = require('./SBTree');
+import SBTree from './SBTree.js';
 const fixtures = {
   documents: [
     {age: 27, email: 'alex@valjean.fr', _id: '16ced004da93e'},

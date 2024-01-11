@@ -5,7 +5,7 @@ async function findDocuments(params) {
     await this.isReady();
   }
 
-  return (await query.call(this, params));
+  return (query.call(this, params));
 }
 
 export default findDocuments;

@@ -1,7 +1,7 @@
 import { expect } from 'chai';
-const SFBLeaf = require('../../SBFLeaf/SBFLeaf');
-const MemoryAdapter = require('../../../adapters/MemoryAdapter/MemoryAdapter');
-const find = require('../../SBFRoot/methods/find');
+import SFBLeaf from '../../SBFLeaf/SBFLeaf.js';
+import MemoryAdapter from '../../../adapters/MemoryAdapter/MemoryAdapter.js';
+import find from './find.js';
 const fixtures = {
   documents: {
     // '5d6ebb7e21f1df6ff7482631': {
@@ -52,8 +52,11 @@ const fakeSelf = {
   ],
   find
 };
-fakeSelf.getAll = require('../methods/getAll').bind(fakeSelf);
-
+// fakeSelf.getAll = require('../methods/getAll').bind(fakeSelf);
+// ESM
+fakeSelf.getAll = import('../methods/getAll.js').then((mod) => {
+    fakeSelf.getAll = mod.default.bind(fakeSelf);
+});
 describe('SBFRoot - methods - find', () => {
   before(async () => {
     await adapter.addInLeaf('l16da4db23936c37368a', '5d6ebb7e21f1df6ff7482621', 17)

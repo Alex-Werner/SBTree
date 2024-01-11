@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-const SBFTree = require('../SBFTree/SBFTree');
-const MemoryAdapter = require('../../adapters/MemoryAdapter/MemoryAdapter')
+import SBFTree from './SBFTree.js';
+import MemoryAdapter from '../../adapters/MemoryAdapter/MemoryAdapter.js';
 // Vector for verifying with a visual tool : https://www.cs.csubak.edu/~msarr/visualizations/BPlusTree.html
 describe('SBFTree', () => {
   let tree;

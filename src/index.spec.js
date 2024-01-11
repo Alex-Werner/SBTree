@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import indexSpec from './index';
+import indexSpec from './index.js';
 describe('SBTree', () => {
   it('should work', function () {
     expect(indexSpec).to.have.property('SBTree');

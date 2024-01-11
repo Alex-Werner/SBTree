@@ -1,4 +1,4 @@
-const cloneDeep = require('lodash.clonedeep');
+import cloneDeep from "lodash.clonedeep";
 
 export default async function getLeftInLeaf(leafId) {
   const leaf = this.leafs[leafId];

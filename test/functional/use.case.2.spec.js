@@ -1,5 +1,6 @@
-const {expect} = require('chai');
-const {SBTree} = require('../..');
+import { expect } from 'chai';
+import { SBTree } from '../../index.js';
+
 describe('E2E - Classic UseCase', function suite() {
   describe('RegUser DB', () => {
     const customTree = new SBTree({

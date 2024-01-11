@@ -1,9 +1,9 @@
-const isEqual = require('lodash.isequal');
-const get = require('lodash.get');
-const isObject = require('lodash.isobject');
-const transform = require('lodash.transform');
-const RemoveCommand = require('./RemoveCommand');
-const { validTypes } = require('../../../constants');
+import isEqual from 'lodash.isequal';
+import get from 'lodash.get';
+import isObject from 'lodash.isobject';
+import transform from 'lodash.transform';
+import RemoveCommand from './RemoveCommand.js';
+import { validTypes } from '../../../constants.js';
 
 // Returns difference between object. Do not return addition/deletion between object, only diff when existing in both
 function findChangedFields(object, base) {

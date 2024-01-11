@@ -1,5 +1,8 @@
-const Data = require('../types/Data');
-const Meta = require('../types/Meta');
+// const Data = require('../types/Data');
+// const Meta = require('../types/Meta');
+
+import Meta from "../types/Meta.js";
+import Data from "../types/Data.js";
 
 async function createLeaf(leafName) {
   if (this.leafs[leafName]) {

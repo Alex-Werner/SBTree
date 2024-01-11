@@ -1,7 +1,7 @@
-const {expect} = require('chai');
-const {SBTree} = require('../..');
-const userList = require('../fixtures/use.cases/1.reg.users').users;
-const {draw}= require('../../src/utils/ascii');
+import {expect} from 'chai';
+import {SBTree} from '../../index.js';
+import userList from '../fixtures/use.cases/1.reg.users.json' assert { type: "json" };
+
 describe('E2E - Classic UseCase', function suite() {
   describe('RegUser DB', () => {
     const shiftedUsers = [];
@@ -30,7 +30,7 @@ describe('E2E - Classic UseCase', function suite() {
       expect(customTree.fieldTrees).to.deep.equal({});
     });
     it('should allow to insert documents', async function () {
-      const doc = userList.shift();
+      const doc = userList.users.shift();
       shiftedUsers.push(doc);
 
       await customTree.insertDocuments(doc);
@@ -66,8 +66,8 @@ describe('E2E - Classic UseCase', function suite() {
       expect(findRes).to.deep.equal([doc])
     });
     it('should allow more than order', async function () {
-      const doc2 = userList.shift();
-      const doc3 = userList.shift();
+      const doc2 = userList.users.shift();
+      const doc3 = userList.users.shift();
       shiftedUsers.push(doc2);
       shiftedUsers.push(doc3);
       await customTree.insertDocuments(doc2);
@@ -87,7 +87,7 @@ describe('E2E - Classic UseCase', function suite() {
       });
     });
     it('should still allow to find document', async function () {
-      const doc4 = userList.shift();
+      const doc4 = userList.users.shift();
       shiftedUsers.push(doc4)
       await customTree.insertDocuments(doc4);
 
@@ -101,9 +101,9 @@ describe('E2E - Classic UseCase', function suite() {
       expect(delRes).to.deep.equal([doc])
     });
     it('should allow to add even more', async function () {
-      const doc5 = userList.shift();
-      const doc6 = userList.shift();
-      const doc7 = userList.shift();
+      const doc5 = userList.users.shift();
+      const doc6 = userList.users.shift();
+      const doc7 = userList.users.shift();
       shiftedUsers.push(doc5);
       shiftedUsers.push(doc6);
       shiftedUsers.push(doc7);

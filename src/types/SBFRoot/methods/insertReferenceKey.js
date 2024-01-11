@@ -1,5 +1,4 @@
-const { insertSorted } = require('../../../utils/array');
-
+import {insertSorted} from '../../../utils/array.js';
 async function insertReferenceKey(value) {
   if (this.isFull()) {
     await this.split();

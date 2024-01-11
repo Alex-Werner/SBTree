@@ -1,5 +1,4 @@
-// const { insertSorted } = require('../../../utils/array');
-import insertSorted from '../../../utils/array.js';
+import {insertSorted} from '../../../utils/array.js';
 export default async function insertSortedInLeaf(leafId, value) {
   const data = await this.openLeafData(leafId);
   if (!data || !data.keys) {

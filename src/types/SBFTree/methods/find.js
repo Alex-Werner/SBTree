@@ -4,5 +4,5 @@ export default async function find(value, operator) {
     this.createRoot();
     root = this.root;
   }
-  return await root.find(value, operator);
+  return root.find(value, operator);
 };

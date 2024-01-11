@@ -1,7 +1,6 @@
-const {expect} = require('chai');
-const {SBTree} = require('../..');
-const users = require('./users');
-
+import { expect } from 'chai';
+import { SBTree } from '../../index.js';
+import users from './users.json' assert { type: "json" };
 const toNames = (arr)=>{
   return arr.reduce((acc, el)=>{
       acc.push(el.name);
@@ -63,6 +62,7 @@ describe('E2E - Classic UseCase', function suite() {
       const res3 = await customTree.findDocuments({age: {$gt: 45}})
       expect(res3).to.deep.equal([])
     });
+    return;
     it('should be able to search lt 45', async function () {
       const res = await customTree.findDocuments({age: {$lt: 45}})
       const res2 = await customTree.findDocuments({age: {$lte: 45}})

@@ -1,6 +1,20 @@
-const {insertSorted} = require('../../utils/array');
-const SBFLeaf = require('../SBFLeaf/SBFLeaf');
-const {generateNodeId} = require('../../utils/crypto');
+import {generateNodeId} from '../../utils/crypto.js';
+import SBFLeaf from '../SBFLeaf/SBFLeaf.js';
+import attachLeaf from "./methods/attachLeaf.js";
+import find from "./methods/find.js";
+import findLowerThan from "./methods/findLowerThan.js";
+import findGreaterThan from "./methods/findGreaterThan.js";
+import getAdapter from "./methods/getAdapter.js";
+import getAll from "./methods/getAll.js";
+import getFillStatus from "./methods/getFillStatus.js";
+import getTreeOptions from "./methods/getTreeOptions.js";
+import insert from "./methods/insert.js";
+import insertReferenceKey from "./methods/insertReferenceKey.js";
+import isFull from "./methods/isFull.js";
+import mergeUp from "./methods/mergeUp.js";
+import remove from "./methods/remove.js";
+import replace from "./methods/replace.js";
+import split from "./methods/split.js";
 
 /**
  * SBFTree
@@ -44,19 +58,19 @@ class SBFNode {
   }
 
 };
-SBFNode.prototype.attachLeaf = require('./methods/attachLeaf')
-SBFNode.prototype.find = require('./methods/find')
-SBFNode.prototype.findLowerThan = require('./methods/findLowerThan')
-SBFNode.prototype.findGreaterThan = require('./methods/findGreaterThan')
-SBFNode.prototype.getAdapter = require('./methods/getAdapter')
-SBFNode.prototype.getAll = require('./methods/getAll')
-SBFNode.prototype.getFillStatus = require('./methods/getFillStatus')
-SBFNode.prototype.getTreeOptions = require('./methods/getTreeOptions')
-SBFNode.prototype.insert = require('./methods/insert')
-SBFNode.prototype.insertReferenceKey = require('./methods/insertReferenceKey')
-SBFNode.prototype.isFull = require('./methods/isFull')
-SBFNode.prototype.mergeUp = require('./methods/mergeUp')
-SBFNode.prototype.remove = require('./methods/remove')
-SBFNode.prototype.replace = require('./methods/replace')
-SBFNode.prototype.split = require('./methods/split')
+SBFNode.prototype.attachLeaf = attachLeaf;
+SBFNode.prototype.find = find;
+SBFNode.prototype.findLowerThan = findLowerThan;
+SBFNode.prototype.findGreaterThan = findGreaterThan
+SBFNode.prototype.getAdapter = getAdapter;
+SBFNode.prototype.getAll = getAll;
+SBFNode.prototype.getFillStatus = getFillStatus;
+SBFNode.prototype.getTreeOptions = getTreeOptions;
+SBFNode.prototype.insert = insert;
+SBFNode.prototype.insertReferenceKey = insertReferenceKey;
+SBFNode.prototype.isFull = isFull;
+SBFNode.prototype.mergeUp = mergeUp;
+SBFNode.prototype.remove = remove;
+SBFNode.prototype.replace = replace;
+SBFNode.prototype.split = split;
 export default SBFNode;

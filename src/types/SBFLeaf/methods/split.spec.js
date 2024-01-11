@@ -1,6 +1,5 @@
 import { expect } from 'chai';
-const split = require('./split');
-
+import split from './split.js';
 let called = [];
 const self = {
       id: '16d72f309846d',

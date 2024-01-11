@@ -1,9 +1,21 @@
-const {insertSorted} = require('../../utils/array');
-const {comparatorString, comparatorNum} = require('../../utils/comparators')
-const {generateRootId} = require('../../utils/crypto');
-const each = require('lodash.foreach');
-const SBFLeaf = require('../SBFLeaf/SBFLeaf');
-const SBFNode = require('../SBFNode/SBFNode');
+import isFull from "./methods/isFull.js";
+import split from "./methods/split.js";
+import attachLeaf from "./methods/attachLeaf.js";
+import find from "./methods/find.js";
+import getAll from "./methods/getAll.js";
+import get from "./methods/get.js";
+import getAdapter from "./methods/getAdapter.js";
+import getFillStatus from "./methods/getFillStatus.js";
+import getTreeOptions from "./methods/getTreeOptions.js";
+import remove from "./methods/remove.js";
+import replace from "./methods/replace.js";
+import insert from "./methods/insert.js";
+import insertReferenceKey from "./methods/insertReferenceKey.js";
+
+import {generateRootId} from '../../utils/crypto.js';
+import each from "lodash.foreach";
+import SBFLeaf from "../SBFLeaf/SBFLeaf.js";
+import SBFNode from "../SBFNode/SBFNode.js";
 
 const parseChildrens = (_childrens, _parent)=>{
   const childrens = [];
@@ -49,17 +61,17 @@ class SBFRoot {
     return (this.#tree);
   }
 };
-SBFRoot.prototype.attachLeaf = require('./methods/attachLeaf')
-SBFRoot.prototype.find = require('./methods/find')
-SBFRoot.prototype.getAll = require('./methods/getAll')
-SBFRoot.prototype.get = require('./methods/get')
-SBFRoot.prototype.getAdapter = require('./methods/getAdapter')
-SBFRoot.prototype.getFillStatus = require('./methods/getFillStatus')
-SBFRoot.prototype.getTreeOptions = require('./methods/getTreeOptions')
-SBFRoot.prototype.remove = require('./methods/remove')
-SBFRoot.prototype.replace = require('./methods/replace')
-SBFRoot.prototype.insert = require('./methods/insert')
-SBFRoot.prototype.insertReferenceKey = require('./methods/insertReferenceKey')
-SBFRoot.prototype.isFull = require('./methods/isFull')
-SBFRoot.prototype.split = require('./methods/split')
+SBFRoot.prototype.attachLeaf = attachLeaf;
+SBFRoot.prototype.find = find;
+SBFRoot.prototype.getAll = getAll;
+SBFRoot.prototype.get = get;
+SBFRoot.prototype.getAdapter = getAdapter;
+SBFRoot.prototype.getFillStatus = getFillStatus;
+SBFRoot.prototype.getTreeOptions = getTreeOptions;
+SBFRoot.prototype.remove = remove;
+SBFRoot.prototype.replace = replace;
+SBFRoot.prototype.insert = insert;
+SBFRoot.prototype.insertReferenceKey = insertReferenceKey;
+SBFRoot.prototype.isFull = isFull;
+SBFRoot.prototype.split = split;
 export default SBFRoot;

@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import MemoryAdapter from './MemoryAdapter';
+import MemoryAdapter from './MemoryAdapter.js';
 
 describe('Adapters - MemoryAdapter', function suite() {
   it('should initialize', function () {

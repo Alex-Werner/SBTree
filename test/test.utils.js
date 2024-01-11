@@ -1,5 +1,4 @@
-const { expect } = require('chai');
-
+import { expect } from 'chai';
 const expectThrowsAsync = async (method, errorMessage) => {
   let error = null;
   try {
@@ -12,4 +11,4 @@ const expectThrowsAsync = async (method, errorMessage) => {
     expect(error.message).to.equal(errorMessage);
   }
 };
-module.exports = { expectThrowsAsync };
+export { expectThrowsAsync };

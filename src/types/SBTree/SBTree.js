@@ -1,8 +1,18 @@
-const EventEmitter = require('events');
-const {MemoryAdapter, FsAdapter} = require('../../adapters');
-const {generateTreeId} = require('../../utils/crypto');
-const each = require('lodash.foreach');
-// const SBFTree = require('../SBFTree/SBFTree');
+import EventEmitter from 'events';
+import {MemoryAdapter, FsAdapter} from '../../adapters/index.js';
+import {generateTreeId} from '../../utils/crypto.js';
+import each from 'lodash.foreach';
+import SBFTree from '../SBFTree/SBFTree.js';
+import toJSON from "./methods/toJSON.js";
+import setFieldTree from "./methods/setFieldTree.js";
+import loadState from "./methods/loadState.js";
+import replaceDocuments from "./methods/replaceDocuments.js";
+import insertDocuments from "./methods/insertDocuments.js";
+import getFieldTree from "./methods/getFieldTree.js";
+import getDocument from "./methods/getDocument.js";
+import getAdapter from "./methods/getAdapter.js";
+import findDocuments from "./methods/findDocuments.js";
+import deleteDocuments from "./methods/deleteDocuments.js";
 
 const Adapters = {MemoryAdapter, FsAdapter};
 const parseAdapter = (_adapterOpts) =>{
@@ -22,7 +32,7 @@ class SBTree extends EventEmitter {
     super();
     const self = this;
     Object.assign(SBTree.prototype, {
-      setFieldTree: require('./methods/setFieldTree')
+      setFieldTree: setFieldTree,
     });
     const defaultProps = {
       order: 511,
@@ -97,14 +107,14 @@ class SBTree extends EventEmitter {
 }
 
 
-SBTree.prototype.deleteDocuments = require('./methods/deleteDocuments')
-SBTree.prototype.findDocuments = require('./methods/findDocuments')
-SBTree.prototype.getAdapter = require('./methods/getAdapter');
-SBTree.prototype.getDocument = require('./methods/getDocument')
-SBTree.prototype.getFieldTree = require('./methods/getFieldTree')
-SBTree.prototype.insertDocuments = require('./methods/insertDocuments')
-SBTree.prototype.replaceDocuments = require('./methods/replaceDocuments')
-SBTree.prototype.loadState = require('./methods/loadState')
-SBTree.prototype.setFieldTree = require('./methods/setFieldTree')
-SBTree.prototype.toJSON = require('./methods/toJSON')
+SBTree.prototype.deleteDocuments = deleteDocuments;
+SBTree.prototype.findDocuments = findDocuments;
+SBTree.prototype.getAdapter = getAdapter;
+SBTree.prototype.getDocument = getDocument;
+SBTree.prototype.getFieldTree = getFieldTree;
+SBTree.prototype.insertDocuments = insertDocuments;
+SBTree.prototype.replaceDocuments = replaceDocuments;
+SBTree.prototype.loadState = loadState;
+SBTree.prototype.setFieldTree = setFieldTree;
+SBTree.prototype.toJSON = toJSON;
 export default SBTree;

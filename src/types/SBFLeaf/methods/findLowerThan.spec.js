@@ -1,5 +1,6 @@
 import { expect } from 'chai';
-const findLowerThan = require('./findLowerThan');
+// const findLowerThan = require('./findLowerThan');
+import findLowerThan from './findLowerThan.js';
 
 let called = [];
 const self = {

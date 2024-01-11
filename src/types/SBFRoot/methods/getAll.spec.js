@@ -1,7 +1,7 @@
 import { expect } from 'chai';
-const SFBLeaf = require('../../SBFLeaf/SBFLeaf');
-const MemoryAdapter = require('../../../adapters/MemoryAdapter/MemoryAdapter');
-const getAll = require('../../SBFRoot/methods/getAll');
+import getAll from './getAll.js';
+import MemoryAdapter from '../../../adapters/MemoryAdapter/MemoryAdapter.js';
+import SFBLeaf from '../../SBFLeaf/SBFLeaf.js';
 const fixtures = {
   documents: {
     // '5d6ebb7e21f1df6ff7482631': {

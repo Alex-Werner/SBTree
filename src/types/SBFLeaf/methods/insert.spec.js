@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-const insert = require('./insert');
+import insert from './insert.js';
 
 const jean = {identifier: '507f191e810c19729de860ea', name: 'Jean'};
 const alex = {identifier: '507f1f77bcf86cd799439011', name: 'Alex'};

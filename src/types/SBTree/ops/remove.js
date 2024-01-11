@@ -1,6 +1,5 @@
-const query = require('./query');
-
-const RemoveCommand = require('./RemoveCommand');
+import query from './query.js';
+import RemoveCommand from './RemoveCommand.js';
 
 async function remove(_query) {
   const self = this;

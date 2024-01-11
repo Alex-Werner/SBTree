@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-const getSpec = require('./get');
+import getSpec from './get.js';
 
 const idFixtureDoc = '5d6ebb7e21f1df6ff7482631'
 const fixtures = {

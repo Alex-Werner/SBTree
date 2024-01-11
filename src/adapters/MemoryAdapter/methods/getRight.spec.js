@@ -1,6 +1,5 @@
 import { expect } from 'chai';
-const MemoryAdapter = require('../MemoryAdapter');
-
+import MemoryAdapter from '../MemoryAdapter.js';
 describe('Adapters - MemoryAdapter - getRight', function suite() {
   let adapter;
   const leafId = '16d72f309846d';

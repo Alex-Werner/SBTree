@@ -1,6 +1,7 @@
 import { expect } from 'chai';
-const insert = require('./insert');
-const {expectThrowsAsync} = require('../../../../test/test.utils');
+import insert from './insert.js';
+import { expectThrowsAsync } from '../../../../test/test.utils.js';
+
 const fixtures = {
   documents: {
     '5d6ebb7e21f1df6ff7482631': {

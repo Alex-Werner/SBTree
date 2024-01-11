@@ -1,7 +1,6 @@
-const findEquals = require('./ops/findEquals');
-const findLowerThan = require('./ops/findLowerThan');
-const findGreaterThan = require('./ops/findGreaterThan');
-
+import findEquals from './ops/findEquals.js';
+import findLowerThan from './ops/findLowerThan.js';
+import findGreaterThan from './ops/findGreaterThan.js';
 async function find(value, operator = '$eq') {
   const self = this;
   const p = [];

@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-const MemoryAdapter = require('../MemoryAdapter');
-const {expectThrowsAsync} = require('../../../../test/test.utils');
+import MemoryAdapter from '../MemoryAdapter.js';
+import {expectThrowsAsync} from '../../../../test/test.utils.js';
 
 describe('Adapters - MemoryAdapter - createLeaf', function suite() {
   let adapter;
