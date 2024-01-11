@@ -1,6 +1,6 @@
-const cloneDeep = require('lodash.clonedeep');
+import cloneDeep from "lodash.clonedeep";
 
-module.exports = async function getRightInLeaf(leafId) {
+export default async function getRightInLeaf(leafId) {
   const leaf = this.leafs[leafId];
 
   const { meta, data } = leaf;

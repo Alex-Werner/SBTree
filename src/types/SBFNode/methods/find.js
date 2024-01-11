@@ -1,4 +1,4 @@
-module.exports = async function find(value) {
+export default async function find(value) {
   const results = { identifiers: [], keys: [] };
   const { childrens } = this;
   let leafIndex = 0;

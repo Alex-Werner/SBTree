@@ -1,7 +1,6 @@
-const ObjectId = require('mongo-objectid');
-const cloneDeep = require('lodash.clonedeep');
-const insert = require('../ops/insert');
-
+import ObjectId from "mongo-objectid";
+import cloneDeep from "lodash.clonedeep";
+import insert from "../ops/insert.js";
 /**
  * Allow to insert of or multiple documents
  *
@@ -34,4 +33,5 @@ async function insertDocuments(documents) {
 
   return [document];
 }
-module.exports = insertDocuments;
+
+export default insertDocuments;

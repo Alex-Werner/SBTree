@@ -1,9 +1,8 @@
-const cloneDeep = require('lodash.clonedeep');
-const range = require('lodash.range');
-const lowerThanKeys = require('./ops/lowerThanKeys');
-const greaterThanKeys = require('./ops/greaterThanKeys');
+import cloneDeep from "lodash.clonedeep";
+import lowerThanKeys from "./ops/lowerThanKeys.js";
+import greaterThanKeys from "./ops/greaterThanKeys.js";
 
-module.exports = async function findInLeaf(leafId, value, op = '$eq') {
+export default async function findInLeaf(leafId, value, op = '$eq') {
   const leaf = this.leafs[leafId];
 
   if (!leaf) {

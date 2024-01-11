@@ -1,6 +1,5 @@
-const {expect} = require('chai');
-const indexSpec = require('./index');
-
+import {expect} from 'chai';
+import indexSpec from './index.js';
 describe('SBTree', () => {
   it('should work', function () {
     expect(indexSpec).to.have.property('SBTree');

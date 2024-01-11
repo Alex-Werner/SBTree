@@ -1,6 +1,5 @@
-const intersection = require('lodash.intersection');
-
-const get = require('./get');
+import intersection from 'lodash.intersection';
+import get from './get.js';
 
 async function resolveDocuments(self, objectIds) {
   const documents = [];
@@ -20,14 +19,13 @@ const findIntersectingIdentifiers = (listOfListOfIdentifiers) => {
   return intersection(...identifiers);
 };
 
-const getFieldNamesFromQuery = require('../utils/getFieldNamesFromQuery');
-
+import getFieldNamesFromQuery from '../utils/getFieldNamesFromQuery.js';
 /**
  *
- * @param query
+ * @param _query
  * @returns {Promise<[]>}
  */
-async function query(query) {
+async function query(_query) {
   const self = this;
   const findNested = async function (_promises, _queryFieldName, _queryFieldValue) {
     for (const nestedQueryFieldName in _queryFieldValue) {
@@ -47,13 +45,13 @@ async function query(query) {
       }
     }
   };
-  if (!query) return [];
+  if (!_query) return [];
 
-  const fields = getFieldNamesFromQuery(query);
+  const fields = getFieldNamesFromQuery(_query);
 
   // When our search is based on _id and only _id, we can just get document.
   if (fields.length === 1 && fields.indexOf('_id') > -1) {
-    return [await get.call(this, query._id)];
+    return [await get.call(this, _query._id)];
   }
 
   const promises = [];
@@ -65,7 +63,7 @@ async function query(query) {
     queryFieldName.split('.').forEach((subFieldName) => {
       queryFieldValue = (queryFieldValue && queryFieldValue[subFieldName])
           ? queryFieldValue[subFieldName]
-          : query[subFieldName];
+          : _query[subFieldName];
     })
 
     const queryFieldType = typeof queryFieldValue;
@@ -123,4 +121,4 @@ async function query(query) {
   return resolveDocuments(this, matchingObjectIds);
 }
 
-module.exports = query;
+export default query;

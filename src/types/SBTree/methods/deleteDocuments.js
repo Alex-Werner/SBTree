@@ -1,5 +1,4 @@
-const remove = require('../ops/remove');
-
+import remove from '../ops/remove.js';
 async function deleteDocuments(query) {
   if (!query || query === {}) {
     // this would cause to delete all as we would query all.
@@ -11,4 +10,5 @@ async function deleteDocuments(query) {
 
   return (await remove.call(this, query));
 }
-module.exports = deleteDocuments;
+
+export default deleteDocuments;

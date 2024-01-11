@@ -10,4 +10,4 @@ const getFillStatus = async function () {
     fillFactor, order, leafSize: size, fillFactorFilled: size >= minKeys,
   };
 };
-module.exports = getFillStatus;
+export default getFillStatus;

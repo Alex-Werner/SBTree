@@ -1,5 +1,6 @@
-const { insertSorted } = require('../../../utils/array');
+// const { insertSorted } = require('../../../utils/array');
 
+import {insertSorted} from '../../../utils/array.js';
 async function addInLeaf(leafName, identifier, value) {
   if (!this.leafs[leafName]) {
     await this.createLeaf(leafName);
@@ -20,4 +21,4 @@ async function addInLeaf(leafName, identifier, value) {
   meta.size += 1;
   meta.identifiers.splice(index, 0, identifier);
 }
-module.exports = addInLeaf;
+export default addInLeaf;

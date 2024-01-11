@@ -12,4 +12,4 @@ async function replaceInLeaf(leafId, identifier, value) {
   const index = meta.identifiers.indexOf(identifier);
   data.keys[index] = value;
 }
-module.exports = replaceInLeaf;
+export default replaceInLeaf;

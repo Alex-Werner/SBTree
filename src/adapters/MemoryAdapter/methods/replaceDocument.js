@@ -4,4 +4,4 @@ async function replaceDocument(doc) {
   }
   this.documents[doc._id] = doc;
 }
-module.exports = replaceDocument;
+export default replaceDocument;

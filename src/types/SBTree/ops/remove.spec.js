@@ -1,5 +1,5 @@
-const {expect} = require('chai');
-const removeSpec = require('./remove');
+import { expect } from 'chai';
+import removeSpec from './remove.js';
 
 const fixtures = {
   documents: {

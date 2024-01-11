@@ -1,10 +1,8 @@
 async function split() {
-  const SBFLeaf = require('../SBFLeaf');
-
   const parent = this.getParent();
   const adapter = parent.getAdapter();
 
-  const newLeaf = new SBFLeaf({ parent });
+  const newLeaf = new this.constructor({ parent });
 
   await adapter.createLeaf(newLeaf.id);
   const midKey = await adapter.splitLeaf(this, newLeaf);
@@ -13,4 +11,4 @@ async function split() {
 
   await parent.attachLeaf(index + 1, newLeaf);
 }
-module.exports = split;
+export default split;

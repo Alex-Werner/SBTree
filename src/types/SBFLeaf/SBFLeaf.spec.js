@@ -1,8 +1,7 @@
-const {expect} = require('chai');
-const SBFLeaf = require('./SBFLeaf');
-const MemoryAdpter = require('../../adapters/MemoryAdapter/MemoryAdapter');
-const adapter = new MemoryAdpter()
-
+import { expect } from 'chai';
+import SBFLeaf from './SBFLeaf.js';
+import MemoryAdapter from '../../adapters/MemoryAdapter/MemoryAdapter.js';
+const adapter = new MemoryAdapter();
 const fakeTree = {
   options: {order: 3},
   adapter,

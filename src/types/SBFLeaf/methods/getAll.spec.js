@@ -1,5 +1,5 @@
-const {expect} = require('chai');
-const getAll = require('./getAll');
+import { expect } from 'chai';
+import getAll from './getAll.js';
 
 let called = [];
 const self = {

@@ -1,8 +1,8 @@
-module.exports = async function find(value, operator) {
+export default async function find(value, operator) {
   let { root } = this;
   if (!root) {
     this.createRoot();
     root = this.root;
   }
-  return await root.find(value, operator);
+  return root.find(value, operator);
 };

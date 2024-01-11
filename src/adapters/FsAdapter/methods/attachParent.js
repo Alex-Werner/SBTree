@@ -1,5 +1,4 @@
-const autosave = require('./ops/autosave');
-
+import autosave from './ops/autosave.js';
 async function attachParent(parent) {
   this.setParent(parent);
 
@@ -20,4 +19,4 @@ async function attachParent(parent) {
   this.emit('ready');
 }
 
-module.exports = attachParent;
+export default attachParent;

@@ -1,5 +1,5 @@
-const {expect} = require('chai');
-const querySpec = require('./query');
+import { expect } from 'chai';
+import querySpec from './query.js';
 
 const fixtures = {
   documents: {

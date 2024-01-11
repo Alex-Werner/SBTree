@@ -1,39 +1,59 @@
-function insecureRandomBytes(size) {
-  const result = new Uint8Array(size);
-  for (let i = 0; i < size; ++i) result[i] = Math.floor(Math.random() * 256);
-  return result;
+export function insecureRandomBytes(size) {
+    const result = new Uint8Array(size);
+    for (let i = 0; i < size; ++i) {
+        result[i] = Math.floor(Math.random() * 256);
+    }
+    return result;
 }
 
-function getRandomBytes() {
-  let randomBytes = null;
-  try {
-    randomBytes = require('crypto').randomBytes;
-  } catch (e) {
-    // keep the fallback
-  }
-  if (randomBytes == null) {
-    randomBytes = insecureRandomBytes;
-  }
-  return randomBytes;
+import crypto from 'crypto';
+
+export function getRandomBytes() {
+    if (typeof require !== 'undefined') {
+        try {
+            return crypto.randomBytes;
+        } catch (e) {
+            return insecureRandomBytes;
+        }
+    }
+    return insecureRandomBytes;
 }
 
-function browserRandomBytes() {
-  const randomBytes = (size) => window.crypto.getRandomValues(new Uint8Array(size));
-  return randomBytes;
+export function browserRandomBytes(size) {
+    return window.crypto.getRandomValues(new Uint8Array(size));
 }
 
-const isWindowContext = (typeof window !== 'undefined' && window.crypto && window.crypto.getRandomValues);
+export function randomBytes(size) {
+    const isWindowContext = (typeof window !== 'undefined' && window.crypto && window.crypto.getRandomValues);
+    if (isWindowContext) {
+        return browserRandomBytes(size);
+    } else {
+        return getRandomBytes()(size);
+    }
+}
 
-const crypto = {
-  insecureRandomBytes,
-  randomBytes: (isWindowContext) ? browserRandomBytes : getRandomBytes(),
-};
-crypto.generateRandId = (prefix = '') => prefix + (Date.now().toString(16) + crypto.randomBytes(4).toString('hex'));
+export function generateRandId(prefix = '') {
+    return prefix + (Date.now().toString(16) + crypto.randomBytes(4).toString('hex'));
+}
 
-crypto.generateLeafId = () => crypto.generateRandId('l');
-crypto.generateFieldTreeId = () => crypto.generateRandId('f');
-crypto.generateTreeId = () => crypto.generateRandId('t');
-crypto.generateNodeId = () => crypto.generateRandId('n');
-crypto.generateRootId = () => crypto.generateRandId('r');
 
-module.exports = crypto;
+export function generateFieldTreeId() {
+    return generateRandId('f');
+}
+
+export function generateTreeId() {
+    return generateRandId('t');
+}
+
+export function generateNodeId() {
+    return generateRandId('n');
+}
+
+export function generateRootId() {
+    return generateRandId('r');
+}
+
+export function generateLeafId() {
+    return generateRandId('l');
+}
+

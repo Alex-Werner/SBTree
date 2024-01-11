@@ -1,6 +1,6 @@
-const {expect} = require('chai');
-const SBFTree = require('../SBFTree/SBFTree');
-const MemoryAdapter = require('../../adapters/MemoryAdapter/MemoryAdapter')
+import { expect } from 'chai';
+import SBFTree from './SBFTree.js';
+import MemoryAdapter from '../../adapters/MemoryAdapter/MemoryAdapter.js';
 // Vector for verifying with a visual tool : https://www.cs.csubak.edu/~msarr/visualizations/BPlusTree.html
 describe('SBFTree', () => {
   let tree;
@@ -13,7 +13,6 @@ describe('SBFTree', () => {
   it('should default on mem adapter + size', function () {
     const t = new SBFTree({adapter, fieldName: 'email'});
     expect(t.order).to.equal(511)
-    console.log(t)
     expect(t.getAdapter().constructor.name).to.equal('MemoryAdapter')
   });
   it('should instantiate', async function () {

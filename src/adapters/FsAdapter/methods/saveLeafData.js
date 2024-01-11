@@ -1,4 +1,4 @@
-module.exports = async function saveLeafData(leafName, data) {
+export default async function saveLeafData(leafName, data) {
   const job = await this.queue.add('File.create', `${this.path}/l/${leafName}.dat`, data).execution();
   let res = {};
   if (!job.result) {

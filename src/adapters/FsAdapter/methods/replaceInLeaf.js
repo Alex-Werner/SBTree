@@ -1,5 +1,3 @@
-const { insertSorted } = require('../../../utils/array');
-
 async function replaceInLeaf(leafId, identifier, value) {
   if (!this.leafs[leafId].meta.identifiers.includes(identifier)) {
     // TODO : except unique:false?
@@ -13,4 +11,4 @@ async function replaceInLeaf(leafId, identifier, value) {
   return index;
 }
 
-module.exports = replaceInLeaf;
+export default replaceInLeaf;

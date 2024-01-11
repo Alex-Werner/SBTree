@@ -3,4 +3,4 @@ async function saveDocument(doc) {
     this.documents[doc._id] = doc;
   }
 }
-module.exports = saveDocument;
+export default saveDocument;

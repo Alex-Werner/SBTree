@@ -1,4 +1,6 @@
-module.exports = {
-  FsAdapter: require('./FsAdapter/FsAdapter.js'),
-  MemoryAdapter: require('./MemoryAdapter/MemoryAdapter.js'),
+import FsAdapter from './FsAdapter/FsAdapter.js';
+import MemoryAdapter from './MemoryAdapter/MemoryAdapter.js';
+export {
+    FsAdapter,
+    MemoryAdapter,
 };

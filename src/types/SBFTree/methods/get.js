@@ -1,3 +1,3 @@
-module.exports = async function get(identifier) {
+export default async function get(identifier) {
   return await this.root.get(identifier);
 };

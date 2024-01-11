@@ -9,4 +9,4 @@ async function replace(identifier, value) {
     await this.split();
   }
 }
-module.exports = replace;
+export default replace;

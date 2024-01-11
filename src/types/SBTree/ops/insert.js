@@ -1,5 +1,4 @@
-const { validTypes } = require('../../../constants');
-
+import { validTypes } from '../../../constants.js';
 async function insert(document) {
   if (!document) {
     throw new Error('Cannot insert empty document');
@@ -61,4 +60,4 @@ async function insert(document) {
   }
   await this.adapter.saveDocument(document);
 }
-module.exports = insert;
+export default insert;

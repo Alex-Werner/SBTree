@@ -1,5 +1,4 @@
-const cloneDeep = require('lodash.clonedeep');
-
+import cloneDeep from "lodash.clonedeep";
 async function get(identifier) {
   if (!identifier) throw new Error('Expected an objectid');
 
@@ -7,4 +6,5 @@ async function get(identifier) {
 
   return cloneDeep(res) || null;
 }
-module.exports = get;
+
+export default get;

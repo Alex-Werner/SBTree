@@ -4,4 +4,4 @@ class LeafMeta {
     this.identifiers = (props.identifiers) ? props.identifiers : [];
   }
 }
-module.exports = LeafMeta;
+export default LeafMeta;

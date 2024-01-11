@@ -1,6 +1,6 @@
-const {expect} = require('chai');
-const {SBTree} = require('../..');
-const users = require('./users');
+import {expect} from 'chai';
+import {SBTree} from '../../index.js';
+import users from './users.json' assert { type: "json" };
 
 const toNames = (arr)=>{
   return arr.reduce((acc, el)=>{

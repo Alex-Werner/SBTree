@@ -28,4 +28,4 @@ async function getAll() {
   });
 }
 
-module.exports = getAll;
+export default getAll;

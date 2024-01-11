@@ -9,4 +9,4 @@ function getFieldTree(fieldName) {
 
   return this.fieldTrees[fieldName];
 }
-module.exports = getFieldTree;
+export default getFieldTree;

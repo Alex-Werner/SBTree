@@ -1,4 +1,4 @@
-module.exports = async function findEquals(value) {
+export default async function findEquals(value) {
   const result = { identifiers: [], keys: [] };
   const { childrens, identifiers, keys } = this;
 

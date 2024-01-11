@@ -1,5 +1,3 @@
-const { insertSorted } = require('../../../utils/array');
-
 async function addInLeaf(leafName, identifier, value) {
   if (!this.leafs[leafName]) {
     await this.createLeaf(leafName);
@@ -19,4 +17,4 @@ async function addInLeaf(leafName, identifier, value) {
   // await this.updateDocument(doc)
 }
 
-module.exports = addInLeaf;
+export default addInLeaf;

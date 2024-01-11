@@ -4,4 +4,4 @@ class Meta {
     this.identifiers = (props.identifiers) ? props.identifiers : [];
   }
 }
-module.exports = Meta;
+export default Meta;

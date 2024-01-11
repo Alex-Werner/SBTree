@@ -22,4 +22,4 @@ const getFillStatus = async function () {
     throw e;
   }
 };
-module.exports = getFillStatus;
+export default getFillStatus;

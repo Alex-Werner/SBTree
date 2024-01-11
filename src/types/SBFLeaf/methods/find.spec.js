@@ -1,5 +1,6 @@
-const {expect} = require('chai');
-const find = require('./find');
+// import { expect } from 'chai';
+import { expect } from 'chai';
+import find from './find.js';
 
 let called = [];
 const self = {

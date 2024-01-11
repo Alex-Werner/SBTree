@@ -1,6 +1,5 @@
-const SBFLeaf = require('../../SBFLeaf/SBFLeaf');
-
-module.exports = async function replace(identifier, value) {
+import SBFLeaf from '../../SBFLeaf/SBFLeaf.js';
+export default async function replace(identifier, value) {
   const { childrens, keys } = this;
   if (!childrens.length) {
     throw new Error('SBFNode cannot replace with no childrens');

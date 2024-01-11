@@ -4,4 +4,4 @@ function isFull() {
 
   return this.keys.length >= order;
 }
-module.exports = isFull;
+export default isFull;

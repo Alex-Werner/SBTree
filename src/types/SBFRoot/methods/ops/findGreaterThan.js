@@ -52,4 +52,4 @@ async function findGreaterThan(key, includeKey = false) {
 
   return result;
 }
-module.exports = findGreaterThan;
+export default findGreaterThan;

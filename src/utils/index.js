@@ -1,7 +1,13 @@
-module.exports = {
-  ascii: require('./ascii'),
-  array: require('./array'),
-  comparators: require('./comparators'),
-  crypto: require('./crypto'),
-  time: require('./time'),
-};
+import * as array from "./array.js";
+import * as ascii from "./ascii.js";
+import * as comparators from "./comparators.js";
+import * as crypto from './crypto.js';
+import * as time from './time.js';
+
+export default {
+    array,
+    ascii,
+    comparators,
+    crypto,
+    time,
+}

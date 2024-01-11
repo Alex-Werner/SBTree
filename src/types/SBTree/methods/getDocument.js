@@ -1,5 +1,4 @@
-const get = require('../ops/get');
-
+import get from '../ops/get.js';
 async function getDocument(identifier) {
   if (!this.state.isReady) {
     await this.isReady();
@@ -7,4 +6,4 @@ async function getDocument(identifier) {
 
   return (await get.call(this, identifier));
 }
-module.exports = getDocument;
+export default getDocument;

@@ -1,5 +1,5 @@
-const {expect} = require('chai');
-const MemoryAdapter = require('../MemoryAdapter');
+import { expect } from 'chai';
+import MemoryAdapter from '../MemoryAdapter.js';
 
 describe('Adapters - MemoryAdapter - findInLeaf', function suite() {
   let adapter;

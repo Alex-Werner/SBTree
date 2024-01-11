@@ -1,5 +1,5 @@
-const {expect} = require('chai');
-const isFillFactorFilled = require('./isFillFactorFilled');
+import { expect } from 'chai';
+import isFillFactorFilled from './isFillFactorFilled.js';
 
 let called = [];
 let meta = {

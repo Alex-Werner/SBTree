@@ -1,6 +1,5 @@
-const { expect } = require('chai');
-
-const getFieldNamesFromQuery = require('./getFieldNamesFromQuery');
+import { expect } from 'chai';
+import getFieldNamesFromQuery from "./getFieldNamesFromQuery.js";
 
 describe('utils - .getFieldNamesFromQuery', ()=>{
   it('should works', ()=>{

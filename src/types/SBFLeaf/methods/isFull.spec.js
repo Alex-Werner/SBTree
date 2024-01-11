@@ -1,6 +1,5 @@
-const {expect} = require('chai');
-const isFull = require('./isFull');
-
+import { expect } from 'chai';
+import isFull from './isFull.js';
 let called = [];
 let meta = {
   size:2

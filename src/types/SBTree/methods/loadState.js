@@ -1,5 +1,4 @@
-const each = require('lodash.foreach');
-
+import each from "lodash.foreach";
 function loadState(state) {
   this.order = state.order;
   this.fillFactor = state.fillFactor;
@@ -17,4 +16,4 @@ function loadState(state) {
   });
   return true;
 }
-module.exports = loadState;
+export default loadState;

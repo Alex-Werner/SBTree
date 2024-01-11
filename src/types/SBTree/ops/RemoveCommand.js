@@ -6,4 +6,4 @@ class RemoveCommand {
     this.query = res;
   }
 }
-module.exports = RemoveCommand;
+export default RemoveCommand;

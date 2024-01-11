@@ -1,6 +1,5 @@
-const cloneDeep = require('lodash.clonedeep');
-
-module.exports = async function saveDatabase() {
+import cloneDeep from 'lodash.clonedeep';
+export default async function saveDatabase() {
   const leafs = cloneDeep(this.leafs);
   const tree = this.getParent().toJSON();
   const db = {

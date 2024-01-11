@@ -1,4 +1,4 @@
-module.exports = async function splitLeaf(sourceLeaf, siblingLeaf) {
+export default async function splitLeaf(sourceLeaf, siblingLeaf) {
   if (!this.leafs[sourceLeaf.id]) {
     throw new Error('Source leaf do not exist');
   }

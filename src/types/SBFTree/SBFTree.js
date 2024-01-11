@@ -1,5 +1,10 @@
-const {generateFieldTreeId} = require('../../utils/crypto');
-
+import {generateFieldTreeId} from '../../utils/crypto.js';
+import find from "./methods/find.js";
+import insert from "./methods/insert.js";
+import get from "lodash.get";
+import remove from "./methods/remove.js";
+import replace from "./methods/replace.js";
+import createRoot from "./methods/createRoot.js";
 /**
  * SBFTree
  *
@@ -16,7 +21,7 @@ class SBFTree {
     this.id = (props.id) ? props.id : generateFieldTreeId();
 
     Object.assign(SBFTree.prototype, {
-      createRoot: require('./methods/createRoot')
+      createRoot: createRoot
     });
 
     this.order= (props.order) ? props.order : defaultOpts.order;
@@ -51,9 +56,9 @@ class SBFTree {
   }
 };
 
-SBFTree.prototype.find = require('./methods/find');
-SBFTree.prototype.get = require('./methods/get');
-SBFTree.prototype.insert = require('./methods/insert');
-SBFTree.prototype.remove = require('./methods/remove');
-SBFTree.prototype.replace = require('./methods/replace');
-module.exports = SBFTree;
+SBFTree.prototype.find = find;
+SBFTree.prototype.get = get;
+SBFTree.prototype.insert = insert;
+SBFTree.prototype.remove = remove;
+SBFTree.prototype.replace = replace;
+export default SBFTree;
