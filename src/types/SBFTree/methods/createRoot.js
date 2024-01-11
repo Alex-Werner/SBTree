@@ -1,7 +1,7 @@
 const SBFRoot = require('../../SBFRoot/SBFRoot');
 // const SBFLeaf = require('../../SBFLeaf/SBFLeaf');
 // const SBFNode = require('../../SBFNode/SBFNode');
-module.exports = function createRoot(root = null) {
+export default function createRoot(root = null) {
   if (this.root) {
     throw new Error('Already existing root.');
   }

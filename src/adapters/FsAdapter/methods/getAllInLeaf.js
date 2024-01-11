@@ -1,6 +1,6 @@
-const cloneDeep = require('lodash.clonedeep');
+import cloneDeep from 'lodash.clonedeep';
 
-module.exports = async function getAllInLeaf(leafId) {
+export default async function getAllInLeaf(leafId) {
   const { keys } = await this.openLeafData(leafId);
   if (!keys) {
     console.error(`leafId ${leafId} was not present, had to recreate`);

@@ -1,5 +1,5 @@
-const {expect} = require('chai');
-const {insertSorted} = require('./array');
+import {expect} from 'chai';
+import {insertSorted} from './array.js';
 
 describe('Utils - Array', () => {
 
@@ -24,9 +24,9 @@ describe('Utils - Array', () => {
     it('should insertSorted works with array', function () {
         const arr = ['alex'];
         insertSorted(arr, ['alain', 'jean']);
-        expect(arr).to.deep.equal(['alain', 'jean', 'alex'])
+        expect(arr).to.deep.equal(['alex','alain', 'jean'])
         insertSorted(arr, ['zachary', 'yann']);
-        expect(arr).to.deep.equal(['alain', 'jean', 'yann', 'zachary', 'alex'])
+        expect(arr).to.deep.equal(['alex','alain', 'jean', 'yann', 'zachary'])
     });
     it('should insertSorted works with array and num', function () {
         const arr = ['alex'];

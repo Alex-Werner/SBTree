@@ -70,4 +70,4 @@ async function find(value, operator = '$eq') {
   }
 }
 
-module.exports = find;
+export default find;

@@ -1,4 +1,4 @@
-module.exports = async function replace(identifier, value) {
+export default async function replace(identifier, value) {
   let { root } = this;
   if (!root) {
     this.createRoot();

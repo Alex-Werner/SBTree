@@ -107,4 +107,4 @@ SBTree.prototype.replaceDocuments = require('./methods/replaceDocuments')
 SBTree.prototype.loadState = require('./methods/loadState')
 SBTree.prototype.setFieldTree = require('./methods/setFieldTree')
 SBTree.prototype.toJSON = require('./methods/toJSON')
-module.exports = SBTree;
+export default SBTree;

@@ -15,4 +15,4 @@ async function removeInLeaf(leafId, identifier) {
   return identifiers;
 }
 
-module.exports = removeInLeaf;
+export default removeInLeaf;

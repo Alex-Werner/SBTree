@@ -3,4 +3,4 @@ async function removeDocument(identifier) {
     delete this.documents[identifier];
   }
 }
-module.exports = removeDocument;
+export default removeDocument;

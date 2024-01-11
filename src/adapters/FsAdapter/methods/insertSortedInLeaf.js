@@ -1,6 +1,6 @@
-const { insertSorted } = require('../../../utils/array');
-
-module.exports = async function insertSortedInLeaf(leafId, value) {
+// const { insertSorted } = require('../../../utils/array');
+import insertSorted from '../../../utils/array.js';
+export default async function insertSortedInLeaf(leafId, value) {
   const data = await this.openLeafData(leafId);
   if (!data || !data.keys) {
     console.error(`leafId ${leafId} was not present, had to recreate`);

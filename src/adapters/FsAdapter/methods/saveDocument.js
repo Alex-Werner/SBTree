@@ -1,4 +1,4 @@
-module.exports = async function saveDocument(doc) {
+export default async function saveDocument(doc) {
   if (!doc || !doc._id) {
     console.error(doc);
     throw new Error('Cannot save document, expected id');

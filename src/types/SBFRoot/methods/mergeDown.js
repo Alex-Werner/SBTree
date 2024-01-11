@@ -19,4 +19,4 @@ const mergeDown = async function () {
   console.log('Mergeup');
   throw new Error('Unsupported merge up');
 };
-module.exports = mergeDown;
+export default mergeDown;

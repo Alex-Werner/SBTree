@@ -34,4 +34,4 @@ const mergeUp = async function () {
     throw new Error('Not implemented : MergingUp');
   }
 };
-module.exports = mergeUp;
+export default mergeUp;

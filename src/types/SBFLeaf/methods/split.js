@@ -13,4 +13,4 @@ async function split() {
 
   await parent.attachLeaf(index + 1, newLeaf);
 }
-module.exports = split;
+export default split;

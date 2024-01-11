@@ -68,4 +68,4 @@ async function remove(_query) {
 
   return results;
 }
-module.exports = remove;
+export default remove;

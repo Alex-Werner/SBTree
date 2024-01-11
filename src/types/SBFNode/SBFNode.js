@@ -59,4 +59,4 @@ SBFNode.prototype.mergeUp = require('./methods/mergeUp')
 SBFNode.prototype.remove = require('./methods/remove')
 SBFNode.prototype.replace = require('./methods/replace')
 SBFNode.prototype.split = require('./methods/split')
-module.exports = SBFNode;
+export default SBFNode;

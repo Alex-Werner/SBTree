@@ -1,4 +1,4 @@
-const {expect} = require('chai');
+import { expect } from 'chai';
 const SBFLeaf = require('./SBFLeaf');
 const MemoryAdpter = require('../../adapters/MemoryAdapter/MemoryAdapter');
 const adapter = new MemoryAdpter()

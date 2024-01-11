@@ -1,6 +1,5 @@
-const { expect } = require('chai');
-
-const findDocuments = require('./findDocuments');
+import { expect} from "chai";
+import findDocuments from "./findDocuments.js";
 const mock = {
   state:{
     isReady: true

@@ -1,4 +1,4 @@
-module.exports = async function replaceDocument(doc) {
+export default async function replaceDocument(doc) {
   if (!doc || !doc._id) {
     console.error(doc);
     throw new Error('Cannot replace document, expected id');

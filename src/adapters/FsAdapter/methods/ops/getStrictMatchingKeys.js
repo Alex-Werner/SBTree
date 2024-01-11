@@ -6,4 +6,4 @@ function getStrictMatchingKeys(arr, val) {
   }
   return indexes;
 }
-module.exports = getStrictMatchingKeys;
+export default getStrictMatchingKeys;

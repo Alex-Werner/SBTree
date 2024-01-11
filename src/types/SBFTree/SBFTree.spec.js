@@ -1,4 +1,4 @@
-const {expect} = require('chai');
+import { expect } from 'chai';
 const SBFTree = require('../SBFTree/SBFTree');
 const MemoryAdapter = require('../../adapters/MemoryAdapter/MemoryAdapter')
 // Vector for verifying with a visual tool : https://www.cs.csubak.edu/~msarr/visualizations/BPlusTree.html

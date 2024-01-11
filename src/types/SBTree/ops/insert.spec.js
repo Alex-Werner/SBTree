@@ -1,4 +1,4 @@
-const {expect} = require('chai');
+import { expect } from 'chai';
 const insert = require('./insert');
 const {expectThrowsAsync} = require('../../../../test/test.utils');
 const fixtures = {

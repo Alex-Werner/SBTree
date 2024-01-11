@@ -24,4 +24,4 @@ async function remove(remCmd) {
     }
   }
 }
-module.exports = remove;
+export default remove;

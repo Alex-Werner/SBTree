@@ -35,4 +35,4 @@ MemoryAdapter.prototype.replaceInLeaf = require('./methods/replaceInLeaf');
 MemoryAdapter.prototype.saveDocument = require('./methods/saveDocument');
 MemoryAdapter.prototype.splitLeaf = require('./methods/splitLeaf');
 
-module.exports = MemoryAdapter;
+export default MemoryAdapter;

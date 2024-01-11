@@ -1,5 +1,4 @@
-const replace = require('../ops/replace');
-
+import replace from '../ops/replace.js';
 async function replaceDocuments(documents) {
   if (!this.state.isReady) {
     await this.isReady();
@@ -14,4 +13,5 @@ async function replaceDocuments(documents) {
   const currentDocument = await this.getDocument(documents._id);
   return ([await replace.call(this, currentDocument, documents)]);
 }
-module.exports = replaceDocuments;
+
+export default replaceDocuments;

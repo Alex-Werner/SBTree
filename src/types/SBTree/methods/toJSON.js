@@ -23,4 +23,4 @@ function toJSON() {
     adapter,
   }));
 }
-module.exports = toJSON;
+export default toJSON;

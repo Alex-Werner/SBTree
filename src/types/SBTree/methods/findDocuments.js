@@ -1,4 +1,4 @@
-const query = require('../ops/query');
+import query from '../ops/query.js';
 
 async function findDocuments(params) {
   if (!this.state.isReady) {
@@ -7,4 +7,5 @@ async function findDocuments(params) {
 
   return (await query.call(this, params));
 }
-module.exports = findDocuments;
+
+export default findDocuments;

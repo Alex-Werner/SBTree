@@ -6,4 +6,4 @@ async function removeDocument(identifier) {
   const job = await this.queue.add('File.remove', `${this.path}/d/${identifier}.dat`);
   await job.execution();
 }
-module.exports = removeDocument;
+export default removeDocument;

@@ -1,4 +1,4 @@
-const {expect} = require('chai');
+import { expect } from 'chai';
 const MemoryAdapter = require('../MemoryAdapter');
 const {expectThrowsAsync} = require('../../../../test/test.utils');
 

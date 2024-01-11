@@ -60,4 +60,4 @@ async function split() {
     this.childrens = [left, right];
   }
 }
-module.exports = split;
+export default split;

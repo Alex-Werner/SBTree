@@ -1,4 +1,4 @@
-module.exports = function getFieldNamesFromQuery(query) {
+export default function getFieldNamesFromQuery(query) {
   const fieldNames = [];
   Object.entries(query).forEach((field) => {
     let fieldName = field[0];

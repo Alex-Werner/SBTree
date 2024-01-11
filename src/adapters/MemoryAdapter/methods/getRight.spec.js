@@ -1,4 +1,4 @@
-const {expect} = require('chai');
+import { expect } from 'chai';
 const MemoryAdapter = require('../MemoryAdapter');
 
 describe('Adapters - MemoryAdapter - getRight', function suite() {

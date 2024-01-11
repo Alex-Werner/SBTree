@@ -1,5 +1,5 @@
-const cloneDeep = require('lodash.clonedeep');
+import cloneDeep from 'lodash.clonedeep';
 
-module.exports = async function getDocument(identifier) {
+export default async function getDocument(identifier) {
   return cloneDeep(await this.openDocument(identifier));
 };

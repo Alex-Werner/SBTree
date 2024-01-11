@@ -1,6 +1,6 @@
 const SBFLeaf = require('../../SBFLeaf/SBFLeaf');
 
-module.exports = async function insert(identifier, value) {
+export default async function insert(identifier, value) {
   const { childrens, keys } = this;
   if (!childrens.length) {
     const leaf = new SBFLeaf({ parent: this });

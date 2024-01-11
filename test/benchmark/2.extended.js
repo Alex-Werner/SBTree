@@ -1,10 +1,7 @@
-const { expect } = require('chai');
-const each = require('lodash.foreach');
-const reduce = require('lodash.reduce');
-const { SBTree } = require('../../index');
-const fakeData = require('../fixtures/age');
-const { Timer } = require('../../src/utils/time');
-const { version } = require('../../package.json');
+import { SBTree } from '../../index.js';
+import { Timer } from '../../src/utils/time.js';
+import fakeData from '../fixtures/age.js';
+import { version } from '../../package.json';
 
 let tree;
 

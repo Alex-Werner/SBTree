@@ -1,6 +1,5 @@
-const { expect } = require('chai');
-const insertDocuments = require('./insertDocuments');
-
+import { expect } from 'chai';
+import insertDocuments from './insertDocuments.js';
 const doc1 = {
   value: 'Sunny sun'
 };

@@ -1,39 +1,39 @@
 function insecureRandomBytes(size) {
   const result = new Uint8Array(size);
-  for (let i = 0; i < size; ++i) result[i] = Math.floor(Math.random() * 256);
+  for (let i = 0; i < size; ++i) {
+    result[i] = Math.floor(Math.random() * 256);
+  }
   return result;
 }
 
 function getRandomBytes() {
-  let randomBytes = null;
-  try {
-    randomBytes = require('crypto').randomBytes;
-  } catch (e) {
-    // keep the fallback
+  if (typeof require !== 'undefined') {
+    try {
+      const crypto = require('crypto');
+      return crypto.randomBytes;
+    } catch (e) {
+      return insecureRandomBytes;
+    }
   }
-  if (randomBytes == null) {
-    randomBytes = insecureRandomBytes;
-  }
-  return randomBytes;
+  return insecureRandomBytes;
 }
 
-function browserRandomBytes() {
-  const randomBytes = (size) => window.crypto.getRandomValues(new Uint8Array(size));
-  return randomBytes;
+function browserRandomBytes(size) {
+  return window.crypto.getRandomValues(new Uint8Array(size));
 }
 
 const isWindowContext = (typeof window !== 'undefined' && window.crypto && window.crypto.getRandomValues);
+const randomBytesFunction = isWindowContext ? browserRandomBytes : getRandomBytes();
 
 const crypto = {
   insecureRandomBytes,
-  randomBytes: (isWindowContext) ? browserRandomBytes : getRandomBytes(),
+  randomBytes: isWindowContext ? browserRandomBytes : getRandomBytes(),
+  generateRandId: (prefix = '') => prefix + (Date.now().toString(16) + crypto.randomBytes(4).toString('hex')),
+  generateLeafId: () => crypto.generateRandId('l'),
+  generateFieldTreeId: () => crypto.generateRandId('f'),
+  generateTreeId: () => crypto.generateRandId('t'),
+  generateNodeId: () => crypto.generateRandId('n'),
+  generateRootId: () => crypto.generateRandId('r'),
 };
-crypto.generateRandId = (prefix = '') => prefix + (Date.now().toString(16) + crypto.randomBytes(4).toString('hex'));
-
-crypto.generateLeafId = () => crypto.generateRandId('l');
-crypto.generateFieldTreeId = () => crypto.generateRandId('f');
-crypto.generateTreeId = () => crypto.generateRandId('t');
-crypto.generateNodeId = () => crypto.generateRandId('n');
-crypto.generateRootId = () => crypto.generateRandId('r');
 
 export default crypto;

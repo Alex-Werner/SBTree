@@ -82,4 +82,4 @@ async function mergeWithSiblings() {
   }
   return hasMerged;
 }
-module.exports = mergeWithSiblings;
+export default mergeWithSiblings;

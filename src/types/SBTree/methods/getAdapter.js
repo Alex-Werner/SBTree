@@ -1,3 +1,3 @@
-module.exports = function getAdapter() {
+export default function getAdapter() {
   return this.adapter;
 };

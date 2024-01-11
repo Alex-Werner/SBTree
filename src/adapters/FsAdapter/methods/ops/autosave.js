@@ -1,4 +1,4 @@
-module.exports = async function autosave(self) {
+export default async function autosave(self) {
   const next = async (self) => {
     if ((self.lastChange !== null && self.lastSave === null) || (self.lastChange > self.lastSave)) {
       await self.saveDatabase();

@@ -13,4 +13,4 @@ async function isFull() {
     throw e;
   }
 }
-module.exports = isFull;
+export default isFull;

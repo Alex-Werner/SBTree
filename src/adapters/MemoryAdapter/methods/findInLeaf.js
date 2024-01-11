@@ -3,7 +3,7 @@ const range = require('lodash.range');
 const lowerThanKeys = require('./ops/lowerThanKeys');
 const greaterThanKeys = require('./ops/greaterThanKeys');
 
-module.exports = async function findInLeaf(leafId, value, op = '$eq') {
+export default async function findInLeaf(leafId, value, op = '$eq') {
   const leaf = this.leafs[leafId];
 
   if (!leaf) {

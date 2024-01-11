@@ -11,4 +11,4 @@ async function createLeaf(leafName) {
   };
 }
 
-module.exports = createLeaf;
+export default createLeaf;

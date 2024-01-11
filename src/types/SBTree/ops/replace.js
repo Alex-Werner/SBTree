@@ -144,4 +144,4 @@ async function replace(currentDocument, newDocument) {
   await this.adapter.replaceDocument(newDocument);
   return newDocument;
 }
-module.exports = replace;
+export default replace;

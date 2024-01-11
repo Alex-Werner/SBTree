@@ -53,4 +53,4 @@ async function redistribute() {
   }
   return hasRedistributed;
 }
-module.exports = redistribute;
+export default redistribute;

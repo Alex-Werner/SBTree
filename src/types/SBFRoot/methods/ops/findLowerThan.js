@@ -55,4 +55,4 @@ async function findLowerThan(key, includeKey = false) {
   }
   return result;
 }
-module.exports = findLowerThan;
+export default findLowerThan;

@@ -7,4 +7,4 @@ async function insertReferenceKey(value) {
   const index = insertSorted(this.keys, value);
   return index;
 }
-module.exports = insertReferenceKey;
+export default insertReferenceKey;

@@ -1,4 +1,4 @@
-module.exports = async function remove(remCmd) {
+export default async function remove(remCmd) {
   let { root } = this;
   if (!root) {
     this.createRoot();

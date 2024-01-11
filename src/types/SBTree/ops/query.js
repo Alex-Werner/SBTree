@@ -123,4 +123,4 @@ async function query(query) {
   return resolveDocuments(this, matchingObjectIds);
 }
 
-module.exports = query;
+export default query;

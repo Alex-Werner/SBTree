@@ -1,4 +1,4 @@
-module.exports = async function getAll() {
+export default async function getAll() {
   const result = { identifiers: [], keys: [] };
 
   const p = [];

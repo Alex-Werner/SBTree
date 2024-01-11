@@ -1,4 +1,4 @@
-const {expect} = require('chai');
+import { expect } from 'chai';
 const remove = require('./remove');
 
 const jean = {identifier: '507f191e810c19729de860ea', name: 'Jean'};

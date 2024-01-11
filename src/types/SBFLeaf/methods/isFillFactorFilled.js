@@ -22,4 +22,4 @@ async function isFillFactorFilled() {
     throw e;
   }
 }
-module.exports = isFillFactorFilled;
+export default isFillFactorFilled;

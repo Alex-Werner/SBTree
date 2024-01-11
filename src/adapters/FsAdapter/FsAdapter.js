@@ -67,4 +67,4 @@ FsAdapter.prototype.saveDocument = require('./methods/saveDocument')
 FsAdapter.prototype.saveLeafData = require('./methods/saveLeafData')
 FsAdapter.prototype.splitLeaf = require('./methods/splitLeaf')
 FsAdapter.prototype.updateDocument = require('./methods/updateDocument')
-module.exports = FsAdapter;
+export default FsAdapter;

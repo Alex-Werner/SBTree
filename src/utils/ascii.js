@@ -1,4 +1,4 @@
-import {forEach} from './array.js';
+import { forEach } from './array.js';
 
 /*
  Cheap drawing implementation. Would need deep rework to make it really working.

@@ -1,6 +1,6 @@
 const { insertSorted } = require('../../../utils/array');
 
-module.exports = async function insertReferenceKey(value) {
+export default async function insertReferenceKey(value) {
   if (this.isFull()) {
     await this.split();
   }

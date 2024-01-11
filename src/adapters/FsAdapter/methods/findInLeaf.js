@@ -1,8 +1,7 @@
-const getStrictMatchingKeys = require('./ops/getStrictMatchingKeys');
-const lowerThanKeys = require('./ops/lowerThanKeys');
-const greaterThanKeys = require('./ops/greaterThanKeys');
-
-module.exports = async function findInLeaf(leafId, value, op = '$eq') {
+import getStrictMatchingKeys from './ops/getStrictMatchingKeys.js';
+import lowerThanKeys from './ops/lowerThanKeys.js';
+import greaterThanKeys from './ops/greaterThanKeys.js';
+export default async function findInLeaf(leafId, value, op = '$eq') {
   const result = {
     identifiers: [],
     keys: [],

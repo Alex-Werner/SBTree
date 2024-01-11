@@ -1,4 +1,4 @@
-const {expect} = require('chai');
+import { expect } from 'chai';
 const findGreaterThan = require('./findGreaterThan');
 
 let called = [];

@@ -1,4 +1,4 @@
-const {expect} = require('chai');
+import { expect } from 'chai';
 const isFillFactorFilled = require('./isFillFactorFilled');
 
 let called = [];

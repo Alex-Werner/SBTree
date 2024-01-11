@@ -62,4 +62,4 @@ SBFRoot.prototype.insert = require('./methods/insert')
 SBFRoot.prototype.insertReferenceKey = require('./methods/insertReferenceKey')
 SBFRoot.prototype.isFull = require('./methods/isFull')
 SBFRoot.prototype.split = require('./methods/split')
-module.exports = SBFRoot;
+export default SBFRoot;

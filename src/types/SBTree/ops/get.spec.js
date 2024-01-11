@@ -1,4 +1,4 @@
-const {expect} = require('chai');
+import { expect } from 'chai';
 const getSpec = require('./get');
 
 const idFixtureDoc = '5d6ebb7e21f1df6ff7482631'

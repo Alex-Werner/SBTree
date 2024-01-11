@@ -1,4 +1,4 @@
-const {expect} = require('chai');
+import { expect } from 'chai';
 const isFull = require('./isFull');
 
 let called = [];

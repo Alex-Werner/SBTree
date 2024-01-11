@@ -61,4 +61,4 @@ async function insert(document) {
   }
   await this.adapter.saveDocument(document);
 }
-module.exports = insert;
+export default insert;

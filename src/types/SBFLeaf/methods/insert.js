@@ -9,4 +9,4 @@ async function insert(identifier, value) {
     await this.split();
   }
 }
-module.exports = insert;
+export default insert;

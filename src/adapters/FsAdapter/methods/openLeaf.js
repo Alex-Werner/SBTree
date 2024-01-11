@@ -1,4 +1,4 @@
-module.exports = async function openLeaf(leafName) {
+export default async function openLeaf(leafName) {
   if (!this.leafs[leafName]) {
     throw new Error('Leaf do not exist');
   }

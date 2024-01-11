@@ -1,5 +1,4 @@
-const SBFTree = require('../../SBFTree/SBFTree');
-
+import SBFTree from '../../SBFTree/SBFTree.js';
 /**
  *
  * @param fieldTreeOpts
@@ -39,4 +38,5 @@ function setFieldTree(_fieldTreeOpts) {
   const fieldTree = new SBFTree(fieldTreeOpts);
   this.fieldTrees[fieldName] = fieldTree;
 }
-module.exports = setFieldTree;
+
+export default setFieldTree;

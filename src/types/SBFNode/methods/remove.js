@@ -12,4 +12,4 @@ async function remove(remCmd) {
     await leaf.remove(remCmd);
   }
 }
-module.exports = remove;
+export default remove;

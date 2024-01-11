@@ -25,4 +25,5 @@ async function getFillStatus() {
     } throw e;
   }
 }
-module.exports = getFillStatus;
+
+export default getFillStatus;

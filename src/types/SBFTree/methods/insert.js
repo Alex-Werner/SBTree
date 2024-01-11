@@ -1,4 +1,4 @@
-module.exports = async function insert(identifier, value) {
+export default async function insert(identifier, value) {
   let { root } = this;
   if (!root) {
     this.createRoot();

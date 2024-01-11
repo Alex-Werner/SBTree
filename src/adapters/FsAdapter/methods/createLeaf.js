@@ -1,7 +1,7 @@
-const LeafData = require('../types/LeafData/LeafData');
-const LeafMeta = require('../types/LeafMeta/LeafMeta');
+import LeafMeta from "../types/LeafMeta/LeafMeta.js";
+import LeafData from "../types/LeafData/LeafData.js";
 
-module.exports = async function createLeaf(leafId) {
+export default async function createLeaf(leafId) {
   this.leafs[leafId] = {
     id: leafId,
     meta: new LeafMeta(),
