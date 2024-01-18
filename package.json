@@ -49,7 +49,7 @@
     "nyc": "^15.1.0"
   },
   "dependencies": {
-    "fslockjs": "^2.0.2",
+    "fslockjs": "^2.0.3",
     "lodash.clonedeep": "^4.5.0",
     "lodash.foreach": "^4.5.0",
     "lodash.get": "^4.4.2",
